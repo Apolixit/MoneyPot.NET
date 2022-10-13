@@ -1,0 +1,19 @@
+﻿@switch (Level)
+{
+    case TitleLevel.h1:
+        <h1 class="text-xl font-bold text-@global.themeInfo.MainColor mb-2">
+            @Title
+        </h1>
+        break;
+}
+
+@code {
+    [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
+    [Parameter] public string Title { get; set; }
+    [Parameter] public TitleLevel Level { get; set; } = TitleLevel.h1;
+
+    public enum TitleLevel
+    {
+        h1
+    };
+}

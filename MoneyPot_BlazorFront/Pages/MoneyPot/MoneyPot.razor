@@ -1,0 +1,104 @@
+﻿@using static MoneyPot_BlazorFront.Shared.Basic.MPToast
+
+<div class="relative grow p-6 bg-white rounded-lg border border-@global.themeInfo.MainColor m-10">
+    <div class="flex justify-between items-center mb-4">
+        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Money pot</h5>
+        @if (!moneyPot.IsFinished)
+        {
+            <span class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Open</span>
+        }
+        else
+        {
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Close</span>
+        }
+    </div>
+    <strong class="mb-2">
+        <div>Creator :</div>
+        <MPPopover>
+            <TogglePopoverContent>
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+                    @moneyPot.Creator.Name
+                </span>
+            </TogglePopoverContent>
+            <PopoverContent>
+                <AccountCard account="@moneyPot.Creator" />
+            </PopoverContent>
+        </MPPopover>
+    </strong>
+    <strong class="mb-2 font-semibold">
+        <div>Receiver :</div>
+        
+        <MPPopover>
+            <TogglePopoverContent>
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+                    @moneyPot.Receiver.Name
+                </span>
+            </TogglePopoverContent>
+            <PopoverContent>
+                <AccountCard account="@moneyPot.Creator" />
+            </PopoverContent>
+        </MPPopover>
+    </strong>
+    <div class="mb-3 font-semibold">
+        <div>Contributors :</div>
+
+        <MPList Elems="@moneyPot.Contributors"
+                Context="contributor">
+            <ElemsContent>
+                <MPPopover>
+                    <TogglePopoverContent>
+                        <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+                            @contributor.Contributor.Name
+                        </span>
+                    </TogglePopoverContent>
+                    <PopoverContent>
+                        <AccountCard account="@contributor.Contributor" />
+                    </PopoverContent>
+                </MPPopover>
+            </ElemsContent>
+        </MPList>
+    </div>
+    @if (!moneyPot.IsFinished)
+    {
+        <div class="flex justify-between items-end">
+            <Modal Valid="Ok"
+               Cancel="" @ref="ContributionModal">
+                <ToggleModalContent>Contribute !</ToggleModalContent>
+                <ModalContent>
+                    <ContributeForm Contributor="CurrentContributor"
+                                ValidateCallback="OnContribution" />
+                </ModalContent>
+            </Modal>
+        </div>
+    }
+
+    <MPToast Level="MPToast.ToastLevel.Info"
+             @ref="StatusContributionToast"
+             Position="ToastPosition.Relative">
+        Ok !!
+    </MPToast>
+</div>
+
+@code {
+    [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
+    [Parameter] public MoneyPotDto moneyPot { get; set; }
+    private Modal ContributionModal { get; set; }
+    private MPToast StatusContributionToast { get; set; }
+    public ContributorDto CurrentContributor { get; set; }
+
+    protected override void OnInitialized()
+    {
+        this.CurrentContributor = new ContributorDto()
+            {
+                Contributor = global.connectedUser,
+                Amount = 0
+            };
+    }
+
+    protected async Task OnContribution(ContributorDto CurrentContributor)
+    {
+        Console.WriteLine($"Contribution of {CurrentContributor.Contributor.Name} from {CurrentContributor.Amount} ok !");
+        this.ContributionModal.Hide();
+        this.StatusContributionToast.Show();
+    }
+}

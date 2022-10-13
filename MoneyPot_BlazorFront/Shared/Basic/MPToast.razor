@@ -1,0 +1,143 @@
+﻿<div class="opacity-90 flex items-center p-4 space-x-4 w-full max-w-xs text-gray-500 
+            bg-white rounded-lg divide-x divide-gray-200 shadow space-x
+            @PositionCss()
+            @VisibilityCss()
+            @ColorCss()"
+     role="alert">
+    @switch (Level)
+    {
+        case ToastLevel.Info:
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            break;
+        case ToastLevel.Success:
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            break;
+        case ToastLevel.Error:
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            break;
+    }
+
+    <div class="pl-4 text-sm font-normal">
+        @ChildContent
+    </div>
+</div>
+
+@code {
+    [Parameter] public ToastDuration Duration { get; set; } = ToastDuration.Standard;
+    [Parameter] public ToastLevel Level { get; set; } = ToastLevel.Unset;
+    [Parameter] public ToastPosition Position { get; set; } = ToastPosition.Relative;
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    private System.Timers.Timer delayTimer = null;
+
+    private bool display = false;
+    [Parameter]
+    public bool Display
+    {
+        get
+        {
+            return display;
+        }
+        set
+        {
+            display = value;
+
+            // Trigger the timer if toast is display
+            if (display)
+            {
+                switch (Duration)
+                {
+                    case ToastDuration.Short:
+                        delayTimer = new System.Timers.Timer(2_000);
+                        break;
+                    case ToastDuration.Standard:
+                        delayTimer = new System.Timers.Timer(5_000);
+                        break;
+                    case ToastDuration.Long:
+                        delayTimer = new System.Timers.Timer(8_000);
+                        break;
+                    default:
+                        delayTimer = null;
+                        break;
+                }
+                if (delayTimer != null)
+                {
+                    delayTimer.AutoReset = false;
+                    delayTimer.Enabled = true;
+
+                    delayTimer.Elapsed += (sender, e) =>
+                    {
+                        this.delayTimer = null;
+                        this.Display = false;
+                        StateHasChanged();
+                    };
+                }
+            }
+        }
+    }
+
+    public void Show() => this.Display = true;
+
+    /* CSS */
+    private string VisibilityCss() => this.Display ? "block" : "hidden";
+
+    private string ColorCss()
+    {
+        switch (this.Level)
+        {
+            case ToastLevel.Info:
+                return $"bg-blue-200 border-blue-400";
+            case ToastLevel.Success:
+                return "bg-green-200 border-green-400";
+            case ToastLevel.Error:
+                return "bg-red-200 border-red-400";
+        }
+
+        return string.Empty;
+    }
+
+    private string PositionCss() => (this.Position == ToastPosition.Relative) ? "absolute top-2 right-2" : "fixed top-0 right-0";
+
+    /// <summary>
+    ///  Toast log level
+    /// </summary>
+    public enum ToastLevel
+    {
+        Unset,
+        Info,
+        Success,
+        Error
+    }
+
+    /// <summary>
+    ///  Toast duration display on screen
+    /// </summary>
+    public enum ToastDuration
+    {
+        /// <summary>
+        /// 2s display
+        /// </summary>
+        Short,
+        /// <summary>
+        /// 5s display
+        /// </summary>
+        Standard,
+        /// <summary>
+        /// 8s display
+        /// </summary>
+        Long,
+        /// <summary>
+        /// Never hidden
+        /// </summary>
+        Eternal = 0
+    }
+
+    /// <summary>
+    ///  CSS position on the screen
+    /// </summary>
+    public enum ToastPosition
+    {
+        Relative,
+        Absolute
+    }
+}

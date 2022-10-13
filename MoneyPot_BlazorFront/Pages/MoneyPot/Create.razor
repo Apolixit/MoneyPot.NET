@@ -1,0 +1,31 @@
+﻿@inject IToastService ToastService
+
+<div class="flex items-center justify-center">
+    <Modal Valid=""
+           Cancel="Close"
+           @ref="creationModal">
+        <ToggleModalContent>
+            <MPButton TypeBtn="MPButton.TypeButton.Valid">
+                Create new money pot
+            </MPButton>
+        </ToggleModalContent>
+        <ModalContent>
+            <CreateForm MoneyPot="newMoneyPot"
+                    OnMoneyPotCreated="OnMoneyPotCreated" />
+        </ModalContent>
+    </Modal>
+    <MPToast @ref="toastCreated">Money pot created</MPToast>
+</div>
+
+@code {
+    private Modal creationModal;
+    private MPToast toastCreated;
+    private MoneyPotDto newMoneyPot;
+
+    protected async Task OnMoneyPotCreated()
+    {
+        this.creationModal.Hide();
+        this.toastCreated.Show();
+        //ToastService.ShowSuccess("Money pot created");
+    }
+}

@@ -1,0 +1,52 @@
+﻿@using Shared_MoneyPot
+@inject IBlockRepository blockRepository;
+
+<div>
+    <div>
+        <div class="mb-4 flex items-center justify-between">
+            <div>
+                <MPTitle Title="Latest blocks" />
+            </div>
+        </div>
+
+        <div class="flex flex-col mt-8">
+            <div class="shadow">
+                <MPTable Elems="Blocks"
+                         Context="block">
+                    <ThContent>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-@global.themeInfo.MainColor uppercase">
+                            Block number
+                        </th>
+                        <th scope="col" class="p-4 text-left text-xs font-medium text-@global.themeInfo.MainColor uppercase">
+                            Hex
+                        </th>
+                    </ThContent>
+                    <TbodyContent>
+                        <tr>
+                            <td class="p-1 whitespace-nowrap text-sm font-normal">
+                                <span class="font-semibold">@block.BlockNumber</span>
+                            </td>
+                            <td class="p-1 whitespace-nowrap text-xs font-normal">
+                                <span>@($"0x{block.BlockHash}")</span>
+                            </td>
+                        </tr>
+                    </TbodyContent>
+                </MPTable>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
+    public List<BlockDto> Blocks { get; set; } = new List<BlockDto>();
+
+    protected override void OnInitialized()
+    {
+        blockRepository.SubscribeNewBlocks((BlockDto newBlock) =>
+        {
+            this.Blocks.Insert(0, newBlock);
+            StateHasChanged();
+        });
+    }
+}

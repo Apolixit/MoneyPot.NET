@@ -1,0 +1,42 @@
+﻿<div class="z-50 bg-white p-3">
+    <div class="flex">
+        <div class="mr-3 shrink-0">
+            <a href="#" class="block p-2 bg-gray-100 rounded-lg">
+                <img class="w-8 h-8 rounded-full" src="@Account.AvatarUrl" alt="@Account.Name profil">
+            </a>
+            <p class="mb-3 text-base font-semibold text-gray-900">
+                @Account.Name
+            </p>
+        </div>
+    </div>
+    <div class="">
+        <div class="mb-3 text-xs font-normal">
+            <p>Public key :</p>
+            <p>@Account.PublicKey</p>
+        </div>
+        <div class="mb-3 text-xs font-normal">
+            <p>Address :</p>
+            <p>@Account.Address</p>
+        </div>
+        <ul class="text-sm font-light">
+            <li class="flex items-start text-xs mb-2">
+                <span class="mr-1 font-semibold text-gray-400">
+                    <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                </span>
+                <span>Participation to <strong>X</strong> money pots with a total of <strong>Y</strong> amount</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter] protected MainLayout.GlobalInformation global { get; set; }
+    [Parameter] public AccountDto Account { get; set; }
+    private bool displayDetails { get; set; }
+
+    private void toogleDetails(bool value)
+    {
+        this.displayDetails = value;
+        StateHasChanged();
+    }
+}

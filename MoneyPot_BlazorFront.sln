@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyPot_BlazorFront", "MoneyPot_BlazorFront\MoneyPot_BlazorFront.csproj", "{A996EDE4-529C-4F06-B8C2-0A694459483D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared_MoneyPot", "Shared_MoneyPot\Shared_MoneyPot.csproj", "{D5B6D475-B2DB-4ED0-9883-25C87DF0D8BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A996EDE4-529C-4F06-B8C2-0A694459483D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A996EDE4-529C-4F06-B8C2-0A694459483D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A996EDE4-529C-4F06-B8C2-0A694459483D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A996EDE4-529C-4F06-B8C2-0A694459483D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5B6D475-B2DB-4ED0-9883-25C87DF0D8BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B6D475-B2DB-4ED0-9883-25C87DF0D8BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5B6D475-B2DB-4ED0-9883-25C87DF0D8BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5B6D475-B2DB-4ED0-9883-25C87DF0D8BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E79E568-848C-4EA8-A297-8477DFADBE5A}
+	EndGlobalSection
+EndGlobal

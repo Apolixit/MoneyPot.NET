@@ -1,0 +1,48 @@
+﻿@page "/listing"
+@inject IMoneyPotRepository moneyPotRepository;
+
+<div class="mt-4 w-full grid grid-cols-1 gap-4">
+    <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+        <Create />
+
+        <div class="flex items-center justify-center mt-10">
+            <MPTitle Title="Available Money Pots !" />
+        </div>
+        <div class="flex items-center justify-center">
+            <MPList Elems="OpenMoneyPots"
+                    Context="moneyPot">
+                <ElemsContent>
+                    @* Money pot component *@
+                    <MoneyPot MoneyPot="@moneyPot" />
+                </ElemsContent>
+            </MPList>
+        </div>
+
+        <div class="flex items-center justify-center mt-10">
+            <MPTitle Title="Closed Money Pots" />
+        </div>
+        <div class="flex items-center justify-center">
+            <MPList Elems="CloseMoneyPots"
+                    Context="moneyPot">
+                <ElemsContent>
+                    @* Money pot component *@
+                    <MoneyPot MoneyPot="@moneyPot" />
+                </ElemsContent>
+            </MPList>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
+    private IList<MoneyPotDto>? MoneyPots { get; set; }
+
+    public IList<MoneyPotDto>? OpenMoneyPots => MoneyPots?.Where(x => !x.IsFinished).ToList();
+    public IList<MoneyPotDto>? CloseMoneyPots => MoneyPots?.Where(x => x.IsFinished).ToList();
+
+    protected async override Task OnInitializedAsync()
+    {
+        this.MoneyPots = (await moneyPotRepository.GetAllAsync()).ToList();
+    }
+}

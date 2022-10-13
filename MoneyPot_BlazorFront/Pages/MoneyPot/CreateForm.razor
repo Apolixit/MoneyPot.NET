@@ -1,0 +1,51 @@
+﻿<EditForm Model="CreateModel"
+          OnValidSubmit="ValidateCreation"
+          class="space-y-6">
+    <div>
+        <MPInputText Label="Receiver account"
+                     @bind-Value="@CreateModel.ReceiverAddress" />
+    </div>
+    <div>
+        <InputNumber Label="Target amount"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                     @bind-Value="@CreateModel.TargetAmount" />
+    </div>
+
+    <MPButton TypeBtn="MPButton.TypeButton.Submit">
+        Create money pot
+    </MPButton>
+</EditForm>
+
+@code {
+    [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
+    [Parameter] public MoneyPotDto MoneyPot { get; set; }
+    [Parameter] public EventCallback OnMoneyPotCreated { get; set; }
+
+    private CreateDto CreateModel { get; set; } = new();
+
+    //private string receiverAddress;
+    //private double targetAmount;
+
+
+    public async Task ValidateCreation()
+    {
+        var storeAccount = MoneyPot_BlazorFront.Repository.AccountStorage.Accounts.Find(x => x.ss58Address == this.CreateModel.ReceiverAddress);
+        AccountDto receiverAccount = new(storeAccount.name, storeAccount.ss58Address, storeAccount.publicKey);
+
+        this.MoneyPot = new()
+            {
+                Creator = global.connectedUser,
+                Receiver = new(storeAccount.name, storeAccount.ss58Address, storeAccount.publicKey),
+                IsFinished = false,
+                TypeEnd = TypeEndDto.AmountLimit
+            };
+
+        await OnMoneyPotCreated.InvokeAsync();
+    }
+
+    protected class CreateDto
+    {
+        public string ReceiverAddress { get; set; } 
+        public double TargetAmount { get; set; }
+    }
+}

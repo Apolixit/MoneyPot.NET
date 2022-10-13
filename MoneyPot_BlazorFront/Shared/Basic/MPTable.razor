@@ -1,0 +1,66 @@
+﻿@typeparam T
+
+<table class="min-w-full divide-y divide-gray-200">
+    @if (ThContent != null)
+    {
+        <thead class="bg-gray-50">
+            <tr>
+                @ThContent
+            </tr>
+        </thead>
+    }
+
+    <tbody class="bg-white">
+        @if (Elems == null)
+        {
+            <tr>
+                @if(NullContent != null)
+                {
+                    @NullContent
+                } else
+                {
+                    <Loader />
+                }
+            </tr>
+        }
+        else if (Elems.Count == 0)
+        {
+            <tr>
+                @if (EmptyContent != null)
+            {
+                @EmptyContent
+            }
+            else
+            {
+                <span class="text-center">No data...</span>
+            }
+            </tr>
+        }
+        else
+        {
+            foreach (var elem in Elems)
+            {
+                @TbodyContent(elem)
+            }
+        }
+    </tbody>
+    @if(TfootContent != null)
+    {
+        <tfoot>
+            <tr>
+                @TfootContent
+            </tr>
+        </tfoot>
+    }
+</table>
+@code {
+    [Parameter] public RenderFragment NullContent { get; set; } = null;
+    [Parameter] public RenderFragment EmptyContent { get; set; } = null;
+    [Parameter] public RenderFragment ThContent { get; set; } = null;
+    [Parameter] public RenderFragment<T> TbodyContent { get; set; } = null;
+    [Parameter] public RenderFragment TfootContent { get; set; } = null;
+
+    [Parameter] public EventCallback OnBodyRowClick { get; set; }
+
+    [Parameter] public IList<T> Elems { get; set; } = null;
+}

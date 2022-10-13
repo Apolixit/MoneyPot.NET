@@ -1,0 +1,28 @@
+﻿<button class="@currentClass() px-5 py-2.5 text-center" 
+        type="@typeBtn()" 
+        @onclick="OnClick">
+    @ChildContent
+</button>
+
+@code {
+    [CascadingParameter] protected MainLayout.GlobalInformation global { get; set; }
+
+    [Parameter] public TypeButton TypeBtn { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+
+    public enum TypeButton
+    {
+        Valid,
+        Cancel,
+        Submit,
+    }
+
+    /* CSS */
+    private string currentClass() =>
+        (this.TypeBtn == TypeButton.Valid || this.TypeBtn == TypeButton.Submit) ?
+        $"text-white bg-{global.themeInfo.MinorColor} hover:bg-{global.themeInfo.MainColor}" :
+        $"text-dark bg-grey-200 hover:bg-grey-300";
+
+    private string typeBtn() => (this.TypeBtn == TypeButton.Submit) ? "submit" : "button";
+}

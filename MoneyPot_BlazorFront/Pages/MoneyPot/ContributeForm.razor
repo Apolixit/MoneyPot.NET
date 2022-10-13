@@ -1,0 +1,28 @@
+﻿<h3 class="mb-4 text-xl font-medium">Contribute to money pot</h3>
+<EditForm Model="Contributor"
+          OnValidSubmit="ValidateContribution"
+          class="space-y-6">
+    <div>
+        <MPInputText Label="Your account"
+                     @bind-Value="@Contributor.Contributor.Address" />
+    </div>
+    <div>
+        <InputNumber class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                     @bind-Value="@Contributor.Amount" />
+    </div>
+
+    <MPButton TypeBtn="MPButton.TypeButton.Submit">
+        Validate contribution
+    </MPButton>
+</EditForm>
+
+@code {
+    [Parameter] public ContributorDto Contributor { get; set; } = new ContributorDto();
+    [Parameter] public EventCallback<ContributorDto> ValidateCallback { get; set; }
+
+    protected void ValidateContribution()
+    {
+        Console.WriteLine($"Contribution of {Contributor.Contributor.Name} from {Contributor.Amount} ok !");
+        ValidateCallback.InvokeAsync(Contributor);
+    }
+}

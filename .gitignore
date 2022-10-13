@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/MoneyPot_BlazorFront
+/MoneyPot_BlazorFront/bin/Debug/net6.0
+/MoneyPot_BlazorFront/obj
+/MoneyPot_BlazorFront/node_modules
+/Shared_MoneyPot
