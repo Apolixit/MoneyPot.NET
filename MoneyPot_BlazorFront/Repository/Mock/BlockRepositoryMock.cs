@@ -8,7 +8,7 @@ namespace MoneyPot_BlazorFront.Repository.Mock
         private static System.Timers.Timer timer;
         private static Random random = new Random();
 
-        public void SubscribeNewBlocks(Action<BlockDto> blockCallback)
+        public async Task SubscribeNewBlocksAsync(Action<BlockDto> blockCallback)
         {
             timer = new System.Timers.Timer(6_000)
             {
@@ -27,7 +27,7 @@ namespace MoneyPot_BlazorFront.Repository.Mock
             return new BlockDto()
             {
                 BlockNumber = Random.Shared.Next(1, 100000),
-                BlockHash = generateRandomHash(64)
+                BlockHash = $"0x{generateRandomHash(64)}"
             };
         }
 

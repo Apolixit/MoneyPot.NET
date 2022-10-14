@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# VSTHRD101: Avoid unsupported async delegates
+dotnet_diagnostic.VSTHRD101.severity = none

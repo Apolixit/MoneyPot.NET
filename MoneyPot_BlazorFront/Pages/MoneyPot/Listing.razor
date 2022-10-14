@@ -43,6 +43,10 @@
 
     protected async override Task OnInitializedAsync()
     {
-        this.MoneyPots = (await moneyPotRepository.GetAllAsync()).ToList();
+        await moneyPotRepository.SubscribeMoneyPotsAsync((IEnumerable<MoneyPotDto> moneyPots) =>
+        {
+            this.MoneyPots = moneyPots.ToList();
+            StateHasChanged();
+        });
     }
 }

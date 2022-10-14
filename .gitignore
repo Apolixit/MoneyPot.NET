@@ -6,4 +6,16 @@
 /MoneyPot_BlazorFront/bin/Debug/net6.0
 /MoneyPot_BlazorFront/obj
 /MoneyPot_BlazorFront/node_modules
-/Shared_MoneyPot
+/ConsoleTest
+/MoneyPot_BlazorFront/bin/Release/net6.0
+/.config
+/.ajuna
+/MoneyPot_RestClient.Mockup
+/MoneyPot_RestClient.Test
+/MoneyPot_RestService
+/Shared_MoneyPot/obj
+/Shared_MoneyPot/bin
+/MoneyPot_NetApiExt/bin
+/MoneyPot_NetApiExt/obj
+/MoneyPot_RestClient/bin
+/MoneyPot_RestClient/obj

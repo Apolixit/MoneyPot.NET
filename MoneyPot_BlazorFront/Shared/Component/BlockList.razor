@@ -24,10 +24,10 @@
                     <TbodyContent>
                         <tr>
                             <td class="p-1 whitespace-nowrap text-sm font-normal">
-                                <span class="font-semibold">@block.BlockNumber</span>
+                                <span class="font-semibold">@block.BlockNumber.ToString("N0")</span>
                             </td>
                             <td class="p-1 whitespace-nowrap text-xs font-normal">
-                                <span>@($"0x{block.BlockHash}")</span>
+                                <span>@(block.BlockHash)</span>
                             </td>
                         </tr>
                     </TbodyContent>
@@ -43,7 +43,7 @@
 
     protected override void OnInitialized()
     {
-        blockRepository.SubscribeNewBlocks((BlockDto newBlock) =>
+        blockRepository.SubscribeNewBlocksAsync((BlockDto newBlock) =>
         {
             this.Blocks.Insert(0, newBlock);
             StateHasChanged();

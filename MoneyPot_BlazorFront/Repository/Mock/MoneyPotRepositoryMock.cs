@@ -45,5 +45,10 @@ namespace MoneyPot_BlazorFront.Repository.Mock
                 }.AsEnumerable();
             });
         }
+
+        public Task SubscribeMoneyPotsAsync(Action<IEnumerable<MoneyPotDto>> moneyPotCallback)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

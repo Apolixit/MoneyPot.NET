@@ -1,4 +1,6 @@
 ﻿@using Blazored.Toast.Configuration
+@using MoneyPot_BlazorFront.Helpers
+@inject ISubstrateService substrateService;
 @inherits LayoutComponentBase
 
 <nav class="bg-@global.themeInfo.BackgroundPrimaryColor border-b border-gray-200 fixed z-30 w-full border-b-@global.themeInfo.MainColor">
@@ -6,36 +8,64 @@
         <NavMenu />
     </div>
 </nav>
+
 <div class="flex overflow-hidden bg-@global.themeInfo.BackgroundPrimaryColor pt-16">
     <div class="w-full h-full bg-@global.themeInfo.BackgroundSecondaryColor relative overflow-y-auto">
         <CascadingValue Value="@global">
             <main class="pt-6 px-4">
-                <div class="w-full grid grid-cols-2 sm::grid-cols-1 gap-4 h-96 overflow-auto">
-                    <div class="bg-@global.themeInfo.BackgroundPrimaryColor shadow rounded-lg p-4">
-                        @* Blocks *@
-                        <MoneyPot_BlazorFront.Shared.Component.BlockList />
+                @if (!substrateService.Client.IsConnected)
+                {
+                    <div>Waiting blockchain connexion...</div>
+                }
+                else
+                {
+                    <div class="w-full grid grid-cols-2 sm::grid-cols-1 gap-4 h-96 overflow-auto">
+                        <div class="bg-@global.themeInfo.BackgroundPrimaryColor shadow rounded-lg p-4">
+                            @* Blocks *@
+                            <MoneyPot_BlazorFront.Shared.Component.BlockList />
+                        </div>
+                        <div class="bg-@global.themeInfo.BackgroundPrimaryColor shadow rounded-lg p-4 h-96">
+                            @* Account *@
+                            <MoneyPot_BlazorFront.Shared.Component.AccountList />
+                        </div>
                     </div>
-                    <div class="bg-@global.themeInfo.BackgroundPrimaryColor shadow rounded-lg p-4 h-96">
-                        @* Account *@
-                        <MoneyPot_BlazorFront.Shared.Component.AccountList />
+                    <div>
+                        <button type="button" @onclick="TestMethod">Test button</button>
                     </div>
-                </div>
-
-                <div class="my-4">
-                    @Body
-                </div>
+                    <div class="my-4">
+                        @Body
+                    </div>
+                }
             </main>
         </CascadingValue>
     </div>
 </div>
+
+
 @*<Footer />*@
 
 @code {
     protected GlobalInformation? global { get; set; }
     protected Theme.Mode currentMode { get; set; } = Theme.Mode.White;
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         this.global = new GlobalInformation(this.currentMode);
+
+        if (!substrateService.Client.IsConnected)
+        {
+            Console.WriteLine("Not connected...");
+            await substrateService.Client.ConnectAsync();
+            Console.WriteLine("Connected...");
+            StateHasChanged();
+        }
+    }
+
+    protected async Task TestMethod()
+    {
+        var countParams = MoneyPot_NetApiExt.Generated.Storage.MoneyPotStorage.MoneyPotsCountParams();
+        Console.WriteLine($"countParams = {countParams}");
+
+        var moneyPots = MoneyPot_NetApiExt.Generated.Storage.MoneyPotStorage.MoneyPotsParams(null);
     }
 
     public class GlobalInformation

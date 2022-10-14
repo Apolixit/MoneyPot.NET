@@ -10,13 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ajuna.AspNetCore" Version="0.1.25" />
+    <PackageReference Include="Ajuna.ServiceLayer" Version="0.1.25" />
     <PackageReference Include="Blazored.Toast" Version="3.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.10" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared_MoneyPot\Shared_MoneyPot.csproj" />
+    <ProjectReference Include="..\MoneyPot_NetApiExt\MoneyPot_NetApiExt.csproj" />
+    <ProjectReference Include="..\MoneyPot_RestClient\MoneyPot_RestClient.csproj" />
+    <ProjectReference Include="..\Shared_MoneyPot\MoneyPot_Shared.csproj" />
   </ItemGroup>
 
 </Project>
