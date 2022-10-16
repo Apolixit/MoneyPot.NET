@@ -15,7 +15,10 @@
             <main class="pt-6 px-4">
                 @if (!substrateService.Client.IsConnected)
                 {
-                    <div>Waiting blockchain connexion...</div>
+                    <div class="flew flex-col loading-screen h-screen">
+                        <Loader />
+                        <div class="mt-2">Waiting blockchain connexion...</div>
+                    </div>
                 }
                 else
                 {
@@ -28,9 +31,6 @@
                             @* Account *@
                             <MoneyPot_BlazorFront.Shared.Component.AccountList />
                         </div>
-                    </div>
-                    <div>
-                        <button type="button" @onclick="TestMethod">Test button</button>
                     </div>
                     <div class="my-4">
                         @Body
@@ -53,20 +53,22 @@
 
         if (!substrateService.Client.IsConnected)
         {
-            Console.WriteLine("Not connected...");
-            await substrateService.Client.ConnectAsync();
-            Console.WriteLine("Connected...");
-            StateHasChanged();
+            try
+            {
+                Console.WriteLine("Not connected...");
+                await substrateService.Client.ConnectAsync();
+                Console.WriteLine("Connected...");
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
         }
     }
 
-    protected async Task TestMethod()
-    {
-        var countParams = MoneyPot_NetApiExt.Generated.Storage.MoneyPotStorage.MoneyPotsCountParams();
-        Console.WriteLine($"countParams = {countParams}");
-
-        var moneyPots = MoneyPot_NetApiExt.Generated.Storage.MoneyPotStorage.MoneyPotsParams(null);
-    }
+    
 
     public class GlobalInformation
     {

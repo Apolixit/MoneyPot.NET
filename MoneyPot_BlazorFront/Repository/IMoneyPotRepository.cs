@@ -14,6 +14,6 @@ namespace MoneyPot_BlazorFront.Repository
         /// </summary>
         /// <param name="moneyPotCallback"></param>
         /// <returns></returns>
-        Task SubscribeMoneyPotsAsync(Action<IEnumerable<MoneyPotDto>> moneyPotCallback);
+        Task SubscribeMoneyPotsAsync(Action<MoneyPotDto> moneyPotCallback);
     }
 }

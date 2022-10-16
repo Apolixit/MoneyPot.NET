@@ -1,4 +1,5 @@
 ﻿@page "/listing"
+@using MoneyPot_BlazorFront.Helpers
 @inject IMoneyPotRepository moneyPotRepository;
 
 <div class="mt-4 w-full grid grid-cols-1 gap-4">
@@ -11,6 +12,7 @@
         <div class="flex items-center justify-center">
             <MPList Elems="OpenMoneyPots"
                     Context="moneyPot">
+                <EmptyContent>No money pot yet :'(</EmptyContent>
                 <ElemsContent>
                     @* Money pot component *@
                     <MoneyPot MoneyPot="@moneyPot" />
@@ -24,6 +26,7 @@
         <div class="flex items-center justify-center">
             <MPList Elems="CloseMoneyPots"
                     Context="moneyPot">
+                <EmptyContent></EmptyContent>
                 <ElemsContent>
                     @* Money pot component *@
                     <MoneyPot MoneyPot="@moneyPot" />
@@ -36,16 +39,26 @@
 
 @code {
     [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
-    private IList<MoneyPotDto>? MoneyPots { get; set; }
+    private IList<MoneyPotDto>? MoneyPots { get; set; } = new List<MoneyPotDto>();
 
     public IList<MoneyPotDto>? OpenMoneyPots => MoneyPots?.Where(x => !x.IsFinished).ToList();
     public IList<MoneyPotDto>? CloseMoneyPots => MoneyPots?.Where(x => x.IsFinished).ToList();
 
     protected async override Task OnInitializedAsync()
     {
-        await moneyPotRepository.SubscribeMoneyPotsAsync((IEnumerable<MoneyPotDto> moneyPots) =>
+        await moneyPotRepository.SubscribeMoneyPotsAsync((MoneyPotDto moneyPotCallback) =>
         {
-            this.MoneyPots = moneyPots.ToList();
+            if (MoneyPots == null) MoneyPots = new List<MoneyPotDto>();
+
+            this.MoneyPots.AddOrUpdate(moneyPotCallback);
+            //var existingMoneyPot = this.MoneyPots.FirstOrDefault(x => x.Equals(moneyPotCallback));
+            //if(existingMoneyPot != null)
+            //{
+            //    existingMoneyPot = moneyPotCallback;
+            //} else
+            //{
+            //    this.MoneyPots.Add(moneyPotCallback);
+            //}
             StateHasChanged();
         });
     }

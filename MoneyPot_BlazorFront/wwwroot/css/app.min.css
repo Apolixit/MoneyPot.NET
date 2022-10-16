@@ -593,6 +593,9 @@ video {
 .mb-3 {
   margin-bottom: 0.75rem;
 }
+.mt-2 {
+  margin-top: 0.5rem;
+}
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -634,6 +637,9 @@ video {
 }
 .h-full {
   height: 100%;
+}
+.h-screen {
+  height: 100vh;
 }
 .h-96 {
   height: 24rem;

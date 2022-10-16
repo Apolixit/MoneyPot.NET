@@ -9,7 +9,7 @@ namespace MoneyPot_BlazorFront.Repository.Api
             throw new NotImplementedException();
         }
 
-        public Task SubscribeMoneyPotsAsync(Action<IEnumerable<MoneyPotDto>> moneyPotCallback)
+        public Task SubscribeMoneyPotsAsync(Action<MoneyPotDto> moneyPotCallback)
         {
             throw new NotImplementedException();
         }

@@ -26,6 +26,4 @@ static void ConfigureService(IServiceCollection services)
     services.AddScoped<IAccountRepository, AccountRepositoryMock>();
 
     services.AddSingleton<ISubstrateService, SubstrateService>();
-
-    services.AddBlazoredToast();
 }
