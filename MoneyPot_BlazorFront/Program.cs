@@ -21,9 +21,11 @@ await builder.Build().RunAsync();
 static void ConfigureService(IServiceCollection services)
 {
     services.AddScoped<IHttpService, HttpService>();
-    services.AddScoped<IMoneyPotRepository, MoneyPot_BlazorFront.Repository.DirectAccess.MoneyPotRepositoryDirectAccess>();
-    services.AddScoped<IBlockRepository, MoneyPot_BlazorFront.Repository.DirectAccess.BlockRepositoryDirectAccess>();
+    services.AddScoped<IMoneyPotRepository, MoneyPotRepositoryMock>();
+    services.AddScoped<IBlockRepository, BlockRepositoryMock>();
     services.AddScoped<IAccountRepository, AccountRepositoryMock>();
 
-    services.AddSingleton<ISubstrateService, SubstrateService>();
+    services.AddSingleton<ISubstrateService, SubstrateServiceMock>();
+
+    services.AddBlazoredToast();
 }

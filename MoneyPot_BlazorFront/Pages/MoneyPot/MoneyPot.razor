@@ -1,4 +1,4 @@
-﻿@using static MoneyPot_BlazorFront.Shared.Basic.MPToast
+﻿@inject IToastService toastService;
 
 <div class="relative grow p-6 bg-white rounded-lg border border-@global.themeInfo.MainColor m-10">
     <div class="flex justify-between items-center mb-4">
@@ -71,19 +71,12 @@
             </Modal>
         </div>
     }
-
-    <MPToast Level="MPToast.ToastLevel.Info"
-             @ref="StatusContributionToast"
-             Position="ToastPosition.Relative">
-        Ok !!
-    </MPToast>
 </div>
 
 @code {
     [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
     [Parameter] public MoneyPotDto moneyPot { get; set; }
     private Modal ContributionModal { get; set; }
-    private MPToast StatusContributionToast { get; set; }
     public ContributorDto CurrentContributor { get; set; }
 
     protected override void OnInitialized()
@@ -99,6 +92,6 @@
     {
         Console.WriteLine($"Contribution of {CurrentContributor.Contributor.Name} from {CurrentContributor.Amount} ok !");
         this.ContributionModal.Hide();
-        this.StatusContributionToast.Show();
+        toastService.ShowSuccess("Your contribution has been added !");
     }
 }

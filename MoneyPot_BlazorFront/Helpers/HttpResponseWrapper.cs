@@ -12,7 +12,7 @@
             this.HttpResponseMessage = httpResponseMessage;
         }
 
-        public async Task<string> ReadResponse()
+        public async Task<string> ReadResponseAsync()
         {
             return await HttpResponseMessage.Content.ReadAsStringAsync();
         }

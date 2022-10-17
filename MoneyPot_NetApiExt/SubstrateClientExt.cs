@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Ajuna.NetApi.Model.Extrinsics;
 using Ajuna.NetApi.Model.Meta;
 using Ajuna.NetApi.Model.Types.Base;
 using MoneyPot_NetApiExt.Generated.Storage;
@@ -75,8 +76,8 @@ namespace MoneyPot_NetApiExt.Generated
         /// </summary>
         public MoneyPotStorage MoneyPotStorage;
         
-        public SubstrateClientExt(System.Uri uri) : 
-                base(uri)
+        public SubstrateClientExt(System.Uri uri, ChargeType chargeType) : 
+                base(uri, chargeType)
         {
             StorageKeyDict = new System.Collections.Generic.Dictionary<System.Tuple<string, string>, System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>>();
             this.SystemStorage = new SystemStorage(this);

@@ -1,11 +1,20 @@
-﻿using MoneyPot_NetApiExt.Generated;
+﻿using Ajuna.NetApi.Model.Extrinsics;
+using MoneyPot_NetApiExt.Generated;
 using MoneyPot_RestClient;
 
 namespace MoneyPot_BlazorFront.Helpers
 {
     public class SubstrateService : ISubstrateService
     {
-        public Uri NodeUri = new Uri("ws://127.0.0.1:9944");
+        private readonly IConfiguration Configuration;
+        public SubstrateService(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        private readonly Uri NodeUri = new Uri("ws://127.0.0.1:9944"); //Configuration["uriEndpoint"]
+        public bool IsConnected => Client.IsConnected;
+
         private SubstrateClientExt _client;
         public SubstrateClientExt Client
         {
@@ -14,21 +23,15 @@ namespace MoneyPot_BlazorFront.Helpers
                 if (_client == null)
                 {
                     Console.WriteLine($"_client is null");
-                    _client = new SubstrateClientExt(NodeUri);
+                    _client = new SubstrateClientExt(NodeUri, ChargeTransactionPayment.Default());
                     Console.WriteLine($"_client = {_client}");
-                } 
+                }
                 return _client;
             }
         }
 
-        //private BaseSubscriptionClient? _subscriptionClient;
-        //public BaseSubscriptionClient SubscriptionClient
-        //{
-        //    get
-        //    {
-        //        if (_subscriptionClient == null) _subscriptionClient = new BaseSubscriptionClient(new System.Net.WebSockets.ClientWebSocket());
-        //        return _subscriptionClient;
-        //    }
-        //}
+
+
+
     }
 }

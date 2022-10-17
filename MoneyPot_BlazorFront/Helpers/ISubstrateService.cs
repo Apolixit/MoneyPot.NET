@@ -5,5 +5,6 @@ namespace MoneyPot_BlazorFront.Helpers
     public interface ISubstrateService
     {
         public SubstrateClientExt Client { get;  }
+        public bool IsConnected { get; }
     }
 }

@@ -38,7 +38,7 @@ namespace MoneyPot_BlazorFront.Helpers
             var response = await Get<T>(url);
             if (!response.IsSuccess)
             {
-                throw new ApplicationException(await response.ReadResponse());
+                throw new ApplicationException(await response.ReadResponseAsync());
             }
             return response.Response;
         }

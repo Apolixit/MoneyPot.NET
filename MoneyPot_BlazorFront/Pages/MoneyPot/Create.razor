@@ -1,4 +1,6 @@
-﻿<div class="flex items-center justify-center">
+﻿@inject IToastService toastService;
+
+<div class="flex items-center justify-center">
     <Modal Valid=""
            Cancel="Close"
            @ref="creationModal">
@@ -12,18 +14,15 @@
                     OnMoneyPotCreated="OnMoneyPotCreated" />
         </ModalContent>
     </Modal>
-    <MPToast @ref="toastCreated">Money pot created</MPToast>
 </div>
 
 @code {
     private Modal creationModal;
-    private MPToast toastCreated;
     private MoneyPotDto newMoneyPot;
 
     protected async Task OnMoneyPotCreated()
     {
         this.creationModal.Hide();
-        this.toastCreated.Show();
-        //ToastService.ShowSuccess("Money pot created");
+        toastService.ShowSuccess("Money pot created");
     }
 }
