@@ -1,4 +1,7 @@
-﻿<EditForm Model="CreateModel"
+﻿@using MoneyPot_BlazorFront.Helpers
+@inject IAccountService accountService;
+@inject IMoneyPotRepository moneyPotRepository;
+<EditForm Model="CreateModel"
           OnValidSubmit="ValidateCreation"
           class="space-y-6">
     <div>
@@ -29,18 +32,11 @@
 
     public async Task ValidateCreation()
     {
-        var storeAccount = MoneyPot_BlazorFront.Repository.AccountStorage.Accounts.Find(x => x.ss58Address == this.CreateModel.ReceiverAddress);
-        AccountDto receiverAccount = new(storeAccount.name, storeAccount.ss58Address, storeAccount.publicKey);
+        await moneyPotRepository.CreateMoneyPotAsync(SubstrateHelper.BuildAccountDtoFromAddress(CreateModel.ReceiverAddress), CreateModel.TargetAmount, async (string status) => {
+            Console.WriteLine($"Money pot creation = {status}");
+            await OnMoneyPotCreated.InvokeAsync();
+        });
 
-        this.MoneyPot = new()
-            {
-                Creator = global.connectedUser,
-                Receiver = new(storeAccount.name, storeAccount.ss58Address, storeAccount.publicKey),
-                IsFinished = false,
-                TypeEnd = TypeEndDto.AmountLimit
-            };
-
-        await OnMoneyPotCreated.InvokeAsync();
     }
 
     protected class CreateDto

@@ -2,6 +2,7 @@
 @using MoneyPot_BlazorFront.Helpers
 @inject ISubstrateService substrateService;
 @inject IToastService toastService;
+@inject ILogger<Program> logger;
 @inherits LayoutComponentBase
 
 <nav class="bg-@global.themeInfo.BackgroundPrimaryColor border-b border-gray-200 z-30 w-full border-b-@global.themeInfo.MainColor">
@@ -10,7 +11,7 @@
     </div>
 </nav>
 
-<div class="flex overflow-hidden bg-@global.themeInfo.BackgroundPrimaryColor pt-16">
+<div class="flex overflow-hidden bg-@global.themeInfo.BackgroundPrimaryColor">
     <div class="w-full h-full bg-@global.themeInfo.BackgroundSecondaryColor relative overflow-y-auto">
         <CascadingValue Value="@global">
             <BlazoredToasts />
@@ -21,6 +22,9 @@
                     <div class="flew flex-col loading-screen h-screen">
                         <Loader />
                         <div class="mt-2">Waiting blockchain connexion...</div>
+                        <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg @(displayAlert ? "block" : "hidden")" role="alert">
+                            <span class="font-medium">Unable to connect to Substrate node</span> We are trying again...
+                        </div>
                     </div>
                 }
                 else
@@ -50,35 +54,35 @@
 @code {
     protected GlobalInformation? global { get; set; }
     protected Theme.Mode currentMode { get; set; } = Theme.Mode.White;
+    protected bool isCurrentlyConnected = false;
+
+    protected bool displayAlert = false;
     protected override async Task OnInitializedAsync()
     {
         this.global = new GlobalInformation(this.currentMode);
 
-        if (!substrateService.IsConnected)
+        await substrateService.CheckBlockchainStateAsync((bool isConnected) =>
         {
-            try
+        // If connexion state changed => refresh
+        if (isCurrentlyConnected != isConnected)
             {
-                Console.WriteLine("Not connected...");
-                await substrateService.Client.ConnectAsync();
-                Console.WriteLine("Connected...");
+                logger.LogInformation($"Is connected : {isConnected}");
+                isCurrentlyConnected = isConnected;
+
+                if (!isConnected) displayAlert = true;
+
                 StateHasChanged();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-
-        }
+            
+        }, CancellationToken.None);
     }
 
     public class GlobalInformation
     {
-        public AccountDto connectedUser;
         public IThemeInfo themeInfo;
 
         public GlobalInformation(Theme.Mode mode)
         {
-            connectedUser = null;
             themeInfo = Theme.GetTheme(mode);
         }
     }

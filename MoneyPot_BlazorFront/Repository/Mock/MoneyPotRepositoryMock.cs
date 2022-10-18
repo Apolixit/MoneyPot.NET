@@ -4,7 +4,7 @@ namespace MoneyPot_BlazorFront.Repository.Mock
 {
     public class MoneyPotRepositoryMock : IMoneyPotRepository
     {
-        public Task<IEnumerable<MoneyPotDto>> GetAllAsync()
+        private Task<IEnumerable<MoneyPotDto>> GetAllAsync()
         {
             return Task.Run(() =>
             {
@@ -56,6 +56,16 @@ namespace MoneyPot_BlazorFront.Repository.Mock
         {
             //moneyPotCallback(await GetAllAsync());
             (await GetAllAsync()).ToList().ForEach(mp => moneyPotCallback(mp));
+        }
+
+        public Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<string> createCallback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ContributeMoneyPotAsync(MoneyPotDto moneyPot, double amount, Action<string> contributeCallback)
+        {
+            throw new NotImplementedException();
         }
     }
 }

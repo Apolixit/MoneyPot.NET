@@ -1,4 +1,5 @@
-﻿using MoneyPot_NetApiExt.Generated;
+﻿using MoneyPot_BlazorFront.Service;
+using MoneyPot_NetApiExt.Generated;
 using MoneyPot_RestClient;
 
 namespace MoneyPot_BlazorFront.Helpers
@@ -13,6 +14,22 @@ namespace MoneyPot_BlazorFront.Helpers
             {
                 return null;
             }
+        }
+
+        public async Task CheckBlockchainStateAsync(Action<bool> isConnectedCallback, CancellationToken cancellationToken, int millisecondCheck = 500)
+        {
+            try
+            {
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    isConnectedCallback(true);
+                }
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            {
+
+            }
+            
         }
     }
 }

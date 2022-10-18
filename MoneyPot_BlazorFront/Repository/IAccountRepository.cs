@@ -5,9 +5,10 @@ namespace MoneyPot_BlazorFront.Repository
     public interface IAccountRepository
     {
         /// <summary>
-        /// Get all available accounts for testing
+        /// Subscribe to list of accounts
         /// </summary>
+        /// <param name="moneyPotCallback"></param>
         /// <returns></returns>
-        Task<List<AccountDto>> GetAll();
+        Task SubscribeAccountAsync(Action<AccountDto> accountCallback);
     }
 }

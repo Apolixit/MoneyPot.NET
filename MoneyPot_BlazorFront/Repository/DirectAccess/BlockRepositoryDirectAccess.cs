@@ -1,4 +1,6 @@
-﻿using MoneyPot_BlazorFront.Helpers;
+﻿using Ajuna.NetApi.Model.Types.Base;
+using MoneyPot_BlazorFront.Helpers;
+using MoneyPot_BlazorFront.Service;
 using Shared_MoneyPot;
 
 namespace MoneyPot_BlazorFront.Repository.DirectAccess
@@ -13,13 +15,17 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
 
         public async Task SubscribeNewBlocksAsync(Action<BlockDto> blockCallback)
         {
-            await substrateService.Client.Chain.SubscribeAllHeadsAsync((string s, Ajuna.NetApi.Model.Rpc.Header h) =>
+            await substrateService.Client.Chain.SubscribeAllHeadsAsync(async (string s, Ajuna.NetApi.Model.Rpc.Header h) =>
             {
-                //Console.WriteLine($"Number = {h.Number.Value} - s = {s} - h.ExtrinsicsRoot = {h.ExtrinsicsRoot} - h.StateRoot = {h.StateRoot}");
+                var blockNumber = new BlockNumber();
+                blockNumber.Create((uint)h.Number.Value);
+
+                var currentHash = await this.substrateService.Client.Chain.GetBlockHashAsync(blockNumber);
+                
                 blockCallback(new BlockDto()
                 {
-                    BlockHash = h.ParentHash.Value,
-                    BlockNumber = (int)h.Number.Value,
+                    BlockHash = currentHash.Value,
+                    BlockNumber = (int)blockNumber.Value,
                 });
             });
         }

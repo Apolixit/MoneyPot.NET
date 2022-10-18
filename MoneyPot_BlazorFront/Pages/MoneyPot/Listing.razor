@@ -52,14 +52,6 @@
             if (MoneyPots == null) MoneyPots = new List<MoneyPotDto>();
 
             this.MoneyPots.AddOrUpdate(moneyPotCallback);
-            //var existingMoneyPot = this.MoneyPots.FirstOrDefault(x => x.Equals(moneyPotCallback));
-            //if(existingMoneyPot != null)
-            //{
-            //    existingMoneyPot = moneyPotCallback;
-            //} else
-            //{
-            //    this.MoneyPots.Add(moneyPotCallback);
-            //}
             StateHasChanged();
         });
     }

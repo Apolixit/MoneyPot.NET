@@ -4,7 +4,7 @@ namespace MoneyPot_BlazorFront.Repository.Api
 {
     public class AccountRepositoryApi : IAccountRepository
     {
-        public Task<List<AccountDto>> GetAll()
+        public Task SubscribeAccountAsync(Action<AccountDto> accountCallback)
         {
             throw new NotImplementedException();
         }

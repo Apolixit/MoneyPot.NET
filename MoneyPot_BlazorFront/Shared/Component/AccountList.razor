@@ -1,4 +1,7 @@
-﻿@inject IAccountRepository accountRepository;
+﻿@using MoneyPot_BlazorFront.Helpers
+@inject IAccountRepository accountRepository;
+@inject ISubstrateService substrateService;
+@inject IAccountService accountService;
 @inject IToastService toastService;
 
 <div>
@@ -7,19 +10,19 @@
             <MPTitle Title="Accounts" />
         </div>
         <div class="items-right">
-            @if(global.connectedUser != null)
+            @if (accountService.ConnectedAccount != null)
             {
-                <span class="text-sm">You are connected as @global.connectedUser.Name</span>
+                <span class="text-sm">You are connected as @accountService.ConnectedAccount.Name</span>
             }
         </div>
     </div>
-    
+
     <div class="flex flex-col mt-8">
         <div class="overflow-x-auto">
-            <MPTable Elems="Accounts" 
-            Context="account">
+            <MPTable Elems="Accounts"
+                     Context="account">
                 <TbodyContent>
-                    <tr class="@(account.Address == global.connectedUser.Address ? "bg-green-100" : string.Empty)" 
+                    <tr class="@(account.Address == accountService.ConnectedAccount.Address ? "bg-green-100" : string.Empty)"
                         @onclick="@(() => accountRowSelected(account))">
                         <td>
                             <img class="h-10 w-10 rounded-full" src="@account.AvatarUrl" alt="@account.Name">
@@ -46,16 +49,21 @@
 
     protected override async Task OnInitializedAsync()
     {
-        this.Accounts = await accountRepository.GetAll();
-
-        if (global.connectedUser == null)
+        await accountRepository.SubscribeAccountAsync((AccountDto account) =>
         {
-            global.connectedUser = this.Accounts.First();
-        }
+            if (accountService.ConnectedAccount == null)
+                accountService.UpdateConnectedAccount(account);
+            
+            Accounts.AddOrUpdate(account);
+            StateHasChanged();
+        });
+
+
     }
 
-    private void accountRowSelected(AccountDto selectedAccount) {
-        global.connectedUser = selectedAccount;
+    private void accountRowSelected(AccountDto selectedAccount)
+    {
+        accountService.UpdateConnectedAccount(selectedAccount);
         toastService.ShowInfo($"You are now connected as {selectedAccount.Name}");
         StateHasChanged();
     }
