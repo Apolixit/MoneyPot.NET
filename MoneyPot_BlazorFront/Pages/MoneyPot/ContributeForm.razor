@@ -1,11 +1,13 @@
-﻿<h3 class="mb-4 text-xl font-medium">Contribute to money pot</h3>
+﻿@inject IMoneyPotRepository moneyPotRepository;
+
+<h3 class="mb-4 text-xl font-medium">Contribute to money pot</h3>
 <EditForm Model="Contributor"
           OnValidSubmit="ValidateContribution"
           class="space-y-6">
-    <div>
+    @*<div>
         <MPInputText Label="Your account"
                      @bind-Value="@Contributor.Contributor.Address" />
-    </div>
+    </div>*@
     <div>
         <InputNumber class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                      @bind-Value="@Contributor.Amount" />
@@ -17,12 +19,16 @@
 </EditForm>
 
 @code {
+    [Parameter] public MoneyPotDto moneyPotDto { get; set; }
     [Parameter] public ContributorDto Contributor { get; set; } = new ContributorDto();
-    [Parameter] public EventCallback<ContributorDto> ValidateCallback { get; set; }
+    [Parameter] public EventCallback<ContributorDto> OnMoneyPotContribution { get; set; }
 
-    protected void ValidateContribution()
+    protected async Task ValidateContribution()
     {
-        Console.WriteLine($"Contribution of {Contributor.Contributor.Name} from {Contributor.Amount} ok !");
-        ValidateCallback.InvokeAsync(Contributor);
+        await moneyPotRepository.ContributeMoneyPotAsync(moneyPotDto, Contributor.Amount, async (string status) => {
+            //Todo : gérer les comptes inconnus
+            Console.WriteLine($"Money pot contribution = {status}");
+            await OnMoneyPotContribution.InvokeAsync(Contributor);
+        });
     }
 }

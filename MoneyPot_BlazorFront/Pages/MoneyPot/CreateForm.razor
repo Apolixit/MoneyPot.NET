@@ -1,6 +1,7 @@
 ﻿@using MoneyPot_BlazorFront.Helpers
 @inject IAccountService accountService;
 @inject IMoneyPotRepository moneyPotRepository;
+
 <EditForm Model="CreateModel"
           OnValidSubmit="ValidateCreation"
           class="space-y-6">
@@ -33,6 +34,7 @@
     public async Task ValidateCreation()
     {
         await moneyPotRepository.CreateMoneyPotAsync(SubstrateHelper.BuildAccountDtoFromAddress(CreateModel.ReceiverAddress), CreateModel.TargetAmount, async (string status) => {
+            //Todo : gérer les comptes inconnus
             Console.WriteLine($"Money pot creation = {status}");
             await OnMoneyPotCreated.InvokeAsync();
         });

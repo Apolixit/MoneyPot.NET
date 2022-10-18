@@ -32,7 +32,6 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
             //this.storageDataProvider = storageDataProvider;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "VSTHRD101:Avoid unsupported async delegates", Justification = "<Pending>")]
         public async Task SubscribeMoneyPotsAsync(Action<MoneyPotDto> moneyPotCallback)
         {
             // Subscribe when a money pot is created
@@ -131,10 +130,10 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
 
         public async Task ContributeMoneyPotAsync(MoneyPotDto moneyPot, double amount, Action<string> contributeCallback)
         {
-            var u128Amount = new U128();
-            u128Amount.Create(new BigInteger(amount));
+            var hash = new H256();
+            hash.Create(moneyPot.Hash);
 
-            var contributionMethod = MoneyPotCalls.AddFundsToPot(null, fromDouble(amount));
+            var contributionMethod = MoneyPotCalls.AddFundsToPot(hash, fromDouble(amount));
             await substrateService.Client.Author.SubmitAndWatchExtrinsicAsync((string s, ExtrinsicStatus status) =>
             {
                 contributeCallback(status.ToString());
