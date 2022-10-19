@@ -1,10 +1,11 @@
 ﻿@inject IToastService toastService;
 @inject IAccountService accountService;
+@inject ILogger<Program> logger;
 
 <div class="relative grow p-6 bg-white rounded-lg border border-@global.themeInfo.MainColor m-10">
     <div class="flex justify-between items-center mb-4">
         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Money pot</h5>
-        @if (!moneyPot.IsFinished)
+        @if (!MoneyPotItem.IsFinished)
         {
             <span class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Open</span>
         }
@@ -18,32 +19,32 @@
         <MPPopover>
             <TogglePopoverContent>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
-                    @moneyPot.Creator.Name
+                    @MoneyPotItem.Creator.Name
                 </span>
             </TogglePopoverContent>
             <PopoverContent>
-                <AccountCard account="@moneyPot.Creator" />
+                <AccountCard account="@MoneyPotItem.Creator" />
             </PopoverContent>
         </MPPopover>
     </strong>
-    <strong class="mb-2 font-semibold">
+    <div class="mb-2 font-semibold">
         <div>Receiver :</div>
         
         <MPPopover>
             <TogglePopoverContent>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
-                    @moneyPot.Receiver.Name
+                    @MoneyPotItem.Receiver.Name
                 </span>
             </TogglePopoverContent>
             <PopoverContent>
-                <AccountCard account="@moneyPot.Creator" />
+                <AccountCard account="@MoneyPotItem.Creator" />
             </PopoverContent>
         </MPPopover>
-    </strong>
+    </div>
     <div class="mb-3 font-semibold">
         <div>Contributors :</div>
 
-        <MPList Elems="@moneyPot.Contributors"
+        <MPList Elems="@MoneyPotItem.Contributors"
                 Context="contributor">
             <ElemsContent>
                 <MPPopover>
@@ -59,16 +60,14 @@
             </ElemsContent>
         </MPList>
     </div>
-    @if (!moneyPot.IsFinished)
+    @if (!MoneyPotItem.IsFinished)
     {
         <div class="flex justify-between items-end">
             <Modal Valid="Ok"
                Cancel="" @ref="ContributionModal">
                 <ToggleModalContent>Contribute !</ToggleModalContent>
                 <ModalContent>
-                    <ContributeForm Contributor="CurrentContributor"
-                                    moneyPotDto="moneyPot"
-                                OnMoneyPotContribution="OnContribution" />
+                    <ContributeForm OnMoneyPotContribution="OnMoneyPotContribution" />
                 </ModalContent>
             </Modal>
         </div>
@@ -77,23 +76,21 @@
 
 @code {
     [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
-    [Parameter] public MoneyPotDto moneyPot { get; set; }
-    private Modal ContributionModal { get; set; }
-    public ContributorDto CurrentContributor { get; set; }
+    [Parameter] public MoneyPotDto? MoneyPotItem { get; set; }
+    private Modal ContributionModal { get; set; } = new();
+    public ContributorDto? CurrentContributor { get; set; }
 
     protected override void OnInitialized()
     {
-        this.CurrentContributor = new ContributorDto()
-            {
-                Contributor = accountService.ConnectedAccount,
-                Amount = 0
-            };
+        if(MoneyPotItem == null)
+            throw new ArgumentNullException("Please provide a money pot as parameter");
     }
 
-    protected async Task OnContribution(ContributorDto CurrentContributor)
+    protected void OnMoneyPotContribution(ContributorDto CurrentContributor)
     {
-        Console.WriteLine($"Contribution of {CurrentContributor.Contributor.Name} from {CurrentContributor.Amount} ok !");
-        this.ContributionModal.Hide();
+        logger.LogInformation($"Contribution of {CurrentContributor.Contributor.Name} from {CurrentContributor.Amount} ok !");
+        
+        ContributionModal.Hide();
         toastService.ShowSuccess("Your contribution has been added !");
     }
 }

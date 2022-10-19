@@ -7,7 +7,7 @@ namespace MoneyPot_BlazorFront.Repository
         /// <summary>
         /// Allow to subscribe to new generated blocks
         /// </summary>
-        /// <param name="blockCallback"></param>
+        /// <param name="blockCallback">Return the new finalized block</param>
         Task SubscribeNewBlocksAsync(Action<BlockDto> blockCallback);
     }
 }

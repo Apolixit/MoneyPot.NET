@@ -7,5 +7,7 @@ namespace MoneyPot_BlazorFront.Service
         AccountDto ConnectedAccount { get; }
 
         void UpdateConnectedAccount(AccountDto newAccount);
+
+        // Add create account from address
     }
 }

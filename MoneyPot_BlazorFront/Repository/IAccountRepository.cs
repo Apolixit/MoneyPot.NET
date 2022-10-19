@@ -7,7 +7,7 @@ namespace MoneyPot_BlazorFront.Repository
         /// <summary>
         /// Subscribe to list of accounts
         /// </summary>
-        /// <param name="moneyPotCallback"></param>
+        /// <param name="moneyPotCallback">Return the account (created or changed)</param>
         /// <returns></returns>
         Task SubscribeAccountAsync(Action<AccountDto> accountCallback);
     }

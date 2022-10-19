@@ -4,7 +4,7 @@ namespace Shared_MoneyPot
 {
     public class MoneyPotDto
     {
-        public string Hash { get; set; }
+        public string Hash { get; set; } = string.Empty;
         public AccountDto Creator { get; set; } = new();
         public AccountDto Receiver { get; set; } = new();
         public bool IsFinished { get; set; } = false;
@@ -14,16 +14,16 @@ namespace Shared_MoneyPot
         public IList<ContributorDto> Contributors { get; set; } = new List<ContributorDto>();
 
         public string DisplayHash => Hash.ToString();
-        //public static H256 ToH256(string hash)
-        //{
-        //    H256 hash256 = new H256();
-        //    hash256.Create(hash);
-        //    return hash256;
-        //}
+       
         public override bool Equals(object? obj)
         {
             return obj is MoneyPotDto dto &&
                    Hash == dto.Hash;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 
@@ -31,6 +31,12 @@ namespace Shared_MoneyPot
     {
         public AccountDto Contributor { get; set; } = new AccountDto();
         public double Amount { get; set; }
+    }
+
+    public class CreateDto
+    {
+        public string ReceiverAddress { get; set; } = string.Empty;
+        public double TargetAmount { get; set; }
     }
 
     public enum TypeEndDto

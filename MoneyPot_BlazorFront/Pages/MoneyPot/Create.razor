@@ -3,26 +3,28 @@
 <div class="flex items-center justify-center">
     <Modal Valid=""
            Cancel="Close"
-           @ref="creationModal">
+           @ref="_creationModal">
         <ToggleModalContent>
             <MPButton TypeBtn="MPButton.TypeButton.Valid">
                 Create new money pot
             </MPButton>
         </ToggleModalContent>
         <ModalContent>
-            <CreateForm MoneyPot="newMoneyPot"
-                    OnMoneyPotCreated="OnMoneyPotCreated" />
+            <CreateForm OnMoneyPotCreated="OnMoneyPotCreated" />
         </ModalContent>
     </Modal>
 </div>
 
 @code {
-    private Modal creationModal;
-    private MoneyPotDto newMoneyPot;
+    private Modal _creationModal = new();
+    private MoneyPotDto _newMoneyPot = new();
 
-    protected async Task OnMoneyPotCreated()
+    protected void OnMoneyPotCreated(MoneyPotDto newMoneyPot)
     {
-        this.creationModal.Hide();
+        _newMoneyPot = newMoneyPot;
+        // Todo : make something with the new money pot (notice that it has been validated by finalized extrinsic so everything is ok)
+
+        this._creationModal.Hide();
         toastService.ShowSuccess("Money pot created");
     }
 }

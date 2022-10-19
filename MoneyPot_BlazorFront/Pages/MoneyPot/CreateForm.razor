@@ -21,29 +21,25 @@
 </EditForm>
 
 @code {
-    [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
-    [Parameter] public MoneyPotDto MoneyPot { get; set; }
-    [Parameter] public EventCallback OnMoneyPotCreated { get; set; }
+    [Parameter] public EventCallback<MoneyPotDto> OnMoneyPotCreated { get; set; }
 
     private CreateDto CreateModel { get; set; } = new();
 
-    //private string receiverAddress;
-    //private double targetAmount;
-
-
     public async Task ValidateCreation()
     {
-        await moneyPotRepository.CreateMoneyPotAsync(SubstrateHelper.BuildAccountDtoFromAddress(CreateModel.ReceiverAddress), CreateModel.TargetAmount, async (string status) => {
-            //Todo : gérer les comptes inconnus
-            Console.WriteLine($"Money pot creation = {status}");
-            await OnMoneyPotCreated.InvokeAsync();
-        });
+        await moneyPotRepository.CreateMoneyPotAsync(
+            SubstrateHelper.BuildAccountDtoFromAddress(CreateModel.ReceiverAddress),
+            CreateModel.TargetAmount, async (string status) =>
+            {
+                //Todo : gérer les comptes inconnus
+                Console.WriteLine($"Money pot creation = {status}");
 
-    }
-
-    protected class CreateDto
-    {
-        public string ReceiverAddress { get; set; } 
-        public double TargetAmount { get; set; }
+                await OnMoneyPotCreated.InvokeAsync(new MoneyPotDto()
+                    {
+                        Creator = accountService.ConnectedAccount,
+                        Receiver = SubstrateHelper.BuildAccountDtoFromAddress(CreateModel.ReceiverAddress),
+                        AmountTarget = CreateModel.TargetAmount,
+                    });
+            });
     }
 }

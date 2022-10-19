@@ -17,7 +17,7 @@ namespace MoneyPot_BlazorFront.Service
                     services.AddScoped<IAccountRepository, AccountRepositoryMock>();
                     services.AddSingleton<ISubstrateService, SubstrateServiceMock>();
                     break;
-                case ServiceMode.DirectAccess:
+                case ServiceMode.SubstrateNode:
                     services.AddScoped<IMoneyPotRepository, MoneyPotRepositoryDirectAccess>();
                     services.AddScoped<IBlockRepository, BlockRepositoryDirectAccess>();
                     services.AddScoped<IAccountRepository, AccountRepositoryDirectAccess>();
@@ -34,7 +34,7 @@ namespace MoneyPot_BlazorFront.Service
         public enum ServiceMode
         {
             Mock,
-            DirectAccess
+            SubstrateNode
         }
     }
 }
