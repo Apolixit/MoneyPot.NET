@@ -18,17 +18,19 @@ namespace MoneyPot_BlazorFront.Helpers
 
         public async Task CheckBlockchainStateAsync(Action<bool> isConnectedCallback, CancellationToken cancellationToken, int millisecondCheck = 500)
         {
-            try
-            {
-                while (!cancellationToken.IsCancellationRequested)
-                {
-                    isConnectedCallback(true);
-                }
-            }
-            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
-            {
+            isConnectedCallback(true);
 
-            }
+            //try
+            //{
+            //    while (!cancellationToken.IsCancellationRequested)
+            //    {
+            //        isConnectedCallback(true);
+            //    }
+            //}
+            //catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            //{
+
+            //}
             
         }
     }

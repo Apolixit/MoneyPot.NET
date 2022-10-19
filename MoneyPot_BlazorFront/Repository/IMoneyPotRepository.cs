@@ -18,7 +18,7 @@ namespace MoneyPot_BlazorFront.Repository
         /// <param name="amount">The contribution amount</param>
         /// <param name="createCallback">Callback method triggered at different substrate state (based on ExtrinsicStatus)</param>
         /// <returns></returns>
-        Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<string> createCallback);
+        Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<ExtrinsicStatusDto> createCallback);
 
         /// <summary>
         /// Contribute to an existing money pot
@@ -27,6 +27,32 @@ namespace MoneyPot_BlazorFront.Repository
         /// <param name="amount">The contribution amount</param>
         /// <param name="contributeCallback">Callback method triggered at different substrate state (based on ExtrinsicStatus)</param>
         /// <returns></returns>
-        Task ContributeMoneyPotAsync(MoneyPotDto moneyPot, double amount, Action<string> contributeCallback);
+        Task ContributeMoneyPotAsync(MoneyPotDto moneyPot, double amount, Action<ExtrinsicStatusDto> contributeCallback);
+
+        /// <summary>
+        /// Based on ExtrinsicStatus
+        /// </summary>
+        public enum ExtrinsicStatusDto
+        {
+            /// <summary>
+            /// Waiting to be put in a block
+            /// </summary>
+            Waiting,
+
+            /// <summary>
+            /// Waiting for validation
+            /// </summary>
+            InBlock,
+
+            /// <summary>
+            /// Extrinsic validated
+            /// </summary>
+            Finalized,
+
+            /// <summary>
+            /// An error occured
+            /// </summary>
+            Error,
+        }
     }
 }

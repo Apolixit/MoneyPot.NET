@@ -1,4 +1,5 @@
-﻿@inject IMoneyPotRepository moneyPotRepository;
+﻿@using static MoneyPot_BlazorFront.Repository.IMoneyPotRepository
+@inject IMoneyPotRepository moneyPotRepository;
 @inject ILogger<Program> logger;
 
 <h3 class="mb-4 text-xl font-medium">Contribute to money pot</h3>
@@ -28,7 +29,7 @@
 
     protected async Task ValidateContribution()
     {
-        await moneyPotRepository.ContributeMoneyPotAsync(MoneyPot, Contributor.Amount, async (string status) => {
+        await moneyPotRepository.ContributeMoneyPotAsync(MoneyPot, Contributor.Amount, async (ExtrinsicStatusDto status) => {
             //Todo : gérer les comptes inconnus
             
             logger.LogInformation($"Money pot contribution = {status}");

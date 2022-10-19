@@ -1,4 +1,5 @@
 ﻿@using MoneyPot_BlazorFront.Helpers
+@using static MoneyPot_BlazorFront.Repository.IMoneyPotRepository
 @inject IAccountService accountService;
 @inject IMoneyPotRepository moneyPotRepository;
 
@@ -29,7 +30,7 @@
     {
         await moneyPotRepository.CreateMoneyPotAsync(
             SubstrateHelper.BuildAccountDtoFromAddress(CreateModel.ReceiverAddress),
-            CreateModel.TargetAmount, async (string status) =>
+            CreateModel.TargetAmount, async (ExtrinsicStatusDto status) =>
             {
                 //Todo : gérer les comptes inconnus
                 Console.WriteLine($"Money pot creation = {status}");

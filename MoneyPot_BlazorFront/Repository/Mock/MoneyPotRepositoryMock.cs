@@ -1,4 +1,5 @@
 ﻿using Shared_MoneyPot;
+using static MoneyPot_BlazorFront.Repository.IMoneyPotRepository;
 
 namespace MoneyPot_BlazorFront.Repository.Mock
 {
@@ -58,12 +59,12 @@ namespace MoneyPot_BlazorFront.Repository.Mock
             (await GetAllAsync()).ToList().ForEach(mp => moneyPotCallback(mp));
         }
 
-        public Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<string> createCallback)
+        public Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<ExtrinsicStatusDto> createCallback)
         {
             throw new NotImplementedException();
         }
 
-        public Task ContributeMoneyPotAsync(MoneyPotDto moneyPot, double amount, Action<string> contributeCallback)
+        public Task ContributeMoneyPotAsync(MoneyPotDto moneyPot, double amount, Action<ExtrinsicStatusDto> contributeCallback)
         {
             throw new NotImplementedException();
         }

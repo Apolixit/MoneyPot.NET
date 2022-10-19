@@ -1,6 +1,6 @@
 ﻿@using Blazored.Toast.Configuration
 @using MoneyPot_BlazorFront.Helpers
-@inject ISubstrateService substrateService;
+@*@inject ISubstrateService substrateService;*@
 @inject IToastService toastService;
 @inject ILogger<Program> logger;
 @inherits LayoutComponentBase
@@ -17,7 +17,7 @@
             <BlazoredToasts />
 
             <main class="pt-6 px-4">
-                @if (!substrateService.IsConnected)
+                @if (false) //!substrateService.IsConnected
                 {
                     <div class="flew flex-col loading-screen h-screen">
                         <Loader />
@@ -61,20 +61,20 @@
     {
         this.global = new GlobalInformation(this.currentMode);
 
-        await substrateService.CheckBlockchainStateAsync((bool isConnected) =>
-        {
-        // If connexion state changed => refresh
-        if (isCurrentlyConnected != isConnected)
-            {
-                logger.LogInformation($"Is connected : {isConnected}");
-                isCurrentlyConnected = isConnected;
+        //await substrateService.CheckBlockchainStateAsync((bool isConnected) =>
+        //{
+        //// If connexion state changed => refresh
+        //if (isCurrentlyConnected != isConnected)
+        //    {
+        //        logger.LogInformation($"Is connected : {isConnected}");
+        //        isCurrentlyConnected = isConnected;
 
-                if (!isConnected) displayAlert = true;
+        //        if (!isConnected) displayAlert = true;
 
-                StateHasChanged();
-            }
+        //        StateHasChanged();
+        //    }
             
-        }, CancellationToken.None);
+        //}, CancellationToken.None);
     }
 
     public class GlobalInformation

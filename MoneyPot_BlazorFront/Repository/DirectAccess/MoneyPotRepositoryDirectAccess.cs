@@ -14,6 +14,7 @@ using Shared_MoneyPot;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
+using static MoneyPot_BlazorFront.Repository.IMoneyPotRepository;
 
 namespace MoneyPot_BlazorFront.Repository.DirectAccess
 {
@@ -116,28 +117,37 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
 
             var moneyPotsParams = MoneyPotStorage.MoneyPotsCountParams();
             await substrateService.Client.SubscribeStorageKeyAsync(moneyPotsParams, moneyPotCountChangeset, CancellationToken.None);
-
         }
 
-        public async Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<string> createCallback)
+        public async Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<ExtrinsicStatusDto> createCallback)
         {
-            var createLimitAmountMethod = MoneyPotCalls.CreateWithLimitAmount(SubstrateHelper.BuildAccountId32(receiver), fromDouble(amount));
-            await substrateService.Client.Author.SubmitAndWatchExtrinsicAsync((string s, ExtrinsicStatus status) =>
-            {
-                createCallback(status.ToString());
-            }, createLimitAmountMethod, SubstrateHelper.BuildAccount(accountService.ConnectedAccount), ChargeTransactionPayment.Default(), 128, CancellationToken.None);
+            await SubmitExtrinsicAsync(MoneyPotCalls.CreateWithLimitAmount(SubstrateHelper.BuildAccountId32(receiver), fromDouble(amount)), createCallback);
         }
 
-        public async Task ContributeMoneyPotAsync(MoneyPotDto moneyPot, double amount, Action<string> contributeCallback)
+        public async Task ContributeMoneyPotAsync(MoneyPotDto moneyPot, double amount, Action<ExtrinsicStatusDto> contributeCallback)
         {
             var hash = new H256();
             hash.Create(moneyPot.Hash);
 
-            var contributionMethod = MoneyPotCalls.AddFundsToPot(hash, fromDouble(amount));
+            await SubmitExtrinsicAsync(MoneyPotCalls.AddFundsToPot(hash, fromDouble(amount)), contributeCallback);
+        }
+
+        public async Task SubmitExtrinsicAsync(Method method, Action<ExtrinsicStatusDto> callback)
+        {
             await substrateService.Client.Author.SubmitAndWatchExtrinsicAsync((string s, ExtrinsicStatus status) =>
             {
-                contributeCallback(status.ToString());
-            }, contributionMethod, SubstrateHelper.BuildAccount(accountService.ConnectedAccount), ChargeTransactionPayment.Default(), 128, CancellationToken.None);
+                if (status.ExtrinsicState == ExtrinsicState.Ready)
+                    callback(ExtrinsicStatusDto.Waiting);
+
+                else if (status.InBlock != null)
+                    callback(ExtrinsicStatusDto.InBlock);
+                
+                else if(status.Finalized != null)
+                    callback(ExtrinsicStatusDto.Finalized);
+
+                else
+                    callback(ExtrinsicStatusDto.Error);
+            }, method, SubstrateHelper.BuildAccount(accountService.ConnectedAccount), ChargeTransactionPayment.Default(), 128, CancellationToken.None);
         }
 
         private U128 fromDouble(double amount)

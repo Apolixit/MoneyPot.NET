@@ -23,13 +23,13 @@
                 </span>
             </TogglePopoverContent>
             <PopoverContent>
-                <AccountCard account="@MoneyPotItem.Creator" />
+                <AccountCard Account="@MoneyPotItem.Creator" />
             </PopoverContent>
         </MPPopover>
     </strong>
     <div class="mb-2 font-semibold">
         <div>Receiver :</div>
-        
+
         <MPPopover>
             <TogglePopoverContent>
                 <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
@@ -37,7 +37,7 @@
                 </span>
             </TogglePopoverContent>
             <PopoverContent>
-                <AccountCard account="@MoneyPotItem.Creator" />
+                <AccountCard Account="@MoneyPotItem.Receiver" />
             </PopoverContent>
         </MPPopover>
     </div>
@@ -54,7 +54,7 @@
                         </span>
                     </TogglePopoverContent>
                     <PopoverContent>
-                        <AccountCard account="@contributor.Contributor" />
+                        <AccountCard Account="@contributor.Contributor" />
                     </PopoverContent>
                 </MPPopover>
             </ElemsContent>
@@ -67,7 +67,8 @@
                Cancel="" @ref="ContributionModal">
                 <ToggleModalContent>Contribute !</ToggleModalContent>
                 <ModalContent>
-                    <ContributeForm OnMoneyPotContribution="OnMoneyPotContribution" />
+                    <ContributeForm MoneyPot="MoneyPotItem"
+                                OnMoneyPotContribution="OnMoneyPotContribution" />
                 </ModalContent>
             </Modal>
         </div>
@@ -76,20 +77,20 @@
 
 @code {
     [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
-    [Parameter] public MoneyPotDto? MoneyPotItem { get; set; }
+    [Parameter] public MoneyPotDto MoneyPotItem { get; set; }
     private Modal ContributionModal { get; set; } = new();
     public ContributorDto? CurrentContributor { get; set; }
 
     protected override void OnInitialized()
     {
-        if(MoneyPotItem == null)
+        if (MoneyPotItem == null)
             throw new ArgumentNullException("Please provide a money pot as parameter");
     }
 
     protected void OnMoneyPotContribution(ContributorDto CurrentContributor)
     {
         logger.LogInformation($"Contribution of {CurrentContributor.Contributor.Name} from {CurrentContributor.Amount} ok !");
-        
+
         ContributionModal.Hide();
         toastService.ShowSuccess("Your contribution has been added !");
     }
