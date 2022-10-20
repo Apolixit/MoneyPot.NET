@@ -31,12 +31,18 @@
 
 @code {
     [CascadingParameter] protected MainLayout.GlobalInformation global { get; set; }
-    [Parameter] public AccountDto Account { get; set; }
-    private bool displayDetails { get; set; }
+    [Parameter] public AccountDto? Account { get; set; }
+    private bool _displayDetails { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (Account == null)
+            throw new ArgumentNullException("[AccountCard] - Account parameter is not set");
+    }
 
     private void toogleDetails(bool value)
     {
-        this.displayDetails = value;
+        this._displayDetails = value;
         StateHasChanged();
     }
 }

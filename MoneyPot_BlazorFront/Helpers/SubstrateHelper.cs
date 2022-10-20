@@ -5,6 +5,7 @@ using MoneyPot_BlazorFront.Repository;
 using MoneyPot_NetApiExt.Generated.Model.sp_core.crypto;
 using Schnorrkel.Keys;
 using Shared_MoneyPot;
+using System.Numerics;
 
 namespace MoneyPot_BlazorFront.Helpers
 {
@@ -71,6 +72,15 @@ namespace MoneyPot_BlazorFront.Helpers
             //}
 
             return hexString;
+        }
+
+        public static U ToPrimitive<T, U, V>(T input, Func<T, byte[]> convert)
+            where U : BasePrim<V>, new()
+        {
+            var primVal = new U();
+            primVal.Create(convert(input));
+
+            return primVal;
         }
     }
 }

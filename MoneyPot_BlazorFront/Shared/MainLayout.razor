@@ -1,6 +1,6 @@
 ﻿@using Blazored.Toast.Configuration
 @using MoneyPot_BlazorFront.Helpers
-@*@inject ISubstrateService substrateService;*@
+@inject ISubstrateService substrateService;
 @inject IToastService toastService;
 @inject ILogger<Program> logger;
 @inherits LayoutComponentBase
@@ -14,12 +14,18 @@
 <div class="flex overflow-hidden bg-@global.themeInfo.BackgroundPrimaryColor">
     <div class="w-full h-full bg-@global.themeInfo.BackgroundSecondaryColor relative overflow-y-auto">
         <CascadingValue Value="@global">
-            <BlazoredToasts />
+            <BlazoredToasts ShowProgressBar="true"
+                            MaxToastCount="10"
+                            IconType="IconType.FontAwesome"
+                            InfoIcon="fa-solid fa-info"
+                            SuccessIcon="fa-solid fa-thumbs-up"
+                            WarningIcon="fa-solid fa-triangle-exclamation"
+                            ErrorIcon="fa-solid fa-bug" />
 
             <main class="pt-6 px-4">
-                @if (false) //!substrateService.IsConnected
+                @if (!substrateService.IsConnected)
                 {
-                    <div class="flew flex-col loading-screen h-screen">
+                    <div class="flex flex-col loading-screen h-screen">
                         <Loader />
                         <div class="mt-2">Waiting blockchain connexion...</div>
                         <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg @(displayAlert ? "block" : "hidden")" role="alert">
@@ -31,12 +37,10 @@
                 {
                     <div class="w-full grid grid-cols-2 sm::grid-cols-1 gap-4 h-96 overflow-auto">
                         <div class="bg-@global.themeInfo.BackgroundPrimaryColor shadow rounded-lg p-4">
-                            @* Blocks *@
-                            <MoneyPot_BlazorFront.Shared.Component.BlockList />
+                            <BlockList />
                         </div>
                         <div class="bg-@global.themeInfo.BackgroundPrimaryColor shadow rounded-lg p-4 h-96">
-                            @* Account *@
-                            <MoneyPot_BlazorFront.Shared.Component.AccountList />
+                            <AccountList />
                         </div>
                     </div>
                     <div class="my-4">
@@ -60,21 +64,21 @@
     protected override async Task OnInitializedAsync()
     {
         this.global = new GlobalInformation(this.currentMode);
+        Thread.Sleep(2000);
+        await substrateService.CheckBlockchainStateAsync((bool isConnected) =>
+        {
+            // If connexion state changed => refresh
+            if (isCurrentlyConnected != isConnected)
+            {
+                logger.LogInformation($"Is connected : {isConnected}");
+                isCurrentlyConnected = isConnected;
 
-        //await substrateService.CheckBlockchainStateAsync((bool isConnected) =>
-        //{
-        //// If connexion state changed => refresh
-        //if (isCurrentlyConnected != isConnected)
-        //    {
-        //        logger.LogInformation($"Is connected : {isConnected}");
-        //        isCurrentlyConnected = isConnected;
+                if (!isConnected) displayAlert = true;
 
-        //        if (!isConnected) displayAlert = true;
+                StateHasChanged();
+            }
 
-        //        StateHasChanged();
-        //    }
-            
-        //}, CancellationToken.None);
+        }, CancellationToken.None);
     }
 
     public class GlobalInformation

@@ -3,17 +3,17 @@
 @inject IAccountService accountService;
 @inject IMoneyPotRepository moneyPotRepository;
 
-<EditForm Model="CreateModel"
+<EditForm Model="_createModel"
           OnValidSubmit="ValidateCreation"
           class="space-y-6">
     <div>
         <MPInputText Label="Receiver account"
-                     @bind-Value="@CreateModel.ReceiverAddress" />
+                     @bind-Value="@_createModel.ReceiverAddress" />
     </div>
     <div>
         <InputNumber Label="Target amount"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                     @bind-Value="@CreateModel.TargetAmount" />
+                     @bind-Value="@_createModel.TargetAmount" />
     </div>
 
     <MPButton TypeBtn="MPButton.TypeButton.Submit">
@@ -24,13 +24,13 @@
 @code {
     [Parameter] public EventCallback<MoneyPotDto> OnMoneyPotCreated { get; set; }
 
-    private CreateDto CreateModel { get; set; } = new();
+    private CreateDto _createModel { get; set; } = new();
 
     public async Task ValidateCreation()
     {
         await moneyPotRepository.CreateMoneyPotAsync(
-            SubstrateHelper.BuildAccountDtoFromAddress(CreateModel.ReceiverAddress),
-            CreateModel.TargetAmount, async (ExtrinsicStatusDto status) =>
+            SubstrateHelper.BuildAccountDtoFromAddress(_createModel.ReceiverAddress),
+            _createModel.TargetAmount, async (ExtrinsicStatusDto status) =>
             {
                 //Todo : gérer les comptes inconnus
                 Console.WriteLine($"Money pot creation = {status}");
@@ -38,8 +38,8 @@
                 await OnMoneyPotCreated.InvokeAsync(new MoneyPotDto()
                     {
                         Creator = accountService.ConnectedAccount,
-                        Receiver = SubstrateHelper.BuildAccountDtoFromAddress(CreateModel.ReceiverAddress),
-                        AmountTarget = CreateModel.TargetAmount,
+                        Receiver = SubstrateHelper.BuildAccountDtoFromAddress(_createModel.ReceiverAddress),
+                        AmountTarget = _createModel.TargetAmount,
                     });
             });
     }

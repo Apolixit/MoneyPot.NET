@@ -18,7 +18,9 @@
     }
 
     <div class="pl-4 text-sm font-normal">
-        @ChildContent
+        if(ChildContent != null) {
+            @ChildContent
+        }
     </div>
 </div>
 
@@ -26,9 +28,9 @@
     [Parameter] public ToastDuration Duration { get; set; } = ToastDuration.Standard;
     [Parameter] public ToastLevel Level { get; set; } = ToastLevel.Unset;
     [Parameter] public ToastPosition Position { get; set; } = ToastPosition.Relative;
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    private System.Timers.Timer delayTimer = null;
+    private System.Timers.Timer? _delayTimer = null;
 
     private bool display = false;
     [Parameter]
@@ -48,26 +50,26 @@
                 switch (Duration)
                 {
                     case ToastDuration.Short:
-                        delayTimer = new System.Timers.Timer(2_000);
+                        _delayTimer = new System.Timers.Timer(2_000);
                         break;
                     case ToastDuration.Standard:
-                        delayTimer = new System.Timers.Timer(5_000);
+                        _delayTimer = new System.Timers.Timer(5_000);
                         break;
                     case ToastDuration.Long:
-                        delayTimer = new System.Timers.Timer(8_000);
+                        _delayTimer = new System.Timers.Timer(8_000);
                         break;
                     default:
-                        delayTimer = null;
+                        _delayTimer = null;
                         break;
                 }
-                if (delayTimer != null)
+                if (_delayTimer != null)
                 {
-                    delayTimer.AutoReset = false;
-                    delayTimer.Enabled = true;
+                    _delayTimer.AutoReset = false;
+                    _delayTimer.Enabled = true;
 
-                    delayTimer.Elapsed += (sender, e) =>
+                    _delayTimer.Elapsed += (sender, e) =>
                     {
-                        this.delayTimer = null;
+                        this._delayTimer = null;
                         this.Display = false;
                         StateHasChanged();
                     };

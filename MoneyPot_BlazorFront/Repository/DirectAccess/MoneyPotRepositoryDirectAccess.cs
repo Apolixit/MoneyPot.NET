@@ -20,17 +20,15 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
 {
     public class MoneyPotRepositoryDirectAccess : IMoneyPotRepository
     {
-        private ISubstrateService substrateService;
-        private IAccountService accountService;
-
-        //private IStorageDataProvider storageDataProvider;
-        private IList<MoneyPotDto> moneyPots = new List<MoneyPotDto>();
+        private readonly ISubstrateService _substrateService;
+        private readonly IAccountService _accountService;
+        private readonly IList<MoneyPotDto> _moneyPots = new List<MoneyPotDto>();
 
         public MoneyPotRepositoryDirectAccess(ISubstrateService substrateService, IAccountService accountService) //, IStorageDataProvider storageDataProvider
         {
-            this.substrateService = substrateService;
-            this.accountService = accountService;
-            //this.storageDataProvider = storageDataProvider;
+            _substrateService = substrateService;
+            _accountService = accountService;
+            //_storageDataProvider = storageDataProvider;
         }
 
         public async Task SubscribeMoneyPotsAsync(Action<MoneyPotDto> moneyPotCallback)
@@ -51,12 +49,12 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                     var idx = new U32();
                     idx.Create((uint)i);
 
-                    H256 moneyPotHash = await substrateService.Client.MoneyPotStorage.MoneyPotsHash(idx, CancellationToken.None);
+                    H256 moneyPotHash = await _substrateService.Client.MoneyPotStorage.MoneyPotsHash(idx, CancellationToken.None);
                     var moneyPotHashHex = Utils.Bytes2HexString(moneyPotHash.Value.Bytes);
 
                     // Subscribe when a money pot change
                     var moneyPotsSubstrateParams = MoneyPotStorage.MoneyPotsParams(moneyPotHash);
-                    await substrateService.Client.SubscribeStorageKeyAsync(moneyPotsSubstrateParams, async (subscriptionId, storageChangeSet) =>
+                    await _substrateService.Client.SubscribeStorageKeyAsync(moneyPotsSubstrateParams, async (subscriptionId, storageChangeSet) =>
                     {
                         var hexString = SubstrateHelper.getChangesetData(storageChangeSet);
                         if (String.IsNullOrEmpty(hexString)) return;
@@ -78,14 +76,14 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                             moneyPotElem.TypeEnd = TypeEndDto.BlockLimit;
                         }
 
-                        moneyPots.AddOrUpdate(moneyPotElem);
+                        _moneyPots.AddOrUpdate(moneyPotElem);
 
                         moneyPotCallback(moneyPotElem);
                     }, CancellationToken.None);
 
                     // Subscribe when a contribution is done
                     var moneyPotsContributionParams = MoneyPotStorage.MoneyPotContributionParams(moneyPotHash);
-                    await substrateService.Client.SubscribeStorageKeyAsync(moneyPotsContributionParams, async (subscriptionId, storageChangeSet) =>
+                    await _substrateService.Client.SubscribeStorageKeyAsync(moneyPotsContributionParams, async (subscriptionId, storageChangeSet) =>
                     {
                         var hexString = SubstrateHelper.getChangesetData(storageChangeSet);
 
@@ -94,7 +92,7 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                         var contributions = new MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT5();
                         contributions.Create(hexString);
 
-                        var currentMoneyPot = moneyPots.FirstOrDefault(x => x.Hash == moneyPotHashHex);
+                        var currentMoneyPot = _moneyPots.FirstOrDefault(x => x.Hash == moneyPotHashHex);
                         if (currentMoneyPot == null) return;
 
                         if (contributions.Value != null)
@@ -116,12 +114,16 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
             };
 
             var moneyPotsParams = MoneyPotStorage.MoneyPotsCountParams();
-            await substrateService.Client.SubscribeStorageKeyAsync(moneyPotsParams, moneyPotCountChangeset, CancellationToken.None);
+            await _substrateService.Client.SubscribeStorageKeyAsync(moneyPotsParams, moneyPotCountChangeset, CancellationToken.None);
         }
 
         public async Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<ExtrinsicStatusDto> createCallback)
         {
-            await SubmitExtrinsicAsync(MoneyPotCalls.CreateWithLimitAmount(SubstrateHelper.BuildAccountId32(receiver), fromDouble(amount)), createCallback);
+            await SubmitExtrinsicAsync(
+                MoneyPotCalls.CreateWithLimitAmount(
+                    SubstrateHelper.BuildAccountId32(receiver),
+                    SubstrateHelper.ToPrimitive<double, U128, BigInteger>(amount, (amount) => new BigInteger(amount).ToByteArray())
+                ), createCallback);
         }
 
         public async Task ContributeMoneyPotAsync(MoneyPotDto moneyPot, double amount, Action<ExtrinsicStatusDto> contributeCallback)
@@ -129,32 +131,35 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
             var hash = new H256();
             hash.Create(moneyPot.Hash);
 
-            await SubmitExtrinsicAsync(MoneyPotCalls.AddFundsToPot(hash, fromDouble(amount)), contributeCallback);
+            await SubmitExtrinsicAsync(
+                    MoneyPotCalls.AddFundsToPot(hash, 
+                    SubstrateHelper.ToPrimitive<double, U128, BigInteger>(amount, (amount) => new BigInteger(amount).ToByteArray())
+                ), contributeCallback);
         }
 
         public async Task SubmitExtrinsicAsync(Method method, Action<ExtrinsicStatusDto> callback)
         {
-            await substrateService.Client.Author.SubmitAndWatchExtrinsicAsync((string s, ExtrinsicStatus status) =>
+            await _substrateService.Client.Author.SubmitAndWatchExtrinsicAsync((string s, ExtrinsicStatus status) =>
             {
                 if (status.ExtrinsicState == ExtrinsicState.Ready)
                     callback(ExtrinsicStatusDto.Waiting);
 
                 else if (status.InBlock != null)
                     callback(ExtrinsicStatusDto.InBlock);
-                
-                else if(status.Finalized != null)
+
+                else if (status.Finalized != null)
                     callback(ExtrinsicStatusDto.Finalized);
 
                 else
                     callback(ExtrinsicStatusDto.Error);
-            }, method, SubstrateHelper.BuildAccount(accountService.ConnectedAccount), ChargeTransactionPayment.Default(), 128, CancellationToken.None);
+            }, method, SubstrateHelper.BuildAccount(_accountService.ConnectedAccount), ChargeTransactionPayment.Default(), 128, CancellationToken.None);
         }
 
-        private U128 fromDouble(double amount)
-        {
-            var u128Amount = new U128();
-            u128Amount.Create(new BigInteger(amount));
-            return u128Amount;
-        }
+        //private U128 fromDouble(double amount)
+        //{
+        //    var u128Amount = new U128();
+        //    u128Amount.Create(new BigInteger(amount));
+        //    return u128Amount;
+        //}
     }
 }

@@ -12,25 +12,23 @@ namespace MoneyPot_BlazorFront.Service
 {
     public class SubstrateServiceDirectAccess : ISubstrateService
     {
-        private readonly IConfiguration Configuration;
+        private readonly Uri _nodeUri;
+        private SubstrateClientExt? _client;
+
         public SubstrateServiceDirectAccess(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _nodeUri = new Uri(configuration.GetValue<string>("uriEndpoint"));
         }
 
-        private readonly Uri NodeUri = new Uri("ws://127.0.0.1:9944"); //Configuration["uriEndpoint"]
         public bool IsConnected => Client.IsConnected;
 
-        private SubstrateClientExt _client;
         public SubstrateClientExt Client
         {
             get
             {
                 if (_client == null)
                 {
-                    Console.WriteLine($"_client is null");
-                    _client = new SubstrateClientExt(NodeUri, ChargeTransactionPayment.Default());
-                    Console.WriteLine($"_client = {_client}");
+                    _client = new SubstrateClientExt(_nodeUri, ChargeTransactionPayment.Default());
                 }
                 return _client;
             }

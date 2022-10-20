@@ -9,5 +9,11 @@ namespace MoneyPot_BlazorFront.Repository
         /// </summary>
         /// <param name="blockCallback">Return the new finalized block</param>
         Task SubscribeNewBlocksAsync(Action<BlockDto> blockCallback);
+
+        /// <summary>
+        /// Return the last finalized block
+        /// </summary>
+        /// <returns></returns>
+        Task<BlockDto?> GetLastBlockAsync();
     }
 }

@@ -1,4 +1,4 @@
-﻿<MPButton OnClick="@(() => displayModal = true)"
+﻿<MPButton OnClick="@(() => _displayModal = true)"
           TypeBtn="MPButton.TypeButton.Valid">
     @ToggleModalContent
 </MPButton>
@@ -6,7 +6,7 @@
 <!-- Main modal -->
 <div class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
         w-full md:inset-0 h-modal md:h-full 
-        @(displayModal ? "block" : "hidden")">
+        @(_displayModal ? "block" : "hidden")">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -46,7 +46,7 @@ text-sm p-1.5 ml-auto inline-flex items-center"
 </div>
 
 @code {
-    private bool displayModal = false;
+    private bool _displayModal = false;
     [Parameter] public string Title { get; set; } = "Confirm";
     [Parameter] public string Cancel { get; set; } = "Cancel";
     [Parameter] public string Valid { get; set; } = "Valid";
@@ -54,8 +54,8 @@ text-sm p-1.5 ml-auto inline-flex items-center"
     [Parameter] public RenderFragment ModalContent { get; set; }
     [Parameter] public EventCallback onConfirm { get; set; }
     [Parameter] public EventCallback onCancel { get; set; }
-    public void Show() => displayModal = true;
-    public void Hide() => displayModal = false;
+    public void Show() => _displayModal = true;
+    public void Hide() => _displayModal = false;
 
     protected async Task closeModalAndTrigger(EventCallback callback)
     {

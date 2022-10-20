@@ -1,0 +1,29 @@
+﻿<div class="flex justify-between">
+    <small>@Current</small>
+    <div class="grow bg-gray-200 rounded-full h-2.5 mx-4 mt-1">
+        <div class="bg-blue-600 h-2.5 rounded-full" style="width: @percentFilled()%"></div>
+    </div>
+    <small>@Target</small>
+</div>
+
+
+
+@code {
+    [Parameter] public double? Current { get; set; }
+    [Parameter] public double? Target { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (!Current.IsSet() || !Target.IsSet())
+            throw new ArgumentNullException("Current or target block has invalid data");
+    }
+    private int percentFilled()
+    {
+        int filled100 = (int)((Current.Value / Target.Value) * 100);
+        if (filled100 < 0) return 0;
+        if (filled100 > 100) return 100;
+
+        Console.WriteLine($"Current = {Current} / Target = {Target} / filled = {filled100}");
+        return (int)filled100;
+    }
+}

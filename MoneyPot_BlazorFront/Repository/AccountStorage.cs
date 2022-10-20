@@ -81,14 +81,14 @@ namespace MoneyPot_BlazorFront.Repository
         // SS58 Address:      5ExvpL19R3qd88jsRdncjLgaj3znUe6jczKsSjxS1DEM6SvD
 
         // https://www.flaticon.com/free-icons/avatar
-        private static List<(string name, string ss58Address, string publicKey, string secretSeed)> accounts;
+        private static List<(string name, string ss58Address, string publicKey, string secretSeed)> _accounts;
         public static List<(string name, string ss58Address, string publicKey, string secretSeed)> Accounts
         {
             get
             {
-                if (accounts == null)
+                if (_accounts == null)
                 {
-                    accounts = new List<(string name, string ss58Address, string publicKey, string secretSeed)>()
+                    _accounts = new List<(string name, string ss58Address, string publicKey, string secretSeed)>()
                     {
                         ("Alice", "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY", "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d", "0xe5be9a5092b81bca64be81d212e7f2f9eba183bb7a90954f7b76361f6edb5c0a"),
                         ("Alice_Stash", "5GNJqTPyNqANBkUVMN1LPPrxXnFouWXoe2wNSmmEoLctxiZY", "0xbe5ddb1579b72e84524fc29e78609e3caf42e85aa118ebfe0b0ad404b5bdd25f", "0x3c881bc4d45926680c64a7f9315eeda3dd287f8d598f3653d7c107799c5422b3"),
@@ -102,7 +102,7 @@ namespace MoneyPot_BlazorFront.Repository
                     };
                 }
 
-                return accounts;
+                return _accounts;
             }
         }
 

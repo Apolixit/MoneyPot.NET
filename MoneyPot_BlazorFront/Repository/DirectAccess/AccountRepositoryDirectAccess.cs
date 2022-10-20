@@ -9,29 +9,26 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
 {
     public class AccountRepositoryDirectAccess : IAccountRepository
     {
-        private ISubstrateService substrateService;
-        private IList<AccountDto> accounts = new List<AccountDto>();
+        private readonly ISubstrateService _substrateService;
+        private readonly IList<AccountDto> _accounts = new List<AccountDto>();
 
         public AccountRepositoryDirectAccess(ISubstrateService substrateService)
         {
-            this.substrateService = substrateService;
+            this._substrateService = substrateService;
         }
 
-        public async Task<IEnumerable<AccountDto>> GetAll()
+        public async Task<IEnumerable<AccountDto>> GetAllAsync()
         {
-            var accounts = new List<AccountDto>();
             foreach (var storageAccount in AccountStorage.Accounts)
             {
                 var account = new AccountDto(storageAccount.name, storageAccount.ss58Address, storageAccount.publicKey);
-                AccountData accountData = await this.substrateService.Client.BalancesStorage.Account(SubstrateHelper.BuildAccountId32(account), CancellationToken.None);
+                AccountData accountData = await this._substrateService.Client.BalancesStorage.Account(SubstrateHelper.BuildAccountId32(account), CancellationToken.None);
 
                 account.Balance = (double)accountData.Free.Value;
-                accounts.Add(account);
+                _accounts.Add(account);
             }
-            //BalancesStorage.AccountParams(SubstrateHelper.BuildAccountId32(account))
-            //substrateService.Client.MoneyPotStorage.
 
-            return accounts;
+            return _accounts;
         }
 
         public async Task SubscribeAccountAsync(Action<AccountDto> accountCallback)
@@ -39,10 +36,10 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
             foreach (var storageAccount in AccountStorage.Accounts)
             {
                 var account = new AccountDto(storageAccount.name, storageAccount.ss58Address, storageAccount.publicKey);
-                accounts.AddOrUpdate(account);
+                _accounts.AddOrUpdate(account);
                 accountCallback(account);
 
-                await substrateService.Client.SubscribeStorageKeyAsync(SystemStorage.AccountParams(SubstrateHelper.BuildAccountId32(account)), async (subscriptionId, storageChangeSet) =>
+                await _substrateService.Client.SubscribeStorageKeyAsync(SystemStorage.AccountParams(SubstrateHelper.BuildAccountId32(account)), async (subscriptionId, storageChangeSet) =>
                 {
                     var hexString = SubstrateHelper.getChangesetData(storageChangeSet);
                     if (String.IsNullOrEmpty(hexString)) return;
@@ -51,7 +48,7 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                     accountInfo.Create(hexString);
 
                     account.Balance = (double)accountInfo.Data.Free.Value;
-                    accounts.AddOrUpdate(account);
+                    _accounts.AddOrUpdate(account);
                     accountCallback(account);
                 }, CancellationToken.None);
             }

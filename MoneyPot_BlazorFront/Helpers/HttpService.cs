@@ -5,11 +5,11 @@ namespace MoneyPot_BlazorFront.Helpers
 {
     public class HttpService : IHttpService
     {
-        private readonly HttpClient httpClient;
-        private readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+        private readonly HttpClient _httpClient;
+        private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
         public HttpService(HttpClient httpClient)
         {
-            this.httpClient = httpClient;
+            this._httpClient = httpClient;
         }
 
         private async Task<T?> DeserializeAsync<T>(HttpResponseMessage httpResponse, JsonSerializerOptions options)
@@ -20,11 +20,11 @@ namespace MoneyPot_BlazorFront.Helpers
 
         public async Task<HttpResponseWrapper<T?>> GetAsync<T>(string url)
         {
-            var responseHTTP = await httpClient.GetAsync(url);
+            var responseHTTP = await _httpClient.GetAsync(url);
 
             if (responseHTTP.IsSuccessStatusCode)
             {
-                var response = await DeserializeAsync<T?>(responseHTTP, jsonSerializerOptions);
+                var response = await DeserializeAsync<T?>(responseHTTP, _jsonSerializerOptions);
                 return new HttpResponseWrapper<T?>(response, true, responseHTTP);
             }
             else
@@ -47,7 +47,7 @@ namespace MoneyPot_BlazorFront.Helpers
         {
             var dataJson = JsonSerializer.Serialize(data);
             var stringContent = new StringContent(dataJson, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync(url, stringContent);
+            var response = await _httpClient.PostAsync(url, stringContent);
             return new HttpResponseWrapper<object?>(null, response.IsSuccessStatusCode, response);
         }
 
@@ -55,10 +55,10 @@ namespace MoneyPot_BlazorFront.Helpers
         {
             var dataJson = JsonSerializer.Serialize(data);
             var stringContent = new StringContent(dataJson, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync(url, stringContent);
+            var response = await _httpClient.PostAsync(url, stringContent);
             if (response.IsSuccessStatusCode)
             {
-                var responseDeserialized = await DeserializeAsync<TResponse>(response, jsonSerializerOptions);
+                var responseDeserialized = await DeserializeAsync<TResponse>(response, _jsonSerializerOptions);
                 return new HttpResponseWrapper<TResponse?>(responseDeserialized, true, response);
             }
             else
@@ -71,13 +71,13 @@ namespace MoneyPot_BlazorFront.Helpers
         {
             var dataJson = JsonSerializer.Serialize(data);
             var stringContent = new StringContent(dataJson, Encoding.UTF8, "application/json");
-            var response = await httpClient.PutAsync(url, stringContent);
+            var response = await _httpClient.PutAsync(url, stringContent);
             return new HttpResponseWrapper<object?>(null, response.IsSuccessStatusCode, response);
         }
 
         public async Task<HttpResponseWrapper<object?>> DeleteAsync(string url)
         {
-            var res = await httpClient.DeleteAsync(url);
+            var res = await _httpClient.DeleteAsync(url);
             return new HttpResponseWrapper<object?>(null, res.IsSuccessStatusCode, res);
         }
     }

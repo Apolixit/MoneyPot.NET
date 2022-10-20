@@ -1,5 +1,5 @@
-﻿<button class="@currentClass() px-5 py-2.5 text-center" 
-        type="@typeBtn()" 
+﻿<button class="text-center @typeButtonClass() @sizeClass()"
+        type="@typeBtn()"
         @onclick="OnClick">
     @ChildContent
 </button>
@@ -8,6 +8,7 @@
     [CascadingParameter] protected MainLayout.GlobalInformation global { get; set; }
 
     [Parameter] public TypeButton TypeBtn { get; set; }
+    [Parameter] public BtnSize Size { get; set; } = BtnSize.Md;
     [Parameter] public RenderFragment ChildContent { get; set; }
     [Parameter] public EventCallback OnClick { get; set; }
 
@@ -19,10 +20,32 @@
     }
 
     /* CSS */
-    private string currentClass() =>
+    private string typeButtonClass() =>
         (this.TypeBtn == TypeButton.Valid || this.TypeBtn == TypeButton.Submit) ?
         $"text-white bg-{global.themeInfo.MinorColor} hover:bg-{global.themeInfo.MainColor}" :
         $"text-dark bg-grey-200 hover:bg-grey-300";
 
+    private string sizeClass()
+    {
+        switch (Size)
+        {
+            case BtnSize.Xs:
+                return "px-1 py-0.5";
+            case BtnSize.Sm:
+                return "px-2 py-1";
+            case BtnSize.Md:
+                return "px-5 py-2.5";
+        }
+        return "px-8 py-4";
+    }
+
     private string typeBtn() => (this.TypeBtn == TypeButton.Submit) ? "submit" : "button";
+
+    public enum BtnSize
+    {
+        Xs,
+        Sm,
+        Md,
+        Lg
+    }
 }

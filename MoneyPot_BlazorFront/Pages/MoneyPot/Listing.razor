@@ -13,9 +13,8 @@
         <div class="flex items-center justify-center">
             <MPList Elems="OpenMoneyPots"
                     Context="moneyPot">
-                <EmptyContent>No money pot yet :'(</EmptyContent>
+                <EmptyContent>No money pot yet <i class="fa-solid fa-face-sad-tear"></i></EmptyContent>
                 <ElemsContent>
-                    @* Money pot component *@
                     <MoneyPot MoneyPotItem="@moneyPot" />
                 </ElemsContent>
             </MPList>
@@ -29,7 +28,6 @@
                     Context="moneyPot">
                 <EmptyContent></EmptyContent>
                 <ElemsContent>
-                    @* Money pot component *@
                     <MoneyPot MoneyPotItem="@moneyPot" />
                 </ElemsContent>
             </MPList>
@@ -40,8 +38,8 @@
 
 @code {
     [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
-    private IList<MoneyPotDto>? MoneyPots { get; set; } = new List<MoneyPotDto>();
-
+    
+    public IList<MoneyPotDto>? MoneyPots { get; set; } = new List<MoneyPotDto>();
     public IList<MoneyPotDto>? OpenMoneyPots => MoneyPots?.Where(x => !x.IsFinished).ToList();
     public IList<MoneyPotDto>? CloseMoneyPots => MoneyPots?.Where(x => x.IsFinished).ToList();
 

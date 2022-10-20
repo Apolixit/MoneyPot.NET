@@ -1,0 +1,25 @@
+﻿@inject IBlockRepository blockRepository;
+
+<div class="flex justify-center items-center">
+    
+    <span class="mr-2"><i class="fa-brands fa-hive mr-2"></i>  Block n° @BlockTarget.Value.ToString("N0")</span>
+    
+    <span class="ml-2"><i class="fa-solid fa-hourglass-end mx-2"></i> End time @_estimatedDatetime.ToString("g")</span>
+</div>
+
+@code {
+    [Parameter] public int? BlockTarget { get; set; }
+    private int _currentBlock;
+    private DateTime _estimatedDatetime;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (BlockTarget == null)
+            throw new ArgumentNullException("A block target is required");
+
+
+        _currentBlock = 0; //(await blockRepository.GetLastBlockAsync())?.BlockNumber;
+        _estimatedDatetime = DateTime.Now.AddSeconds((double)((BlockTarget - _currentBlock) * 6));
+    }
+
+}

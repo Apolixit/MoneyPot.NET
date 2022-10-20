@@ -4,7 +4,12 @@ namespace MoneyPot_BlazorFront.Repository.Api
 {
     public class BlockRepositoryApi : IBlockRepository
     {
-        public async Task SubscribeNewBlocksAsync(Action<BlockDto> blockCallback)
+        public Task<BlockDto?> GetLastBlockAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SubscribeNewBlocksAsync(Action<BlockDto> blockCallback)
         {
             throw new NotImplementedException();
         }

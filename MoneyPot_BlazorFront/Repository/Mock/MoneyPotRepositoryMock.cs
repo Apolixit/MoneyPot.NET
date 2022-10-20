@@ -5,7 +5,7 @@ namespace MoneyPot_BlazorFront.Repository.Mock
 {
     public class MoneyPotRepositoryMock : IMoneyPotRepository
     {
-        private Task<IEnumerable<MoneyPotDto>> GetAllAsync()
+        private Task<IEnumerable<MoneyPotDto>> getAllAsync()
         {
             return Task.Run(() =>
             {
@@ -17,7 +17,7 @@ namespace MoneyPot_BlazorFront.Repository.Mock
                         Receiver = AccountStorage.ToDTO(AccountStorage.Accounts[1]),
                         Contributors = AccountStorage.Accounts.Skip(2).Take(2).Select(x => new ContributorDto() {
                             Contributor = AccountStorage.ToDTO(x),
-                            Amount = 500
+                            Amount = 200
                         }).ToList(),
                         TypeEnd = TypeEndDto.AmountLimit,
                         AmountTarget = 1000,
@@ -33,7 +33,7 @@ namespace MoneyPot_BlazorFront.Repository.Mock
                             Amount = 500
                         }).ToList(),
                         TypeEnd = TypeEndDto.BlockLimit,
-                        BlockTarget = 80,
+                        BlockTarget = 80000,
                         IsFinished = false
                     },
                     new MoneyPotDto()
@@ -46,7 +46,7 @@ namespace MoneyPot_BlazorFront.Repository.Mock
                             Amount = 500
                         }).ToList(),
                         TypeEnd = TypeEndDto.BlockLimit,
-                        BlockTarget = 44,
+                        BlockTarget = 44000,
                         IsFinished = true
                     }
                 }.AsEnumerable();
@@ -55,18 +55,19 @@ namespace MoneyPot_BlazorFront.Repository.Mock
 
         public async Task SubscribeMoneyPotsAsync(Action<MoneyPotDto> moneyPotCallback)
         {
-            //moneyPotCallback(await GetAllAsync());
-            (await GetAllAsync()).ToList().ForEach(mp => moneyPotCallback(mp));
+            (await getAllAsync()).ToList().ForEach(mp => moneyPotCallback(mp));
         }
 
         public Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<ExtrinsicStatusDto> createCallback)
         {
-            throw new NotImplementedException();
+            createCallback(ExtrinsicStatusDto.Waiting);
+            return Task.CompletedTask;
         }
 
         public Task ContributeMoneyPotAsync(MoneyPotDto moneyPot, double amount, Action<ExtrinsicStatusDto> contributeCallback)
         {
-            throw new NotImplementedException();
+            contributeCallback(ExtrinsicStatusDto.Waiting);
+            return Task.CompletedTask;
         }
     }
 }

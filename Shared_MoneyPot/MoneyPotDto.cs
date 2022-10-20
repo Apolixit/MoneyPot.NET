@@ -14,6 +14,16 @@ namespace Shared_MoneyPot
         public IList<ContributorDto> Contributors { get; set; } = new List<ContributorDto>();
 
         public string DisplayHash => Hash.ToString();
+
+        /// <summary>
+        /// Return the sum of all contributions
+        /// </summary>
+        /// <returns></returns>
+        public double SumContribution()
+        {
+            if (Contributors == null) return 0;
+            return Contributors.Sum(x => x.Amount);
+        }
        
         public override bool Equals(object? obj)
         {
