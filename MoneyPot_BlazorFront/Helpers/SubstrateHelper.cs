@@ -34,13 +34,16 @@ namespace MoneyPot_BlazorFront.Helpers
         /// <returns></returns>
         public static AccountId32 BuildAccountId32(AccountDto accountDto)
         {
-            return BuildAccountId32(AccountStorage.FromDto(accountDto).secretSeed);
+            var accountId32 = new AccountId32();
+            accountId32.Create(Utils.GetPublicKeyFrom(accountDto.Address));
+            return accountId32;
         }
 
         public static Account BuildAccount(AccountDto accountDto)
         {
             MiniSecret miniSecretAccount = new MiniSecret(Utils.HexToByteArray(AccountStorage.FromDto(accountDto).secretSeed), ExpandMode.Ed25519);
-            return Account.Build(KeyType.Sr25519, miniSecretAccount.ExpandToSecret().ToBytes(), miniSecretAccount.GetPair().Public.Key);
+            var res = Account.Build(KeyType.Sr25519, miniSecretAccount.ExpandToSecret().ToBytes(), miniSecretAccount.GetPair().Public.Key);
+            return res;
         }
 
         public static AccountDto BuildAccountDto(AccountId32 account)

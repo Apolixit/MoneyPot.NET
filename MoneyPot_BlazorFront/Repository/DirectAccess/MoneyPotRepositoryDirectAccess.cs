@@ -57,7 +57,7 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                     await _substrateService.Client.SubscribeStorageKeyAsync(moneyPotsSubstrateParams, async (subscriptionId, storageChangeSet) =>
                     {
                         var hexString = SubstrateHelper.getChangesetData(storageChangeSet);
-                        if (String.IsNullOrEmpty(hexString)) return;
+                        if (string.IsNullOrEmpty(hexString)) return;
 
                         var moneyPotVanilla = new MoneyPot();
                         moneyPotVanilla.Create(hexString);
@@ -70,6 +70,12 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                         if (moneyPotVanilla.EndTime.Value.Value == EndType.AmountReached)
                         {
                             moneyPotElem.TypeEnd = TypeEndDto.AmountLimit;
+
+                            // Get target amount
+                            var amountType = (BaseTuple<EnumAmountType, U128>)moneyPotVanilla.EndTime.Value.Value2;
+                            // Reminder : amountType.Value[0] => token type
+                            
+                            moneyPotElem.AmountTarget = (double)((U128)amountType.Value[1]).Value;
                         }
                         else
                         {
@@ -77,7 +83,6 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                         }
 
                         _moneyPots.AddOrUpdate(moneyPotElem);
-
                         moneyPotCallback(moneyPotElem);
                     }, CancellationToken.None);
 
@@ -87,7 +92,7 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                     {
                         var hexString = SubstrateHelper.getChangesetData(storageChangeSet);
 
-                        if (String.IsNullOrEmpty(hexString)) return;
+                        if (string.IsNullOrEmpty(hexString)) return;
 
                         var contributions = new MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT5();
                         contributions.Create(hexString);
@@ -108,6 +113,7 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                             }
                         }
 
+                        _moneyPots.AddOrUpdate(currentMoneyPot);
                         moneyPotCallback(currentMoneyPot);
                     }, CancellationToken.None);
                 }
@@ -119,7 +125,7 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
 
         public async Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<ExtrinsicStatusDto> createCallback)
         {
-            await SubmitExtrinsicAsync(
+            await submitExtrinsicAsync(
                 MoneyPotCalls.CreateWithLimitAmount(
                     SubstrateHelper.BuildAccountId32(receiver),
                     SubstrateHelper.ToPrimitive<double, U128, BigInteger>(amount, (amount) => new BigInteger(amount).ToByteArray())
@@ -131,35 +137,136 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
             var hash = new H256();
             hash.Create(moneyPot.Hash);
 
-            await SubmitExtrinsicAsync(
+            await submitExtrinsicAsync(
                     MoneyPotCalls.AddFundsToPot(hash, 
                     SubstrateHelper.ToPrimitive<double, U128, BigInteger>(amount, (amount) => new BigInteger(amount).ToByteArray())
                 ), contributeCallback);
         }
 
-        public async Task SubmitExtrinsicAsync(Method method, Action<ExtrinsicStatusDto> callback)
+        /// <summary>
+        /// Submit an extrinsic and wait for status callback
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="callback"></param>
+        /// <returns></returns>
+        private async Task submitExtrinsicAsync(Method method, Action<ExtrinsicStatusDto> callback)
         {
-            await _substrateService.Client.Author.SubmitAndWatchExtrinsicAsync((string s, ExtrinsicStatus status) =>
+            try
             {
-                if (status.ExtrinsicState == ExtrinsicState.Ready)
-                    callback(ExtrinsicStatusDto.Waiting);
+                await _substrateService.Client.Author.SubmitAndWatchExtrinsicAsync((string s, ExtrinsicStatus status) =>
+                {
+                    if (status.ExtrinsicState == ExtrinsicState.Ready)
+                        callback(ExtrinsicStatusDto.Waiting);
 
-                else if (status.InBlock != null)
-                    callback(ExtrinsicStatusDto.InBlock);
+                    else if (status.InBlock != null)
+                        callback(ExtrinsicStatusDto.InBlock);
 
-                else if (status.Finalized != null)
-                    callback(ExtrinsicStatusDto.Finalized);
+                    else if (status.Finalized != null)
+                        callback(ExtrinsicStatusDto.Finalized);
 
-                else
-                    callback(ExtrinsicStatusDto.Error);
-            }, method, SubstrateHelper.BuildAccount(_accountService.ConnectedAccount), ChargeTransactionPayment.Default(), 128, CancellationToken.None);
+                    else
+                        callback(ExtrinsicStatusDto.Error);
+                }, method, SubstrateHelper.BuildAccount(_accountService.ConnectedAccount), ChargeTransactionPayment.Default(), 128, CancellationToken.None);
+            } catch(Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+                callback(ExtrinsicStatusDto.Error);
+            }
+            
         }
-
-        //private U128 fromDouble(double amount)
-        //{
-        //    var u128Amount = new U128();
-        //    u128Amount.Create(new BigInteger(amount));
-        //    return u128Amount;
-        //}
     }
 }
+
+
+//public async Task SubscribeMoneyPotsAsync(Action<MoneyPotDto> moneyPotCallback)
+//{
+//    Action<string, Func<string, MoneyPotDto>> SubscribeAndWatchAsync = async (string methodParam, Func<string, MoneyPotDto> action) =>
+//    {
+//        await _substrateService.Client.SubscribeStorageKeyAsync(methodParam, async (subscriptionId, storageChangeSet) =>
+//        {
+//            var hexString = SubstrateHelper.getChangesetData(storageChangeSet);
+
+//            // No data
+//            if (string.IsNullOrEmpty(hexString)) return;
+
+//            var moneyPot = action(hexString);
+
+//            if (moneyPot != null)
+//            {
+//                _moneyPots.AddOrUpdate(moneyPot);
+//                moneyPotCallback(moneyPot);
+//            }
+//        }, CancellationToken.None);
+//    };
+
+//    // Subscribe when a money pot is added
+//    await SubscribeAndWatchAsync(MoneyPotStorage.MoneyPotsCountParams(), async (string hexString) =>
+//    {
+//        var nbPots = new U32();
+//        nbPots.Create(hexString);
+
+//        for (var i = 1; i <= nbPots.Value; i++)
+//        {
+//            var idx = new U32();
+//            idx.Create((uint)i);
+
+//            H256 moneyPotHash = await _substrateService.Client.MoneyPotStorage.MoneyPotsHash(idx, CancellationToken.None);
+//            var moneyPotHashHex = Utils.Bytes2HexString(moneyPotHash.Value.Bytes);
+
+//            // Subscribe when a money pot change
+//            await SubscribeAndWatchAsync(MoneyPotStorage.MoneyPotsParams(moneyPotHash), async (string hexString) => {
+//                var moneyPotVanilla = new MoneyPot();
+//                moneyPotVanilla.Create(hexString);
+
+//                MoneyPotDto moneyPotElem = new MoneyPotDto();
+//                moneyPotElem.Hash = moneyPotHashHex;
+//                moneyPotElem.Creator = SubstrateHelper.BuildAccountDto(moneyPotVanilla.Owner);
+//                moneyPotElem.Receiver = SubstrateHelper.BuildAccountDto(moneyPotVanilla.Receiver);
+//                moneyPotElem.IsFinished = !moneyPotVanilla.IsActive.Value;
+//                if (moneyPotVanilla.EndTime.Value.Value == EndType.AmountReached)
+//                {
+//                    moneyPotElem.TypeEnd = TypeEndDto.AmountLimit;
+
+//                    // Get target amount
+//                    var amountType = (BaseTuple<EnumAmountType, U128>)moneyPotVanilla.EndTime.Value.Value2;
+//                    // Reminder : amountType.Value[0] => token type
+
+//                    moneyPotElem.AmountTarget = (double)((U128)amountType.Value[1]).Value;
+//                }
+//                else
+//                {
+//                    moneyPotElem.TypeEnd = TypeEndDto.BlockLimit;
+//                }
+
+//                return moneyPotElem;
+//            });
+
+//            // Subscribe when a contribution is done
+//            await SubscribeAndWatchAsync(MoneyPotStorage.MoneyPotContributionParams(moneyPotHash), async (string hexString) =>
+//            {
+//                var contributions = new MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT5();
+//                contributions.Create(hexString);
+
+//                var currentMoneyPot = _moneyPots.FirstOrDefault(x => x.Hash == moneyPotHashHex);
+//                if (currentMoneyPot == null) return null;
+
+//                if (contributions.Value != null)
+//                {
+//                    currentMoneyPot.Contributors = new List<ContributorDto>();
+//                    foreach (BaseTuple<AccountId32, U128> contrib in contributions.Value.Value)
+//                    {
+//                        currentMoneyPot.Contributors.Add(new ContributorDto()
+//                        {
+//                            Contributor = SubstrateHelper.BuildAccountDto((AccountId32)contrib.Value[0]),
+//                            Amount = (double)((U128)contrib.Value[1]).Value
+//                        });
+//                    }
+//                }
+
+//                return currentMoneyPot;
+//            });
+//        }
+
+//        return null;
+//    });
+//}        

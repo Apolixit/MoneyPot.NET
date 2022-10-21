@@ -7,6 +7,8 @@ namespace Shared_MoneyPot
         public string Hash { get; set; } = string.Empty;
         public AccountDto Creator { get; set; } = new();
         public AccountDto Receiver { get; set; } = new();
+        public int BlockStart { get; set; }
+        public DateTime DateStart { get; set; }
         public bool IsFinished { get; set; } = false;
         public TypeEndDto TypeEnd { get; set; }
         public double? AmountTarget { get; set; }

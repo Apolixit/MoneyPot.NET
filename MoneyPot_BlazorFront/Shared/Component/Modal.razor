@@ -4,7 +4,7 @@
 </MPButton>
 
 <!-- Main modal -->
-<div class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
+<div class="flex justify-center items-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
         w-full md:inset-0 h-modal md:h-full 
         @(_displayModal ? "block" : "hidden")">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
@@ -31,7 +31,7 @@ text-sm p-1.5 ml-auto inline-flex items-center"
             </div>
 
             <!-- Modal footer -->
-            <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+            <div class="flex justify-end p-6 space-x-2 rounded-b border-t border-gray-200">
                 @if (!String.IsNullOrEmpty(@Valid))
                 {
                     <MPButton OnClick="@(() => closeModalAndTrigger(onConfirm))" TypeBtn="MPButton.TypeButton.Valid">@Valid</MPButton>

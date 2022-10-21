@@ -39,13 +39,15 @@ namespace MoneyPot_BlazorFront.Service
             {
                 while(!cancellationToken.IsCancellationRequested)
                 {
+                    
                     isConnectedCallback(Client.IsConnected);
                     if(!Client.IsConnected)
                     {
                         try
                         {
                             await Client.ConnectAsync(cancellationToken);
-                        } catch(Exception ex)
+                        }
+                        catch (Exception ex)
                         {
                             // TODO
                             isConnectedCallback(Client.IsConnected);

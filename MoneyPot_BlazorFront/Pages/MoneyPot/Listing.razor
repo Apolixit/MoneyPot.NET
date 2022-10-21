@@ -10,10 +10,10 @@
         <div class="flex items-center justify-center mt-10">
             <MPTitle Title="Available Money Pots !" />
         </div>
-        <div class="flex items-center justify-center">
+        <div class="grid gap-4 grid-cols-3">
             <MPList Elems="OpenMoneyPots"
                     Context="moneyPot">
-                <EmptyContent>No money pot yet <i class="fa-solid fa-face-sad-tear"></i></EmptyContent>
+                <EmptyContent>No money pot yet <i class="fa-solid fa-face-sad-tear fa-lg ml-2"></i></EmptyContent>
                 <ElemsContent>
                     <MoneyPot MoneyPotItem="@moneyPot" />
                 </ElemsContent>
@@ -23,7 +23,7 @@
         <div class="flex items-center justify-center mt-10">
             <MPTitle Title="Closed Money Pots" />
         </div>
-        <div class="flex items-center justify-center">
+        <div class="grid gap-4 grid-cols-3">
             <MPList Elems="CloseMoneyPots"
                     Context="moneyPot">
                 <EmptyContent></EmptyContent>

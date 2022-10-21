@@ -5,8 +5,11 @@
 <div class="relative grow p-6 bg-white rounded-lg border border-@global.themeInfo.MainColor m-10">
     <div class="flex justify-between items-center mb-4">
         <div class="text-base font-bold leading-none text-gray-900">
-            Money pot <span class="ml-2 text-xs">(@MoneyPotItem.Hash)</span>
-            <div class="font-light text-sm mt-2"><i class="fa-solid fa-bullseye mr-2"></i> @MoneyPotItem.SumContribution().ToString("N0") <i class="fa-solid fa-sack-dollar fa-sm ml-1"></i></div>
+            Money pot <span class="ml-2 text-xs hidden">(@MoneyPotItem.Hash)</span>
+            @if (MoneyPotItem.AmountTarget.HasValue)
+            {
+                <div class="font-light text-sm mt-2"><i class="fa-solid fa-bullseye mr-2"></i> @MoneyPotItem.AmountTarget.Value.ToString("N0") <i class="fa-solid fa-sack-dollar fa-sm ml-1"></i></div>
+            }
         </div>
 
         @if (!MoneyPotItem.IsFinished)
@@ -77,8 +80,9 @@
     @if (!MoneyPotItem.IsFinished)
     {
         <div class="flex justify-between items-end">
-            <Modal Valid="Ok"
-               Cancel="" @ref="_contributionModal">
+            <Modal Valid=""
+               Cancel="Close"
+               @ref="_contributionModal">
                 <ToggleModalContent>Contribute !</ToggleModalContent>
                 <ModalContent>
                     <ContributeForm MoneyPot="MoneyPotItem"
@@ -104,8 +108,6 @@
     protected void OnMoneyPotContribution(ContributorDto CurrentContributor)
     {
         logger.LogInformation($"Contribution of {CurrentContributor.Contributor.Name} from {CurrentContributor.Amount} ok !");
-
         _contributionModal.Hide();
-        toastService.ShowSuccess("Your contribution has been added !");
     }
 }

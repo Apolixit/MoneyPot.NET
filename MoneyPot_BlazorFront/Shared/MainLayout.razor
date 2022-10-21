@@ -25,11 +25,14 @@
             <main class="pt-6 px-4">
                 @if (!substrateService.IsConnected)
                 {
-                    <div class="flex flex-col loading-screen h-screen">
+                    <div class="flex flex-col justify-center items-center loading-screen">
                         <Loader />
                         <div class="mt-2">Waiting blockchain connexion...</div>
                         <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg @(displayAlert ? "block" : "hidden")" role="alert">
-                            <span class="font-medium">Unable to connect to Substrate node</span> We are trying again...
+                            <span class="font-medium">
+                                <i class="fa-solid fa-heart-crack"></i>
+                                Unable to connect to Substrate node
+                            </span> 
                         </div>
                     </div>
                 }
@@ -64,8 +67,8 @@
     protected override async Task OnInitializedAsync()
     {
         this.global = new GlobalInformation(this.currentMode);
-        Thread.Sleep(2000);
-        await substrateService.CheckBlockchainStateAsync((bool isConnected) =>
+
+        await substrateService.CheckBlockchainStateAsync(async (bool isConnected) =>
         {
             // If connexion state changed => refresh
             if (isCurrentlyConnected != isConnected)

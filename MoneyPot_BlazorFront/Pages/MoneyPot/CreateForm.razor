@@ -2,6 +2,7 @@
 @using static MoneyPot_BlazorFront.Repository.IMoneyPotRepository
 @inject IAccountService accountService;
 @inject IMoneyPotRepository moneyPotRepository;
+@inject IToastService toastService;
 
 <EditForm Model="_createModel"
           OnValidSubmit="ValidateCreation"
@@ -32,8 +33,20 @@
             SubstrateHelper.BuildAccountDtoFromAddress(_createModel.ReceiverAddress),
             _createModel.TargetAmount, async (ExtrinsicStatusDto status) =>
             {
-                //Todo : gérer les comptes inconnus
-                Console.WriteLine($"Money pot creation = {status}");
+            //Todo : gérer les comptes inconnus
+            Console.WriteLine($"Money pot creation = {status}");
+
+                switch(status) {
+                    case ExtrinsicStatusDto.Waiting:
+                        toastService.ShowInfo("Please wait...");
+                        break;
+                    case ExtrinsicStatusDto.InBlock:
+                        toastService.ShowSuccess("Your money pot has been successfully created !");
+                        break;
+                    case ExtrinsicStatusDto.Error:
+                        toastService.ShowError("An error occured");
+                        break;
+                }
 
                 await OnMoneyPotCreated.InvokeAsync(new MoneyPotDto()
                     {
