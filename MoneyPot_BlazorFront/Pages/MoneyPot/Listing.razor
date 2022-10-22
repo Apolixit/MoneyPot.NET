@@ -7,38 +7,51 @@
     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
         <Create />
 
-        <div class="flex items-center justify-center mt-10">
-            <MPTitle Title="Available Money Pots !" />
-        </div>
-        <div class="grid gap-4 grid-cols-3">
-            <MPList Elems="OpenMoneyPots"
+        @if (OpenMoneyPots != null && OpenMoneyPots.Count() > 0)
+        {
+            <div class="flex items-center justify-center mt-10">
+                <MPTitle Title="Available Money Pots !" />
+            </div>
+            <div class="grid gap-4 grid-cols-3">
+                <MPList Elems="OpenMoneyPots"
                     Context="moneyPot">
-                <EmptyContent>No money pot yet <i class="fa-solid fa-face-sad-tear fa-lg ml-2"></i></EmptyContent>
-                <ElemsContent>
-                    <MoneyPot MoneyPotItem="@moneyPot" />
-                </ElemsContent>
-            </MPList>
-        </div>
+                    
+                    <ElemsContent>
+                        <MoneyPot MoneyPotItem="@moneyPot" />
+                    </ElemsContent>
+                </MPList>
+            </div>
+        } else
+        {
+            <h2 class="text-center text-xl font-bold text-@global.themeInfo.MainColor my-20">
+                There is no money pot yet <i class="fa-solid fa-face-sad-tear fa-lg ml-2"></i>
+            </h2>
+        }
 
-        <div class="flex items-center justify-center mt-10">
-            <MPTitle Title="Closed Money Pots" />
-        </div>
-        <div class="grid gap-4 grid-cols-3">
-            <MPList Elems="CloseMoneyPots"
+
+        @if (CloseMoneyPots != null && CloseMoneyPots.Count() > 0)
+        {
+            <div class="flex items-center justify-center mt-10">
+                <MPTitle Title="Closed Money Pots" />
+            </div>
+            <div class="grid gap-4 grid-cols-3">
+                <MPList Elems="CloseMoneyPots"
                     Context="moneyPot">
-                <EmptyContent></EmptyContent>
-                <ElemsContent>
-                    <MoneyPot MoneyPotItem="@moneyPot" />
-                </ElemsContent>
-            </MPList>
-        </div>
+                    <EmptyContent></EmptyContent>
+                    <ElemsContent>
+                        <MoneyPot MoneyPotItem="@moneyPot" />
+                    </ElemsContent>
+                </MPList>
+            </div>
+        }
+
     </div>
 </div>
 
 
 @code {
     [CascadingParameter] protected MainLayout.GlobalInformation? global { get; set; }
-    
+
     public IList<MoneyPotDto>? MoneyPots { get; set; } = new List<MoneyPotDto>();
     public IList<MoneyPotDto>? OpenMoneyPots => MoneyPots?.Where(x => !x.IsFinished).ToList();
     public IList<MoneyPotDto>? CloseMoneyPots => MoneyPots?.Where(x => x.IsFinished).ToList();

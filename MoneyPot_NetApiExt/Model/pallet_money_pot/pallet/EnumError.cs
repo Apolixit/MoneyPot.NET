@@ -46,7 +46,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
     }
     
     /// <summary>
-    /// >> 134 - Variant[pallet_money_pot.pallet.Error]
+    /// >> 133 - Variant[pallet_money_pot.pallet.Error]
     /// 
     ///			Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
     ///			of this pallet.

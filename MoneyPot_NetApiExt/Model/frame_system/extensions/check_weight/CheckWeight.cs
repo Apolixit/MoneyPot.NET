@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.frame_system.extensions.check_weigh
     
     
     /// <summary>
-    /// >> 148 - Composite[frame_system.extensions.check_weight.CheckWeight]
+    /// >> 147 - Composite[frame_system.extensions.check_weight.CheckWeight]
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Composite)]
     public sealed class CheckWeight : BaseType

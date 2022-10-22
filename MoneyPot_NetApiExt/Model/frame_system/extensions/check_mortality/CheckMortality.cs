@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.frame_system.extensions.check_morta
     
     
     /// <summary>
-    /// >> 145 - Composite[frame_system.extensions.check_mortality.CheckMortality]
+    /// >> 144 - Composite[frame_system.extensions.check_mortality.CheckMortality]
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Composite)]
     public sealed class CheckMortality : BaseType

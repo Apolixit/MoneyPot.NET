@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.frame_system.extensions.check_spec_
     
     
     /// <summary>
-    /// >> 142 - Composite[frame_system.extensions.check_spec_version.CheckSpecVersion]
+    /// >> 141 - Composite[frame_system.extensions.check_spec_version.CheckSpecVersion]
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Composite)]
     public sealed class CheckSpecVersion : BaseType

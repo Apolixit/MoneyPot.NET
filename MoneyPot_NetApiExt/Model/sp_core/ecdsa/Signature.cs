@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.sp_core.ecdsa
     
     
     /// <summary>
-    /// >> 138 - Composite[sp_core.ecdsa.Signature]
+    /// >> 137 - Composite[sp_core.ecdsa.Signature]
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Composite)]
     public sealed class Signature : BaseType

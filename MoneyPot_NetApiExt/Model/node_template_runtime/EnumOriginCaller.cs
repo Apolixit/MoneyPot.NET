@@ -24,7 +24,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.node_template_runtime
     }
     
     /// <summary>
-    /// >> 120 - Variant[node_template_runtime.OriginCaller]
+    /// >> 119 - Variant[node_template_runtime.OriginCaller]
     /// </summary>
     public sealed class EnumOriginCaller : BaseEnumExt<OriginCaller, MoneyPot_NetApiExt.Generated.Model.frame_support.dispatch.EnumRawOrigin, Ajuna.NetApi.Model.Types.Base.BaseVoid>
     {

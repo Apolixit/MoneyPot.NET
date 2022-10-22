@@ -139,7 +139,7 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
             hash.Create(moneyPot.Hash);
 
             await submitExtrinsicAsync(
-                    MoneyPotCalls.AddFundsToPot(hash, 
+                    MoneyPotCalls.AddBalance(hash, 
                     SubstrateHelper.ToPrimitive<double, U128, BigInteger>(amount, (amount) => new BigInteger(amount).ToByteArray())
                 ), contributeCallback);
         }

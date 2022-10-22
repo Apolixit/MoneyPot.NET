@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.frame_system.extensions.check_genes
     
     
     /// <summary>
-    /// >> 144 - Composite[frame_system.extensions.check_genesis.CheckGenesis]
+    /// >> 143 - Composite[frame_system.extensions.check_genesis.CheckGenesis]
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Composite)]
     public sealed class CheckGenesis : BaseType

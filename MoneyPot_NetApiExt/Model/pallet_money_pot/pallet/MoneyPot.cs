@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
     
     
     /// <summary>
-    /// >> 126 - Composite[pallet_money_pot.pallet.MoneyPot]
+    /// >> 125 - Composite[pallet_money_pot.pallet.MoneyPot]
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Composite)]
     public sealed class MoneyPot : BaseType
@@ -43,11 +43,6 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
         /// >> end_time
         /// </summary>
         private Ajuna.NetApi.Model.Types.Base.BaseOpt<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumEndType> _endTime;
-        
-        /// <summary>
-        /// >> visibility
-        /// </summary>
-        private MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumVisibility _visibility;
         
         /// <summary>
         /// >> is_active
@@ -102,18 +97,6 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
             }
         }
         
-        public MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumVisibility Visibility
-        {
-            get
-            {
-                return this._visibility;
-            }
-            set
-            {
-                this._visibility = value;
-            }
-        }
-        
         public Ajuna.NetApi.Model.Types.Primitive.Bool IsActive
         {
             get
@@ -138,7 +121,6 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
             result.AddRange(Receiver.Encode());
             result.AddRange(StartTime.Encode());
             result.AddRange(EndTime.Encode());
-            result.AddRange(Visibility.Encode());
             result.AddRange(IsActive.Encode());
             return result.ToArray();
         }
@@ -154,8 +136,6 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
             StartTime.Decode(byteArray, ref p);
             EndTime = new Ajuna.NetApi.Model.Types.Base.BaseOpt<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumEndType>();
             EndTime.Decode(byteArray, ref p);
-            Visibility = new MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumVisibility();
-            Visibility.Decode(byteArray, ref p);
             IsActive = new Ajuna.NetApi.Model.Types.Primitive.Bool();
             IsActive.Decode(byteArray, ref p);
             TypeSize = p - start;

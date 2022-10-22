@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_transaction_payment
     
     
     /// <summary>
-    /// >> 149 - Composite[pallet_transaction_payment.ChargeTransactionPayment]
+    /// >> 148 - Composite[pallet_transaction_payment.ChargeTransactionPayment]
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Composite)]
     public sealed class ChargeTransactionPayment : BaseType

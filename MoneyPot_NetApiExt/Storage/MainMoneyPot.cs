@@ -139,18 +139,6 @@ namespace MoneyPot_NetApiExt.Generated.Storage
     {
         
         /// <summary>
-        /// >> change_visibility
-        /// Contains one variant per dispatchable that can be called by an extrinsic.
-        /// </summary>
-        public static Method ChangeVisibility(MoneyPot_NetApiExt.Generated.Model.primitive_types.H256 id, MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumVisibility visibility)
-        {
-            System.Collections.Generic.List<byte> byteArray = new List<byte>();
-            byteArray.AddRange(id.Encode());
-            byteArray.AddRange(visibility.Encode());
-            return new Method(9, "MoneyPot", 0, "change_visibility", byteArray.ToArray());
-        }
-        
-        /// <summary>
         /// >> create_with_limit_amount
         /// Contains one variant per dispatchable that can be called by an extrinsic.
         /// </summary>
@@ -159,7 +147,7 @@ namespace MoneyPot_NetApiExt.Generated.Storage
             System.Collections.Generic.List<byte> byteArray = new List<byte>();
             byteArray.AddRange(receiver.Encode());
             byteArray.AddRange(amount.Encode());
-            return new Method(9, "MoneyPot", 1, "create_with_limit_amount", byteArray.ToArray());
+            return new Method(9, "MoneyPot", 0, "create_with_limit_amount", byteArray.ToArray());
         }
         
         /// <summary>
@@ -171,19 +159,19 @@ namespace MoneyPot_NetApiExt.Generated.Storage
             System.Collections.Generic.List<byte> byteArray = new List<byte>();
             byteArray.AddRange(receiver.Encode());
             byteArray.AddRange(end_block.Encode());
-            return new Method(9, "MoneyPot", 2, "create_with_limit_block", byteArray.ToArray());
+            return new Method(9, "MoneyPot", 1, "create_with_limit_block", byteArray.ToArray());
         }
         
         /// <summary>
-        /// >> add_funds_to_pot
+        /// >> add_balance
         /// Contains one variant per dispatchable that can be called by an extrinsic.
         /// </summary>
-        public static Method AddFundsToPot(MoneyPot_NetApiExt.Generated.Model.primitive_types.H256 ref_hash, Ajuna.NetApi.Model.Types.Primitive.U128 amount)
+        public static Method AddBalance(MoneyPot_NetApiExt.Generated.Model.primitive_types.H256 ref_hash, Ajuna.NetApi.Model.Types.Primitive.U128 amount)
         {
             System.Collections.Generic.List<byte> byteArray = new List<byte>();
             byteArray.AddRange(ref_hash.Encode());
             byteArray.AddRange(amount.Encode());
-            return new Method(9, "MoneyPot", 3, "add_funds_to_pot", byteArray.ToArray());
+            return new Method(9, "MoneyPot", 2, "add_balance", byteArray.ToArray());
         }
     }
     

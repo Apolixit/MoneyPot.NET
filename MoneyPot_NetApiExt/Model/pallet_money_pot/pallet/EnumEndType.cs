@@ -24,7 +24,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
     }
     
     /// <summary>
-    /// >> 128 - Variant[pallet_money_pot.pallet.EndType]
+    /// >> 127 - Variant[pallet_money_pot.pallet.EndType]
     /// </summary>
     public sealed class EnumEndType : BaseEnumExt<EndType, Ajuna.NetApi.Model.Types.Primitive.U32, BaseTuple<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumAmountType, Ajuna.NetApi.Model.Types.Primitive.U128>>
     {

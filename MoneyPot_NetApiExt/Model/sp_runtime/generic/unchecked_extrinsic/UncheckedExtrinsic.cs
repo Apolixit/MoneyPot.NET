@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.unchecked_extrin
     
     
     /// <summary>
-    /// >> 135 - Composite[sp_runtime.generic.unchecked_extrinsic.UncheckedExtrinsic]
+    /// >> 134 - Composite[sp_runtime.generic.unchecked_extrinsic.UncheckedExtrinsic]
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Composite)]
     public sealed class UncheckedExtrinsic : BaseType

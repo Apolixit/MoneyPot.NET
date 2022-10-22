@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec
     
     
     /// <summary>
-    /// >> 131 - Composite[sp_runtime.bounded.bounded_vec.BoundedVecT5]
+    /// >> 130 - Composite[sp_runtime.bounded.bounded_vec.BoundedVecT5]
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Composite)]
     public sealed class BoundedVecT5 : BaseType

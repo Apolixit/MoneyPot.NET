@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.frame_system.extensions.check_nonce
     
     
     /// <summary>
-    /// >> 147 - Composite[frame_system.extensions.check_nonce.CheckNonce]
+    /// >> 146 - Composite[frame_system.extensions.check_nonce.CheckNonce]
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Composite)]
     public sealed class CheckNonce : BaseType

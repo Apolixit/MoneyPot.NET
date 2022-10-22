@@ -18,20 +18,18 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
     public enum Call
     {
         
-        change_visibility = 0,
+        create_with_limit_amount = 0,
         
-        create_with_limit_amount = 1,
+        create_with_limit_block = 1,
         
-        create_with_limit_block = 2,
-        
-        add_funds_to_pot = 3,
+        add_balance = 2,
     }
     
     /// <summary>
     /// >> 118 - Variant[pallet_money_pot.pallet.Call]
     /// Contains one variant per dispatchable that can be called by an extrinsic.
     /// </summary>
-    public sealed class EnumCall : BaseEnumExt<Call, BaseTuple<MoneyPot_NetApiExt.Generated.Model.primitive_types.H256, MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumVisibility>, BaseTuple<MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32, Ajuna.NetApi.Model.Types.Primitive.U128>, BaseTuple<MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32, Ajuna.NetApi.Model.Types.Primitive.U32>, BaseTuple<MoneyPot_NetApiExt.Generated.Model.primitive_types.H256, Ajuna.NetApi.Model.Types.Primitive.U128>>
+    public sealed class EnumCall : BaseEnumExt<Call, BaseTuple<MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32, Ajuna.NetApi.Model.Types.Primitive.U128>, BaseTuple<MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32, Ajuna.NetApi.Model.Types.Primitive.U32>, BaseTuple<MoneyPot_NetApiExt.Generated.Model.primitive_types.H256, Ajuna.NetApi.Model.Types.Primitive.U128>>
     {
     }
 }

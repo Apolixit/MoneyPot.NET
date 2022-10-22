@@ -26,7 +26,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
     }
     
     /// <summary>
-    /// >> 129 - Variant[pallet_money_pot.pallet.AmountType]
+    /// >> 128 - Variant[pallet_money_pot.pallet.AmountType]
     /// </summary>
     public sealed class EnumAmountType : BaseEnum<AmountType>
     {

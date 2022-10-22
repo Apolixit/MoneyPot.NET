@@ -26,7 +26,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.frame_support.dispatch
     }
     
     /// <summary>
-    /// >> 121 - Variant[frame_support.dispatch.RawOrigin]
+    /// >> 120 - Variant[frame_support.dispatch.RawOrigin]
     /// </summary>
     public sealed class EnumRawOrigin : BaseEnumExt<RawOrigin, BaseVoid, MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32, BaseVoid>
     {

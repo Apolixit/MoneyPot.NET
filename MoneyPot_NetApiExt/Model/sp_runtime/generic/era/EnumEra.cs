@@ -534,7 +534,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.era
     }
     
     /// <summary>
-    /// >> 146 - Variant[sp_runtime.generic.era.Era]
+    /// >> 145 - Variant[sp_runtime.generic.era.Era]
     /// </summary>
     public sealed class EnumEra : BaseEnumExt<Era, BaseVoid>
     {

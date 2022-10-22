@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Types.Base
     
     
     /// <summary>
-    /// >> 139 - Array
+    /// >> 138 - Array
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Array)]
     public sealed class Arr65U8 : BaseType

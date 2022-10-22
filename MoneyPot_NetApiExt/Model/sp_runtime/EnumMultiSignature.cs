@@ -26,7 +26,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.sp_runtime
     }
     
     /// <summary>
-    /// >> 136 - Variant[sp_runtime.MultiSignature]
+    /// >> 135 - Variant[sp_runtime.MultiSignature]
     /// </summary>
     public sealed class EnumMultiSignature : BaseEnumExt<MultiSignature, MoneyPot_NetApiExt.Generated.Model.sp_core.ed25519.Signature, MoneyPot_NetApiExt.Generated.Model.sp_core.sr25519.Signature, MoneyPot_NetApiExt.Generated.Model.sp_core.ecdsa.Signature>
     {

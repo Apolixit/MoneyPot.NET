@@ -18,7 +18,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.node_template_runtime
     
     
     /// <summary>
-    /// >> 150 - Composite[node_template_runtime.Runtime]
+    /// >> 149 - Composite[node_template_runtime.Runtime]
     /// </summary>
     [AjunaNodeType(TypeDefEnum.Composite)]
     public sealed class Runtime : BaseType
