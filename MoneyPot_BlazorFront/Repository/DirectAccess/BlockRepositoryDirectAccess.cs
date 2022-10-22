@@ -27,7 +27,7 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
             {
                 var blockNumber = new BlockNumber();
                 blockNumber.Create((uint)h.Number.Value);
-
+                
                 var currentHash = await _substrateService.Client.Chain.GetBlockHashAsync(blockNumber);
                 _lastBlock = new BlockDto()
                 {

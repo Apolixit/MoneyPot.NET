@@ -120,6 +120,7 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
             };
 
             var moneyPotsParams = MoneyPotStorage.MoneyPotsCountParams();
+            
             await _substrateService.Client.SubscribeStorageKeyAsync(moneyPotsParams, moneyPotCountChangeset, CancellationToken.None);
         }
 
