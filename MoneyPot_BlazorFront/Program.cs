@@ -27,7 +27,7 @@ await host.RunAsync();
 static void ConfigureService(IServiceCollection services, string endpoint)
 {
     services.AddScoped<IHttpService, HttpService>();
-    services.AddMoneyPotServices(MoneyPotServiceExtension.ServiceMode.SubstrateNode, endpoint);    
+    services.AddMoneyPotServices(MoneyPotServiceExtension.ServiceMode.Mock, endpoint);    
 
     services.AddBlazoredToast();
 }

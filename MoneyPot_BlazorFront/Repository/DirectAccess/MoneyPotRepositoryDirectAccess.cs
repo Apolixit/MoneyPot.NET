@@ -22,12 +22,14 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
     {
         private readonly ISubstrateService _substrateService;
         private readonly IAccountService _accountService;
+        private readonly IBlockRepository _blockRepository;
         private readonly IList<MoneyPotDto> _moneyPots = new List<MoneyPotDto>();
 
-        public MoneyPotRepositoryDirectAccess(ISubstrateService substrateService, IAccountService accountService) //, IStorageDataProvider storageDataProvider
+        public MoneyPotRepositoryDirectAccess(ISubstrateService substrateService, IAccountService accountService, IBlockRepository blockRepository) //, IStorageDataProvider storageDataProvider
         {
             _substrateService = substrateService;
             _accountService = accountService;
+            _blockRepository = blockRepository;
             //_storageDataProvider = storageDataProvider;
         }
 
@@ -124,13 +126,30 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
             await _substrateService.Client.SubscribeStorageKeyAsync(moneyPotsParams, moneyPotCountChangeset, CancellationToken.None);
         }
 
-        public async Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<ExtrinsicStatusDto> createCallback)
+        public async Task CreateMoneyPotAsync(AccountDto receiver, CreateDto creation, Action<ExtrinsicStatusDto> createCallback)
         {
-            await submitExtrinsicAsync(
+            if(creation.TypeEnd == TypeEndDto.AmountLimit)
+            {
+                await submitExtrinsicAsync(
                 MoneyPotCalls.CreateWithLimitAmount(
                     SubstrateHelper.BuildAccountId32(receiver),
-                    SubstrateHelper.ToPrimitive<double, U128, BigInteger>(amount, (amount) => new BigInteger(amount).ToByteArray())
+                    SubstrateHelper.ToPrimitive<double, U128, BigInteger>(creation.AmountTarget, (amount) => new BigInteger(amount).ToByteArray())
                 ), createCallback);
+            } else
+            {
+                // Convert datetime to block number
+                int? lastBlock = (await _blockRepository.GetLastBlockAsync())?.BlockNumber;
+                if(lastBlock == null)
+                {
+                    throw new Exception("Last block is null...");
+                }
+
+                await submitExtrinsicAsync(
+                MoneyPotCalls.CreateWithLimitBlock(
+                    SubstrateHelper.BuildAccountId32(receiver),
+                    SubstrateHelper.ToPrimitive<U32, uint>((uint)SubstrateHelper.DateTimeToBlockNumber(creation.DateTarget, lastBlock.Value + 1, 6000))
+                ), createCallback);
+            }
         }
 
         public async Task ContributeMoneyPotAsync(MoneyPotDto moneyPot, double amount, Action<ExtrinsicStatusDto> contributeCallback)

@@ -4,12 +4,12 @@
 @inject IToastService toastService;
 
 <h3 class="mb-4 text-xl font-medium">Contribute to money pot</h3>
-<EditForm Model="Contributor"
+<EditForm Model="_contributorModel"
           OnValidSubmit="ValidateContribution"
           class="space-y-6">
     <div>
         <InputNumber class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                     @bind-Value="@Contributor.Amount" />
+                     @bind-Value="@_contributorModel.Amount" />
     </div>
 
     <MPButton TypeBtn="MPButton.TypeButton.Submit">
@@ -20,7 +20,7 @@
 @code {
     [Parameter] public MoneyPotDto MoneyPot { get; set; }
     [Parameter] public EventCallback<ContributorDto> OnMoneyPotContribution { get; set; }
-    public ContributorDto Contributor { get; set; } = new();
+    private ContributorDto _contributorModel { get; set; } = new();
 
     protected override void OnInitialized()
     {
@@ -28,9 +28,14 @@
             throw new ArgumentNullException("Please provide a money pot as parameter");
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        _contributorModel = new();
+    }
+
     protected async Task ValidateContribution()
     {
-        await moneyPotRepository.ContributeMoneyPotAsync(MoneyPot, Contributor.Amount, async (ExtrinsicStatusDto status) => {
+        await moneyPotRepository.ContributeMoneyPotAsync(MoneyPot, _contributorModel.Amount, async (ExtrinsicStatusDto status) => {
             //Todo : gérer les comptes inconnus
 
             logger.LogInformation($"Money pot contribution = {status}");
@@ -47,7 +52,7 @@
                         break;
                 }
 
-            await OnMoneyPotContribution.InvokeAsync(Contributor);
+            await OnMoneyPotContribution.InvokeAsync(_contributorModel);
         });
     }
 }
