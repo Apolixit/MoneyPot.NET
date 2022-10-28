@@ -58,11 +58,6 @@
     private CreateDto _createModel { get; set; } = new();
     private bool _isAmountTarget { get; set; } = true;
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        _createModel = new();
-    }
-
     public async Task ValidateCreation()
     {
         await moneyPotRepository.CreateMoneyPotAsync(

@@ -11,7 +11,9 @@ namespace MoneyPot_BlazorFront.Shared.Basic
     /// <typeparam name="TValue"></typeparam>
     public class InputDateTime<TValue> : InputDate<TValue>
     {
-        private const string DateFormat = "yyyy-MM-ddTHH:mm";
+        private const string DateFormat = "yyyy-MM-ddTHH:mm:ss";
+        //private const string DateFormat = "MM/dd/yyyy HH:mm";
+        //'2022-10-26T10:11:00'
 
         /// <inheritdoc />
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -31,7 +33,8 @@ namespace MoneyPot_BlazorFront.Shared.Basic
             switch (value)
             {
                 case DateTime dateTimeValue:
-                    return BindConverter.FormatValue(dateTimeValue, DateFormat, CultureInfo.InvariantCulture);
+                    var convert = BindConverter.FormatValue(dateTimeValue, DateFormat, CultureInfo.InvariantCulture);
+                    return convert;
                 case DateTimeOffset dateTimeOffsetValue:
                     return BindConverter.FormatValue(dateTimeOffsetValue, DateFormat, CultureInfo.InvariantCulture);
                 default:

@@ -6,9 +6,12 @@
     <div class="flex justify-between items-center mb-4">
         <div class="text-base font-bold leading-none text-gray-900">
             Money pot <span class="ml-2 text-xs hidden">(@MoneyPotItem.Hash)</span>
-            @if (MoneyPotItem.AmountTarget.HasValue)
+            @if (MoneyPotItem.TypeEnd == TypeEndDto.AmountLimit)
             {
                 <div class="font-light text-sm mt-2"><i class="fa-solid fa-bullseye mr-2"></i> @MoneyPotItem.AmountTarget.Value.ToString("N0") <i class="fa-solid fa-sack-dollar fa-sm ml-1"></i></div>
+            } else
+            {
+                <div class="font-light text-sm mt-2">@MoneyPotItem.SumContribution().ToString("N0") <i class="fa-solid fa-sack-dollar fa-sm ml-1"></i></div>
             }
         </div>
 

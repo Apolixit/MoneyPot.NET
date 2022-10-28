@@ -8,6 +8,8 @@ Substrate metadata file.
 
 ---
 
+## Setup
+
 If you want to try it by yourself, feel free to clone the repo and use `npm update` in the MoneyPot_BlazorFront project.
 If you just want to test with mock data make sure in your Program.cs to use the following dependency injection :
 ```c#
@@ -15,8 +17,11 @@ services.AddMoneyPotServices(MoneyPotServiceExtension.ServiceMode.Mock, endpoint
 ```
 Otherwise if you want to connect it to the Money pot pallet, please use the following dependency injection :
 ```c#
-services.AddMoneyPotServices(MoneyPotServiceExtension.ServiceMode.SubstrateNode, endpoint);    
+services.AddMoneyPotServices(MoneyPotServiceExtension.ServiceMode.SubstrateNode, endpoint);
 ```
+
+## [Screenshot are available here](https://github.com/Apolixit/moneypot_blazor/Screenshot)
+
 
 ---
 

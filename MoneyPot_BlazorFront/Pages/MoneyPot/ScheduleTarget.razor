@@ -9,7 +9,6 @@
 
 @code {
     [Parameter] public int? BlockTarget { get; set; }
-    private int _currentBlock;
     private DateTime _estimatedDatetime;
 
     protected override async Task OnInitializedAsync()
@@ -17,8 +16,13 @@
         if (BlockTarget == null)
             throw new ArgumentNullException("A block target is required");
 
-        _currentBlock = 0; // (int)(await blockRepository.GetLastBlockAsync())?.BlockNumber;
-        _estimatedDatetime = DateTime.Now.AddSeconds((double)((BlockTarget - _currentBlock) * 6));
+        int _currentBlock = 0;
+        var lastBlock = await blockRepository.GetLastBlockAsync();
+        if (lastBlock != null && lastBlock.BlockNumber > 1)
+            _currentBlock = lastBlock.BlockNumber - 1;
+
+        //_estimatedDatetime = DateTime.Now.AddSeconds((double)((BlockTarget - _currentBlock) * blockRepository.GetBlockTime() / 1000));
+        _estimatedDatetime = SubstrateHelper.BlockNumberToDateTime(BlockTarget.Value, _currentBlock, blockRepository.GetBlockTime(), true);
     }
 
 }

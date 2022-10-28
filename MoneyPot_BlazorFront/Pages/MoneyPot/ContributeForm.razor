@@ -28,11 +28,6 @@
             throw new ArgumentNullException("Please provide a money pot as parameter");
     }
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        _contributorModel = new();
-    }
-
     protected async Task ValidateContribution()
     {
         await moneyPotRepository.ContributeMoneyPotAsync(MoneyPot, _contributorModel.Amount, async (ExtrinsicStatusDto status) => {

@@ -50,7 +50,7 @@ namespace Shared_MoneyPot
         public string ReceiverAddress { get; set; } = string.Empty;
         public TypeEndDto TypeEnd { set; get; }
         public double AmountTarget { get; set; }
-        public DateTime DateTarget { get; set; } = DateTime.Now.AddMonths(1);
+        public DateTime DateTarget { get; set; } = DateTime.Now.AddMinutes(3);
     }
 
     public enum TypeEndDto

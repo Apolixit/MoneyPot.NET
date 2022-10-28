@@ -145,10 +145,14 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                     throw new Exception("Last block is null...");
                 }
 
+                var blockNum = SubstrateHelper.DateTimeToBlockNumber(creation.DateTarget, lastBlock.Value + 1, _blockRepository.GetBlockTime(), false);
+                var blockU32 = new U32();
+                blockU32.Create((uint)blockNum);
+                //SubstrateHelper.ToPrimitive<U32, uint>((uint)SubstrateHelper.DateTimeToBlockNumber(creation.DateTarget, lastBlock.Value + 1, _blockRepository.GetBlockTime()))
                 await submitExtrinsicAsync(
                 MoneyPotCalls.CreateWithLimitBlock(
                     SubstrateHelper.BuildAccountId32(receiver),
-                    SubstrateHelper.ToPrimitive<U32, uint>((uint)SubstrateHelper.DateTimeToBlockNumber(creation.DateTarget, lastBlock.Value + 1, 6000))
+                    blockU32
                 ), createCallback);
             }
         }
