@@ -16,6 +16,11 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
             this._substrateService = substrateService;
         }
 
+        public int GetBlockTime()
+        {
+            return 6000;
+        }
+
         public Task<BlockDto?> GetLastBlockAsync()
         {
             return Task.Run(() => _lastBlock);

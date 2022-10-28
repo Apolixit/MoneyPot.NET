@@ -15,5 +15,11 @@ namespace MoneyPot_BlazorFront.Repository
         /// </summary>
         /// <returns></returns>
         Task<BlockDto?> GetLastBlockAsync();
+
+        /// <summary>
+        /// Block time in millisecond
+        /// </summary>
+        /// <returns></returns>
+        int GetBlockTime();
     }
 }

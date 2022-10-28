@@ -8,6 +8,15 @@ namespace MoneyPot_BlazorFront.Repository.Mock
         private static Random _random = new Random();
         private BlockDto? _lastBlock;
 
+        /// <summary>
+        /// 6000 milliseconde
+        /// </summary>
+        /// <returns></returns>
+        public int GetBlockTime()
+        {
+            return 6000;
+        }
+
         public Task<BlockDto?> GetLastBlockAsync()
         {
             return Task.Run(() => _lastBlock);

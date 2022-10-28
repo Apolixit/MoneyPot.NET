@@ -80,6 +80,7 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                         else
                         {
                             moneyPotElem.TypeEnd = TypeEndDto.BlockLimit;
+                            moneyPotElem.BlockTarget = (int)((U32)moneyPotVanilla.EndTime.Value.Value2).Value;
                         }
 
                         _moneyPots.AddOrUpdate(moneyPotElem);
