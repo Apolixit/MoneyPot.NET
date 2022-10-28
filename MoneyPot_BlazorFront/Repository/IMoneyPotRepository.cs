@@ -18,7 +18,7 @@ namespace MoneyPot_BlazorFront.Repository
         /// <param name="amount">The contribution amount</param>
         /// <param name="createCallback">Callback method triggered at different substrate state (based on ExtrinsicStatus)</param>
         /// <returns></returns>
-        Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<ExtrinsicStatusDto> createCallback);
+        Task CreateMoneyPotAsync(AccountDto receiver, CreateDto creation, Action<ExtrinsicStatusDto> createCallback);
 
         /// <summary>
         /// Contribute to an existing money pot

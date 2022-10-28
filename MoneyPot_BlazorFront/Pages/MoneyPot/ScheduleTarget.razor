@@ -17,7 +17,7 @@
         if (BlockTarget == null)
             throw new ArgumentNullException("A block target is required");
 
-        _currentBlock = (int)(await blockRepository.GetLastBlockAsync())?.BlockNumber;
+        _currentBlock = 0; // (int)(await blockRepository.GetLastBlockAsync())?.BlockNumber;
         _estimatedDatetime = DateTime.Now.AddSeconds((double)((BlockTarget - _currentBlock) * 6));
     }
 

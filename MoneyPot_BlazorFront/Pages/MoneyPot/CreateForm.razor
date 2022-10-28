@@ -7,15 +7,45 @@
 <EditForm Model="_createModel"
           OnValidSubmit="ValidateCreation"
           class="space-y-6">
+    <div class="flex justify-center items-center">
+        <InputRadioGroup @bind-Value="_createModel.TypeEnd">
+            <div>
+                <label>
+                    <InputRadio Value="@(TypeEndDto.AmountLimit)" /> Amount <i class="fa-solid fa-sack-dollar fa-xs ml-1"></i>
+                </label>
+            </div>
+            <div class="ml-4">
+                <label>
+                    <InputRadio Value="@(TypeEndDto.BlockLimit)" /> Time <i class="fa-solid fa-hourglass-end ml-1"></i>
+                </label>
+            </div>
+        </InputRadioGroup>
+    </div>
+
     <div>
         <MPInputText Label="Receiver account"
                      @bind-Value="@_createModel.ReceiverAddress" />
     </div>
-    <div>
-        <InputNumber Label="Target amount"
+
+    @if (_createModel.TypeEnd == TypeEndDto.AmountLimit)
+    {
+        <div>
+            <InputNumber Label="Target amount"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                     @bind-Value="@_createModel.TargetAmount" />
-    </div>
+                     @bind-Value="@_createModel.AmountTarget" />
+        </div>
+    }
+    else
+    {
+        <div>
+            <label>
+                Select end date :
+                <InputDateTime class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                           @bind-Value="@_createModel.DateTarget"></InputDateTime>
+            </label>
+        </div>
+    }
+
 
     <MPButton TypeBtn="MPButton.TypeButton.Submit">
         Create money pot
@@ -26,17 +56,23 @@
     [Parameter] public EventCallback<MoneyPotDto> OnMoneyPotCreated { get; set; }
 
     private CreateDto _createModel { get; set; } = new();
+    private bool _isAmountTarget { get; set; } = true;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        _createModel = new();
+    }
 
     public async Task ValidateCreation()
     {
         await moneyPotRepository.CreateMoneyPotAsync(
-            SubstrateHelper.BuildAccountDtoFromAddress(_createModel.ReceiverAddress),
-            _createModel.TargetAmount, async (ExtrinsicStatusDto status) =>
+            SubstrateHelper.BuildAccountDtoFromAddress(_createModel.ReceiverAddress), _createModel, async (ExtrinsicStatusDto status) =>
             {
-            //Todo : gérer les comptes inconnus
-            Console.WriteLine($"Money pot creation = {status}");
+                //Todo : gérer les comptes inconnus
+                Console.WriteLine($"Money pot creation = {status}");
 
-                switch(status) {
+                switch (status)
+                {
                     case ExtrinsicStatusDto.Waiting:
                         toastService.ShowInfo("Please wait...");
                         break;
@@ -52,7 +88,7 @@
                     {
                         Creator = accountService.ConnectedAccount,
                         Receiver = SubstrateHelper.BuildAccountDtoFromAddress(_createModel.ReceiverAddress),
-                        AmountTarget = _createModel.TargetAmount,
+                        AmountTarget = _createModel.AmountTarget,
                     });
             });
     }

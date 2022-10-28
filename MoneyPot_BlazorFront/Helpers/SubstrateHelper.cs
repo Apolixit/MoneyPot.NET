@@ -77,11 +77,40 @@ namespace MoneyPot_BlazorFront.Helpers
             return hexString;
         }
 
+        public static int DateTimeToBlockNumber(DateTime selectedDate, int currentBlock, int blockTimeMillisecond)
+        {
+            var now = DateTime.Now;
+            if(now >= selectedDate.AddMilliseconds(blockTimeMillisecond))
+            {
+                throw new Exception($"Can't have a end date in the past or less than one block time");
+            }
+            return (int)(currentBlock + selectedDate.Subtract(DateTime.Now).TotalSeconds / ((double)blockTimeMillisecond / 1000));
+        }
+
+        public static DateTime BlockNumberToDateTime(int targetBlock, int currentBlock, int blockTimeMillisecond)
+        {
+            if(targetBlock <= currentBlock)
+            {
+                throw new Exception($"Can't have a end date in the past or less than one block time");
+            }
+
+            return DateTime.Now.AddSeconds((targetBlock - currentBlock) * (double)blockTimeMillisecond / 1000);
+        }
+
         public static U ToPrimitive<T, U, V>(T input, Func<T, byte[]> convert)
             where U : BasePrim<V>, new()
         {
             var primVal = new U();
             primVal.Create(convert(input));
+
+            return primVal;
+        }
+
+        public static U ToPrimitive<U, V>(V input)
+            where U : BasePrim<V>, new()
+        {
+            var primVal = new U();
+            primVal.Create(input.ToString());
 
             return primVal;
         }

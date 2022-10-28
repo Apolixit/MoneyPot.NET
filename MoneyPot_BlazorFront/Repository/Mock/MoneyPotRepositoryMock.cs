@@ -58,7 +58,7 @@ namespace MoneyPot_BlazorFront.Repository.Mock
             (await getAllAsync()).ToList().ForEach(mp => moneyPotCallback(mp));
         }
 
-        public Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<ExtrinsicStatusDto> createCallback)
+        public Task CreateMoneyPotAsync(AccountDto receiver, CreateDto creation, Action<ExtrinsicStatusDto> createCallback)
         {
             createCallback(ExtrinsicStatusDto.Waiting);
             return Task.CompletedTask;

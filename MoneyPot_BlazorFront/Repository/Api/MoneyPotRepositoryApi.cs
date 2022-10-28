@@ -10,7 +10,7 @@ namespace MoneyPot_BlazorFront.Repository.Api
             throw new NotImplementedException();
         }
 
-        public Task CreateMoneyPotAsync(AccountDto receiver, double amount, Action<ExtrinsicStatusDto> createCallback)
+        public Task CreateMoneyPotAsync(AccountDto receiver, CreateDto creation, Action<ExtrinsicStatusDto> createCallback)
         {
             throw new NotImplementedException();
         }
