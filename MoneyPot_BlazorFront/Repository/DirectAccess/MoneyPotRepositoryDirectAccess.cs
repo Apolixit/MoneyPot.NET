@@ -64,7 +64,7 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                         var moneyPotVanilla = new MoneyPot();
                         moneyPotVanilla.Create(hexString);
 
-                        MoneyPotDto moneyPotElem = new MoneyPotDto();
+                        var moneyPotElem = _moneyPots.FirstOrDefault(x => x.Hash == moneyPotHashHex) ?? new MoneyPotDto();
                         moneyPotElem.Hash = moneyPotHashHex;
                         moneyPotElem.Creator = SubstrateHelper.BuildAccountDto(moneyPotVanilla.Owner);
                         moneyPotElem.Receiver = SubstrateHelper.BuildAccountDto(moneyPotVanilla.Receiver);
@@ -115,7 +115,6 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
                                 });
                             }
                         }
-
                         _moneyPots.AddOrUpdate(currentMoneyPot);
                         moneyPotCallback(currentMoneyPot);
                     }, CancellationToken.None);
@@ -123,7 +122,6 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
             };
 
             var moneyPotsParams = MoneyPotStorage.MoneyPotsCountParams();
-            
             await _substrateService.Client.SubscribeStorageKeyAsync(moneyPotsParams, moneyPotCountChangeset, CancellationToken.None);
         }
 
