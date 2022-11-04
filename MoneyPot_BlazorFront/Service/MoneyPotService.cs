@@ -15,12 +15,14 @@ namespace MoneyPot_BlazorFront.Service
                     services.AddScoped<IMoneyPotRepository, MoneyPotRepositoryMock>();
                     services.AddScoped<IBlockRepository, BlockRepositoryMock>();
                     services.AddScoped<IAccountRepository, AccountRepositoryMock>();
+                    services.AddScoped<IEventsRepository, EventsRepositoryMock>();
                     services.AddSingleton<ISubstrateService, SubstrateServiceMock>();
                     break;
                 case ServiceMode.SubstrateNode:
                     services.AddScoped<IMoneyPotRepository, MoneyPotRepositoryDirectAccess>();
                     services.AddScoped<IBlockRepository, BlockRepositoryDirectAccess>();
                     services.AddScoped<IAccountRepository, AccountRepositoryDirectAccess>();
+                    services.AddScoped<IEventsRepository, EventsRepositoryDirectAccess>();
                     services.AddSingleton<ISubstrateService, SubstrateServiceDirectAccess>();
 
                     //IStorageDataProvider _storageDataProvider = new AjunaSubstrateDataProvider(endpoint);
