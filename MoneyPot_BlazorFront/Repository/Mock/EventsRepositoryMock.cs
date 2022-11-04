@@ -22,7 +22,8 @@ namespace MoneyPot_BlazorFront.Repository.Mock
             timer.Elapsed += async (sender, e) =>
             {
                 var fakeEvent = await generateFakeEventAsync();
-                eventCallback(fakeEvent);
+                if(fakeEvent != null)
+                    eventCallback(fakeEvent);
             };
 
             return Task.CompletedTask;
@@ -30,9 +31,12 @@ namespace MoneyPot_BlazorFront.Repository.Mock
 
         private async Task<EventDto> generateFakeEventAsync()
         {
+            var lastBlock = await _blockRepository.GetLastBlockAsync();
+            if (lastBlock == null) return null;
+
             return new EventDto()
             {
-                Block = await _blockRepository.GetLastBlockAsync(),
+                Block = lastBlock,
                 EventName = "Todo...",
                 Description = "Item description...",
             };

@@ -1,0 +1,24 @@
+﻿<span>
+    @if(string.IsNullOrEmpty(BlockHash)) {
+        <text> - </text>
+    } else {
+        if(LimitNbChar == -1) {
+            @BlockHash
+        } else {
+            <MPPopover>
+                <TogglePopoverContent>
+                    <text>@string.Join("", BlockHash.Take(LimitNbChar))</text>
+                    <text>...</text>
+                </TogglePopoverContent>
+                <PopoverContent>
+                    <span class="px-4 py-2 z-40">@BlockHash</span>
+                </PopoverContent>
+            </MPPopover>
+        }
+    }
+</span>
+
+@code {
+    [Parameter] public string BlockHash { get; set; } = string.Empty;
+    [Parameter] public int LimitNbChar { get; set; } = -1;
+}

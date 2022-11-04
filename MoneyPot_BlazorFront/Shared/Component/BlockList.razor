@@ -27,7 +27,7 @@
                                 <span class="font-semibold">@block.BlockNumber.ToString("N0")</span>
                             </td>
                             <td class="p-1 whitespace-nowrap text-xs font-normal">
-                                <span>@(block.BlockHash)</span>
+                                <Block BlockHash="@block.BlockHash" LimitNbChar="30"></Block>
                             </td>
                         </tr>
                     </TbodyContent>
