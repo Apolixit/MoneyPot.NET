@@ -20,3 +20,5 @@
 /MoneyPot_RestClient/bin
 /MoneyPot_RestClient/obj
 /.vs/ProjectEvaluation
+/MoneyPot_Shared_Test/bin/Debug/net6.0
+/MoneyPot_Shared_Test/obj
