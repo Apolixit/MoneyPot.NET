@@ -16,6 +16,13 @@ namespace MoneyPot_Shared.Event
 {
     public class EventListener : IEventListener
     {
+        /// <summary>
+        /// Parse the hexadecimal event to a "friendly" event structure
+        /// </summary>
+        /// <param name="hex">Event hexa</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">Event hexa is empty</exception>
+        /// <exception cref="NullReferenceException"></exception>
         public EventResult Read(string hex)
         {
             if (string.IsNullOrEmpty(hex))
@@ -25,50 +32,49 @@ namespace MoneyPot_Shared.Event
             eventReceived.Create(Utils.HexToByteArray(hex));
 
             if (eventReceived == null)
-                throw new NullReferenceException($"{nameof(eventReceived)} has not been instanciate properly, maybe due to invalid hex parameter");
+                throw new ArgumentNullException($"{nameof(eventReceived)} has not been instanciate properly, maybe due to invalid hex parameter");
 
             var mapping = new EventMapping();
             var eventResult = new EventResult();
 
-            //var eventPhase = eventReceived.Phase;
             var eventCore = eventReceived.Event;
+            //var eventPhase = eventReceived.Phase;
             //var eventTopic = eventReceived.Topics;
 
-           
+            //Current enum event
             BaseEnumType? baseExt = eventCore;
 
-            var events = new List<BaseEnumType>();
             while (baseExt != null)
             {
                 IType? childValue = baseExt.GetValue2();
+
+                if(childValue == null)
+                    throw new ArgumentNullException($"{nameof(childValue)} is empty");
+
+                if(baseExt.GetValue() == null)
+                    throw new ArgumentNullException($"Current event has no value");
+
                 eventResult.AddEvent(baseExt.GetValue().ToString());
 
                 if (!(childValue is BaseEnumType))
                 {
                     // We are not anymore in an event, let's dig into Rust enum details
                     baseExt = null;
-                    
+
                     if (childValue.GetType().IsGenericType)
                     {
                         var genericArgs = childValue.GetType().GenericTypeArguments;
                         for (int i = 0; i < genericArgs.Length; i++)
                         {
-                            //var res = mapping.Elements.FirstOrDefault(x => x.Mapping.ObjectType == genericArgs[i]);
                             var (mappingCategory, mapper) = mapping.Search(genericArgs[i]);
-                            //eventResult.Details.Add(res.Mapping.ToEventDetailsResult(childValue.GetValueArray()[i]));
                             eventResult.AddDetails(mappingCategory, mapper, childValue.GetValueArray()[i]);
                         }
                     }
                     else
                     {
-                        //var res = mapping.Elements.FirstOrDefault(x => x.Mapping.ObjectType == childValue.GetType());
-                        // Check v2.GetValue() or v2.GetValueArray()
                         var (mappingCategory, mapper) = mapping.Search(childValue.GetType());
-                        //eventResult.Details.Add(mappingCategory.Mapping.ToEventDetailsResult(childValue.GetValue()));
                         eventResult.AddDetails(mappingCategory, mapper, childValue);
                     }
-
-                    // Si pas BaseTuple => erreur ou ajout en toString() dans le tableau
                 }
                 else
                 {

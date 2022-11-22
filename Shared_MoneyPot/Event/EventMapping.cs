@@ -19,7 +19,7 @@ namespace MoneyPot_Shared.Event
             Elements.Add(new EventMappingElem()
             {
                 Name = "Amount",
-                Mapping = new List<IMappingElement>() { new MappingElementU128() }
+                Mapping = new List<IMappingElement>() { new MappingElementU128(), new MappingElementU32() }
             });
 
             Elements.Add(new EventMappingElem()
@@ -67,104 +67,42 @@ namespace MoneyPot_Shared.Event
     {
         public Type ObjectType => typeof(U128);
 
-        public Func<U128, uint> ToHuman
-        {
-            get
-            {
-                return (U128 input) => (uint)input.Value;
-            }
-        }
-
-        //public EventDetailsResult ToEventDetailsResult(dynamic input)
-        //{
-        //    return new EventDetailsResult()
-        //    {
-        //        Title = "Amount",
-        //        ComponentName = "Amount",
-        //        Value = ToHuman((U128)input)
-        //    };
-        //}
-
         dynamic IMappingElement.ToHuman(dynamic input)
         {
             return (uint)((U128)input).Value;
         }
     }
 
-    public class MappingElementHash : IMappingElement
+    public class MappingElementU32 : IMappingElement
     {
-        public Type ObjectType => typeof(H256);
-        // [AjunaNodeType(TypeDefEnum.Array)]
-        //public Func<H256, string> ToHuman
-        //{
-        //    get
-        //    {
-        //        return (H256 input) => Utils.Bytes2HexString(input.Value.Bytes);
-        //    }
-        //}
-
-        //public EventDetailsResult ToEventDetailsResult(dynamic input)
-        //{
-        //    return new EventDetailsResult()
-        //    {
-        //        Title = "Hash",
-        //        ComponentName = "Hash",
-        //        Value = ToHuman((H256)input)
-        //    };
-        //}
+        public Type ObjectType => typeof(U32);
 
         dynamic IMappingElement.ToHuman(dynamic input)
         {
-            return Utils.Bytes2HexString(((H256)input).Value.Bytes);
+            return ((U32)input).Value;
         }
+    }
+
+    public class MappingElementHash : IMappingElement
+    {
+        //[AjunaNodeType(TypeDefEnum.Array)]
+        public Type ObjectType => typeof(H256);
+
+        dynamic IMappingElement.ToHuman(dynamic input) => Utils.Bytes2HexString(((H256)input).Value.Bytes);
     }
 
     public class MappingElementAccount : IMappingElement
     {
         public Type ObjectType => typeof(AccountId32);
 
-        //public Func<AccountId32, string> ToHuman
-        //{
-        //    get
-        //    {
-        //        return (AccountId32 account) => AccountHelper.BuildAddress(account);
-        //    }
-        //}
-
-        //public EventDetailsResult ToEventDetailsResult(dynamic input)
-        //{
-        //    return new EventDetailsResult()
-        //    {
-        //        Title = "Account",
-        //        ComponentName = "Account",
-        //        Value = ToHuman((AccountId32)input)
-        //    };
-        //}
-
-        dynamic IMappingElement.ToHuman(dynamic input)
-        {
-            return AccountHelper.BuildAddress((AccountId32)input);
-        }
+        dynamic IMappingElement.ToHuman(dynamic input) => AccountHelper.BuildAddress((AccountId32)input);
     }
 
     public class MappingElementUnknown : IMappingElement
     {
         public Type ObjectType => throw new NotImplementedException();
 
-        //public EventDetailsResult ToEventDetailsResult(dynamic input)
-        //{
-        //    return new EventDetailsResult()
-        //    {
-        //        Title = "Unknown",
-        //        ComponentName = "Unknown",
-        //        Value = input.toString()
-        //    };
-        //}
-
-        public dynamic ToHuman(dynamic input)
-        {
-            return input.ToString();
-        }
+        public dynamic ToHuman(dynamic input) => input.ToString();
     }
     public class EventMappingElem
     {
