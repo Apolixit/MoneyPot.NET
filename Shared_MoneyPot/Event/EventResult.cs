@@ -80,16 +80,8 @@ namespace MoneyPot_Shared.Event
 
         public override bool Equals(object? obj)
         {
-            var b = obj is EventDetailsResult;
-            var res = (EventDetailsResult)obj;
-            var bb = ComponentName == res.ComponentName;
-            var bbb = Title == res.Title;
-            var bbbb = EqualityComparer<dynamic>.Default.Equals(Value, res.Value);
-
-            //return b && bb && bbb && bbbb;
             return obj is EventDetailsResult result &&
                    ComponentName == result.ComponentName &&
-                   Title == result.Title &&
                    EqualityComparer<dynamic>.Default.Equals(Value, result.Value);
         }
     }

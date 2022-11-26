@@ -27,19 +27,19 @@ namespace MoneyPot_Shared_Test.Event
             {
                 new EventDetailsResult()
                 {
-                    ComponentName = "Account",
+                    ComponentName = "AccountId32",
                     Title = "Account",
                     Value = "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"
                 },
                 new EventDetailsResult()
                 {
-                    ComponentName = "Amount",
+                    ComponentName = "Component_U128",
                     Title = "Amount",
                     Value = (uint)86298155
                 },
                 new EventDetailsResult()
                 {
-                    ComponentName = "Amount",
+                    ComponentName = "Component_U128",
                     Title = "Amount",
                     Value = (uint)0
                 },

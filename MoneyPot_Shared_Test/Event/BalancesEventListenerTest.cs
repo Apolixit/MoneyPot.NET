@@ -35,13 +35,13 @@ namespace MoneyPot_Shared_Test.Event
             {
                 new EventDetailsResult()
                 {
-                    ComponentName = "Account",
+                    ComponentName = "Component_AccountId32",
                     Title = "Account",
                     Value = "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"
                 },
                 new EventDetailsResult()
                 {
-                    ComponentName = "Amount",
+                    ComponentName = "Component_U128",
                     Title = "Amount",
                     Value = (uint)86298142
                 },
@@ -51,6 +51,7 @@ namespace MoneyPot_Shared_Test.Event
         }
 
         /// <summary>
+        /// https://github.com/paritytech/substrate/blob/master/frame/balances/src/lib.rs#L446
         /// 2/3
         /// Transfer balance (1000), Charlie to Ferdie (Ferdie new account)
         /// Pallet Balances
@@ -71,13 +72,13 @@ namespace MoneyPot_Shared_Test.Event
             {
                 new EventDetailsResult()
                 {
-                    ComponentName = "Account",
+                    ComponentName = "Component_AccountId32",
                     Title = "Account",
                     Value = "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL"
                 },
                 new EventDetailsResult()
                 {
-                    ComponentName = "Amount",
+                    ComponentName = "Component_U128",
                     Title = "Amount",
                     Value = (uint)1000
                 },
@@ -87,6 +88,7 @@ namespace MoneyPot_Shared_Test.Event
         }
 
         /// <summary>
+        /// https://github.com/paritytech/substrate/blob/master/frame/balances/src/lib.rs#L451
         /// 3/3
         /// Transfer balance (1000), Charlie to Ferdie (Ferdie new account)
         /// Pallet Balances
@@ -109,19 +111,19 @@ namespace MoneyPot_Shared_Test.Event
             {
                 new EventDetailsResult()
                 {
-                    ComponentName = "Account",
+                    ComponentName = "Component_AccountId32",
                     Title = "Account",
                     Value = "5FLSigC9HGRKVhB9FiEo4Y3koPsNmBmLJbpXg2mp1hXcS59Y"
                 },
                 new EventDetailsResult()
                 {
-                    ComponentName = "Account",
+                    ComponentName = "Component_AccountId32",
                     Title = "Account",
                     Value = "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL"
                 },
                 new EventDetailsResult()
                 {
-                    ComponentName = "Amount",
+                    ComponentName = "Component_U128",
                     Title = "Amount",
                     Value = (uint)1000
                 },

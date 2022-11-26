@@ -34,7 +34,7 @@ namespace MoneyPot_Shared_Test.Event
             {
                 new EventDetailsResult()
                 {
-                    ComponentName = "Hash",
+                    ComponentName = "Component_H256",
                     Title = "Hash",
                     Value = "0xE3D6F36453EC1C1C953125ABC4A896D6F5F7F1C0EE982788530CD74F17085048"
                 }
@@ -60,7 +60,7 @@ namespace MoneyPot_Shared_Test.Event
             {
                 new EventDetailsResult()
                 {
-                    ComponentName = "Hash",
+                    ComponentName = "Component_H256",
                     Title = "Hash",
                     Value = "0x93F0837CD6CC6FDCD4232AC53E1F1540060EC692B39BC3F044856803FC280E75"
                 }
@@ -86,23 +86,50 @@ namespace MoneyPot_Shared_Test.Event
             {
                 new EventDetailsResult()
                 {
-                    ComponentName = "Hash",
+                    ComponentName = "Component_H256",
                     Title = "Hash",
                     Value = "0xE3D6F36453EC1C1C953125ABC4A896D6F5F7F1C0EE982788530CD74F17085048"
                 },
                 new EventDetailsResult()
                 {
-                    ComponentName = "Account",
+                    ComponentName = "Component_AccountId32",
                     Title = "Account",
                     Value = "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty"
                 },
                 new EventDetailsResult()
                 {
-                    ComponentName = "Amount",
+                    ComponentName = "Component_U128",
                     Title = "Amount",
                     Value = (uint)500
                 },
 
+            });
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        /// <summary>
+        /// https://github.com/Apolixit/pallet_money_pot/blob/master/pallets/money-pot/src/lib.rs#L168
+        /// Money Pot
+        /// Closed
+        /// Hash
+        /// </summary>
+        /// <param name="hex"></param>
+        [Test]
+        [TestCase("0x020903396CDBF0A89F28E8FF09A5D97FAE185D3FF9920D8CBCB3CEC50F256865DBE0F100")]
+        public void MoneyPot_Closed_ShouldBeParsed(string hex)
+        {
+            var result = _eventListener.Read(hex);
+            Assert.IsNotNull(result);
+
+            var expectedResult = EventResult.Create("MoneyPot", "Closed", new List<EventDetailsResult>()
+            {
+                new EventDetailsResult()
+                {
+                    ComponentName = "Component_H256",
+                    Title = "Hash",
+                    Value = "0x396CDBF0A89F28E8FF09A5D97FAE185D3FF9920D8CBCB3CEC50F256865DBE0F1"
+                }
             });
 
             Assert.That(result, Is.EqualTo(expectedResult));
