@@ -1,9 +1,11 @@
 ﻿using Ajuna.NetApi;
 using Ajuna.NetApi.Model.Types;
+using Ajuna.NetApi.Model.Types.Base;
 using Ajuna.NetApi.Model.Types.Primitive;
 using MoneyPot_NetApiExt.Generated.Model.primitive_types;
 using MoneyPot_NetApiExt.Generated.Model.sp_core.crypto;
 using MoneyPot_NetApiExt.Generated.Types.Base;
+using MoneyPot_Shared.Extensions;
 using MoneyPot_Shared.Helpers;
 using static MoneyPot_Shared.Event.EventMappingElem;
 
@@ -19,7 +21,13 @@ namespace MoneyPot_Shared.Event
             Elements.Add(new EventMappingElem()
             {
                 Name = "Amount",
-                Mapping = new List<IMappingElement>() { new MappingElementU128(), new MappingElementU32() }
+                Mapping = new List<IMappingElement>() { 
+                    new MappingElementU128(),
+                    new MappingElementU64(),
+                    new MappingElementU32(),
+                    new MappingElementU16(),
+                    new MappingElementU8(),
+                }
             });
 
             Elements.Add(new EventMappingElem()
@@ -36,8 +44,14 @@ namespace MoneyPot_Shared.Event
 
             Elements.Add(new EventMappingElem()
             {
-                Name = "Hash",
-                Mapping = new List<IMappingElement>() { new MappingElementHash() }
+                Name = "Result",
+                Mapping = new List<IMappingElement>() { new MappingElementEnumResult() }
+            });
+
+            Elements.Add(new EventMappingElem()
+            {
+                Name = "Unknown",
+                Mapping = new List<IMappingElement>() { new MappingElementUnknown() }
             });
         }
     
@@ -73,6 +87,16 @@ namespace MoneyPot_Shared.Event
         }
     }
 
+    public class MappingElementU64 : IMappingElement
+    {
+        public Type ObjectType => typeof(U64);
+
+        dynamic IMappingElement.ToHuman(dynamic input)
+        {
+            return ((U64)input).Value;
+        }
+    }
+
     public class MappingElementU32 : IMappingElement
     {
         public Type ObjectType => typeof(U32);
@@ -80,6 +104,26 @@ namespace MoneyPot_Shared.Event
         dynamic IMappingElement.ToHuman(dynamic input)
         {
             return ((U32)input).Value;
+        }
+    }
+
+    public class MappingElementU16 : IMappingElement
+    {
+        public Type ObjectType => typeof(U16);
+
+        dynamic IMappingElement.ToHuman(dynamic input)
+        {
+            return ((U16)input).Value;
+        }
+    }
+
+    public class MappingElementU8 : IMappingElement
+    {
+        public Type ObjectType => typeof(U8);
+
+        dynamic IMappingElement.ToHuman(dynamic input)
+        {
+            return ((U8)input).Value;
         }
     }
 
@@ -98,12 +142,36 @@ namespace MoneyPot_Shared.Event
         dynamic IMappingElement.ToHuman(dynamic input) => AccountHelper.BuildAddress((AccountId32)input);
     }
 
+    public class MappingElementEnumResult : IMappingElement
+    {
+        public Type ObjectType => typeof(EnumResult);
+
+        dynamic IMappingElement.ToHuman(dynamic input)
+        {
+            var enumResult = ((EnumResult)input);
+            //enumResult.Value2;
+            return (enumResult.Value, enumResult.Value2.ToString());
+        }
+    }
+
+    public class MappingElementEnumExt : IMappingElement
+    {
+        public Type ObjectType => typeof(BaseEnumType);
+
+        dynamic IMappingElement.ToHuman(dynamic input)
+        {
+            var enumResult = (BaseEnumType)input;
+            return (enumResult.GetValue(), enumResult.GetValue2());
+        }
+    }
+
     public class MappingElementUnknown : IMappingElement
     {
-        public Type ObjectType => throw new NotImplementedException();
+        public Type ObjectType => typeof(object);
 
         public dynamic ToHuman(dynamic input) => input.ToString();
     }
+
     public class EventMappingElem
     {
         public string Name { get; set; }
