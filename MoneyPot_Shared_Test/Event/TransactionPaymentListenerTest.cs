@@ -1,0 +1,50 @@
+﻿using MoneyPot_Shared.Event;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MoneyPot_Shared_Test.Event
+{
+    public class TransactionPaymentListenerTest
+    {
+        private readonly IEventListener _eventListener;
+
+        public TransactionPaymentListenerTest()
+        {
+            _eventListener = new MoneyPot_Shared.Event.EventListener();
+        }
+
+        [Test]
+        [TestCase("0x00010000000700D43593C715FDD31C61141ABD04A99FD6822C8558854CCDE39A5684E7A56DA27D2BCE24050000000000000000000000000000000000000000000000000000000000")]
+        public void TransactionPayment_TransactionFeePaid_ShouldBeParsed(string hex)
+        {
+            var result = _eventListener.Read(hex);
+            Assert.IsNotNull(result);
+
+            var expectedResult = EventResult.Create("TransactionPayment", "TransactionFeePaid", new List<EventDetailsResult>()
+            {
+                new EventDetailsResult()
+                {
+                    ComponentName = "Account",
+                    Title = "Account",
+                    Value = "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"
+                },
+                new EventDetailsResult()
+                {
+                    ComponentName = "Amount",
+                    Title = "Amount",
+                    Value = (uint)86298155
+                },
+                new EventDetailsResult()
+                {
+                    ComponentName = "Amount",
+                    Title = "Amount",
+                    Value = (uint)0
+                },
+            });
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+    }
+}

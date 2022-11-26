@@ -16,6 +16,16 @@ namespace MoneyPot_Shared.Event
 {
     public class EventListener : IEventListener
     {
+        protected EventMapping mapping = new EventMapping();
+
+        // Build tree with selected depth
+        protected int depth = 2;
+
+        public void SetDepth(int depth)
+        {
+            this.depth = depth;
+        }
+
         /// <summary>
         /// Parse the hexadecimal event to a "friendly" event structure
         /// </summary>
@@ -34,7 +44,6 @@ namespace MoneyPot_Shared.Event
             if (eventReceived == null)
                 throw new ArgumentNullException($"{nameof(eventReceived)} has not been instanciate properly, maybe due to invalid hex parameter");
 
-            var mapping = new EventMapping();
             var eventResult = new EventResult();
 
             var eventCore = eventReceived.Event;
@@ -44,45 +53,102 @@ namespace MoneyPot_Shared.Event
             //Current enum event
             BaseEnumType? baseExt = eventCore;
 
-            while (baseExt != null)
+            VisitNode(eventResult, eventCore);
+            //while (baseExt != null)
+            //{
+            //    IType? childValue = baseExt.GetValue2();
+
+            //    if (childValue == null)
+            //        throw new ArgumentNullException($"{nameof(childValue)} is empty");
+
+            //    if (baseExt.GetValue() == null)
+            //        throw new ArgumentNullException($"Current event has no value");
+
+            //    VisitContent(eventResult, childValue);
+
+            //    //eventResult.AddEvent(baseExt.GetValue().ToString());
+
+                
+            //}
+
+            //while (baseExt != null)
+            //{
+            //    IType? childValue = baseExt.GetValue2();
+
+            //    if(childValue == null)
+            //        throw new ArgumentNullException($"{nameof(childValue)} is empty");
+
+            //    if(baseExt.GetValue() == null)
+            //        throw new ArgumentNullException($"Current event has no value");
+
+            //    eventResult.AddEvent(baseExt.GetValue().ToString());
+
+            //    if (!(childValue is BaseEnumType))
+            //    {
+            //        // We are not anymore in an event, let's dig into Rust enum details
+            //        baseExt = null;
+            //        VisitContent(eventResult, childValue);
+            //    }
+            //    else
+            //    {
+            //        baseExt = (BaseEnumType)childValue;
+            //    }
+            //}
+
+            return eventResult;
+        }
+
+        
+
+        private void VisitNode(EventResult eventResult, IType? value)
+        {
+            if (!(value is BaseEnumType))
             {
-                IType? childValue = baseExt.GetValue2();
+                VisitNodePrimitive(eventResult, value);
+            }
+            else
+            {
+                eventResult.AddEvent(value.GetValue().ToString());
+                VisitNode(eventResult, ((BaseEnumType)value).GetValue2());
+            }
+        }
 
-                if(childValue == null)
-                    throw new ArgumentNullException($"{nameof(childValue)} is empty");
+        private void VisitNodePrimitive(EventResult eventResult, IType? value)
+        {
+            if (value.GetType().IsGenericType)
+            {
+                VisitNodeGeneric(eventResult, value);
+            }
+            else
+            {
+                var (mappingCategory, mapper) = mapping.Search(value.GetType());
+                eventResult.AddDetails(mappingCategory, mapper, value);
+            }
+        }
 
-                if(baseExt.GetValue() == null)
-                    throw new ArgumentNullException($"Current event has no value");
-
-                eventResult.AddEvent(baseExt.GetValue().ToString());
-
-                if (!(childValue is BaseEnumType))
+        private void VisitNodeGeneric(EventResult eventResult, IType? value)
+        {
+            var genericArgs = value.GetType().GenericTypeArguments;
+            for (int i = 0; i < genericArgs.Length; i++)
+            {
+                // Loop again until it's not a generic type anymore ?
+                if (genericArgs[i].IsGenericType)
                 {
-                    // We are not anymore in an event, let's dig into Rust enum details
-                    baseExt = null;
-
-                    if (childValue.GetType().IsGenericType)
-                    {
-                        var genericArgs = childValue.GetType().GenericTypeArguments;
-                        for (int i = 0; i < genericArgs.Length; i++)
-                        {
-                            var (mappingCategory, mapper) = mapping.Search(genericArgs[i]);
-                            eventResult.AddDetails(mappingCategory, mapper, childValue.GetValueArray()[i]);
-                        }
-                    }
+                    if (value.GetValue().GetType().IsArray)
+                        VisitNode(eventResult, (IType)value.GetValueArray()[i]);
                     else
-                    {
-                        var (mappingCategory, mapper) = mapping.Search(childValue.GetType());
-                        eventResult.AddDetails(mappingCategory, mapper, childValue);
-                    }
+                        VisitNode(eventResult, (IType)value.GetValue());
                 }
                 else
                 {
-                    baseExt = (BaseEnumType)childValue;
+                    var (mappingCategory, mapper) = mapping.Search(genericArgs[i]);
+                    //eventResult.AddDetails(mappingCategory, mapper, value.GetValueArray()[i]);
+                    if (value.GetValue().GetType().IsArray)
+                        VisitNode(eventResult, (IType)value.GetValueArray()[i]);
+                    else
+                        VisitNode(eventResult, (IType)value.GetValue());
                 }
             }
-
-            return eventResult;
         }
     }
 }
