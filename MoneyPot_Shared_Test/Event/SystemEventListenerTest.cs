@@ -51,7 +51,7 @@ namespace MoneyPot_Shared_Test.Event
             {
                 new EventDetailsResult()
                 {
-                    ComponentName = "Account",
+                    ComponentName = "AccountId32",
                     Title = "Account",
                     Value = "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL"
                 },
@@ -75,7 +75,23 @@ namespace MoneyPot_Shared_Test.Event
             var result = _eventListener.Read(hex);
             Assert.IsNotNull(result);
 
-            
+            var expectedResult = EventResult.Create("System", "ExtrinsicFailed", new List<EventDetailsResult>()
+            {
+                new EventDetailsResult()
+                {
+                    ComponentName = "Unknown",
+                    Title = "Unknown",
+                    Value = ""
+                },
+                new EventDetailsResult()
+                {
+                    ComponentName = "Unknown",
+                    Title = "Unknown",
+                    Value = "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL"
+                },
+            });
+
+            Assert.That(result, Is.EqualTo(expectedResult));
         }
     }
 }

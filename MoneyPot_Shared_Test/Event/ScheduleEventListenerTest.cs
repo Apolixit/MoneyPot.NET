@@ -35,14 +35,13 @@ namespace MoneyPot_Shared_Test.Event
             {
                 new EventDetailsResult()
                 {
-                    ComponentName = "BlockNumber",
+                    ComponentName = "Component_U32",
                     Title = "BlockNumber",
                     Value = (uint)400
                 },
-                // To be honest, I don't know what is it :D
                 new EventDetailsResult()
                 {
-                    ComponentName = "Index",
+                    ComponentName = "Component_U32",
                     Title = "Index",
                     Value = (uint)0
                 },
@@ -55,13 +54,13 @@ namespace MoneyPot_Shared_Test.Event
         /// https://github.com/paritytech/substrate/blob/master/frame/scheduler/src/lib.rs#L259
         /// Pallet scheduler
         /// Dispatch
-        /// task: TaskAddress<T::BlockNumber>,
-        /// id: Option<TaskName>,
-	    /// result: DispatchResult,
+        /// task: TaskAddress<T::BlockNumber> = (180, 0)
+        /// id: Option<TaskName> = Option<Bytes> 0x6d6f6e6579706f74396cdbf0a89f28e8ff09a5d97fae185d3ff9920d8cbcb3cec50f256865dbe0f1
+	    /// result: DispatchResult = 0 (Ok)
         /// </summary>
         /// <param name="hex"></param>
         [Test]
-        [TestCase("0x0206029A0100000000000001A06D6F6E6579706F74C81DB64C632F917AF72DFF41B268A9DE40374D66FF9CD2AE87D304CB36A292FB0000")]
+        [TestCase("0x020602B40000000000000001A06D6F6E6579706F74396CDBF0A89F28E8FF09A5D97FAE185D3FF9920D8CBCB3CEC50F256865DBE0F10000")]
         public void Scheduler_Dispatched_ShouldBeParsed(string hex)
         {
             var result = _eventListener.Read(hex);
@@ -71,14 +70,13 @@ namespace MoneyPot_Shared_Test.Event
             {
                 new EventDetailsResult()
                 {
-                    ComponentName = "BlockNumber",
+                    ComponentName = "Component_U32",
                     Title = "BlockNumber",
-                    Value = (uint)400
+                    Value = (uint)180
                 },
-                // To be honest, I don't know what is it :D
                 new EventDetailsResult()
                 {
-                    ComponentName = "Index",
+                    ComponentName = "Component_U32",
                     Title = "Index",
                     Value = (uint)0
                 },
