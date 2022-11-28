@@ -8,7 +8,6 @@ namespace MoneyPot_Shared.Event
 {
     public interface IEventListener
     {
-        EventResult Read(string hex);
-        void SetDepth(int depth);
+        EventNode Read(string hex);
     }
 }

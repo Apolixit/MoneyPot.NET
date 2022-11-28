@@ -19,13 +19,6 @@ namespace MoneyPot_Shared.Event
     {
         protected EventMapping mapping = new EventMapping();
 
-        // Build tree with selected depth
-        protected int depth = 2;
-
-        public void SetDepth(int depth)
-        {
-            this.depth = depth;
-        }
 
         /// <summary>
         /// Parse the hexadecimal event to a "friendly" event structure
@@ -34,7 +27,7 @@ namespace MoneyPot_Shared.Event
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Event hexa is empty</exception>
         /// <exception cref="NullReferenceException"></exception>
-        public EventResult Read(string hex)
+        public EventNode Read(string hex)
         {
             if (string.IsNullOrEmpty(hex))
                 throw new ArgumentNullException($"{nameof(hex)} is not set");
@@ -45,84 +38,36 @@ namespace MoneyPot_Shared.Event
             if (eventReceived == null)
                 throw new ArgumentNullException($"{nameof(eventReceived)} has not been instanciate properly, maybe due to invalid hex parameter");
 
-            var eventResult = new EventResult();
-
             var eventCore = eventReceived.Event;
             //var eventPhase = eventReceived.Phase;
             //var eventTopic = eventReceived.Topics;
 
-            //Current enum event
-            BaseEnumType? baseExt = eventCore;
-            //0x9A0100000000000001A06D6F6E6579706F74C81DB64C632F917AF72DFF41B268A9DE40374D66FF9CD2AE87D304CB36A292FB00
+            EventNode eventNode = EventNode.Empty;
+            VisitNode(eventNode, eventCore);
 
-            EventNode node = EventNode.Empty;
-            VisitNode(node, eventResult, eventCore);
-            //while (baseExt != null)
-            //{
-            //    IType? childValue = baseExt.GetValue2();
-
-            //    if (childValue == null)
-            //        throw new ArgumentNullException($"{nameof(childValue)} is empty");
-
-            //    if (baseExt.GetValue() == null)
-            //        throw new ArgumentNullException($"Current event has no value");
-
-            //    VisitContent(eventResult, childValue);
-
-            //    //eventResult.AddEvent(baseExt.GetValue().ToString());
-
-                
-            //}
-
-            //while (baseExt != null)
-            //{
-            //    IType? childValue = baseExt.GetValue2();
-
-            //    if(childValue == null)
-            //        throw new ArgumentNullException($"{nameof(childValue)} is empty");
-
-            //    if(baseExt.GetValue() == null)
-            //        throw new ArgumentNullException($"Current event has no value");
-
-            //    eventResult.AddEvent(baseExt.GetValue().ToString());
-
-            //    if (!(childValue is BaseEnumType))
-            //    {
-            //        // We are not anymore in an event, let's dig into Rust enum details
-            //        baseExt = null;
-            //        VisitContent(eventResult, childValue);
-            //    }
-            //    else
-            //    {
-            //        baseExt = (BaseEnumType)childValue;
-            //    }
-            //}
-
-            return eventResult;
+            return eventNode;
         }
 
         
 
-        private void VisitNode(EventNode node, EventResult eventResult, IType? value)
+        private void VisitNode(EventNode node, IType? value)
         {
             if (!(value is BaseEnumType))
             {
-                VisitNodePrimitive(node, eventResult, value);
+                VisitNodePrimitive(node, value);
             }
             else
             {
                 var val = value.GetValue();
-                eventResult.AddEvent(val.ToString());
-
-                var childNode = EventNode.Create(value, val);
+                var childNode = EventNode.Create().AddData(value).AddHumanData(val);
                 if (node.IsEmpty)
                 {
-                    node.SetData(value, val);
-                    VisitNode(node, eventResult, ((BaseEnumType)value).GetValue2());
+                    node.AddData(value).AddHumanData(val);
+                    VisitNode(node, ((BaseEnumType)value).GetValue2());
                 }
                 else
                 {
-                    VisitNode(childNode, eventResult, ((BaseEnumType)value).GetValue2());
+                    VisitNode(childNode, ((BaseEnumType)value).GetValue2());
                     node.AddChild(childNode);
                 }
 
@@ -130,22 +75,22 @@ namespace MoneyPot_Shared.Event
             }
         }
 
-        private void VisitNodePrimitive(EventNode node, EventResult eventResult, IType? value)
+        private void VisitNodePrimitive(EventNode node, IType? value)
         {
-            if (value.GetType().IsGenericType)
+            var mapper = mapping.Search(value.GetType());
+            if (!mapper.IsIdentified && value.GetType().IsGenericType)
             {
-                VisitNodeGeneric(node, eventResult, value);
-            }
-            else
+                VisitNodeGeneric(node, value);
+            } else
             {
-                var (mappingCategory, mapper) = mapping.Search(value.GetType());
-                eventResult.AddDetails(mappingCategory, mapper, value);
-
-                node.AddChild(EventNode.Create(value, mapper.ToHuman(value)));
+                node.AddChild(EventNode.Create()
+                                    .AddData(value)
+                                    .AddContext(mapper)
+                                    .AddHumanData(mapper.ToHuman(value)));
             }
         }
 
-        private void VisitNodeGeneric(EventNode node, EventResult eventResult, IType? value)
+        private void VisitNodeGeneric(EventNode node, IType? value)
         {
             var genericArgs = value.GetType().GenericTypeArguments;
             for (int i = 0; i < genericArgs.Length; i++)
@@ -159,49 +104,16 @@ namespace MoneyPot_Shared.Event
 
                 if (genericArgs[i].IsGenericType)
                 {
-                    var childNode = EventNode.Create(currentValue);
+                    var childNode = EventNode.Create().AddData(currentValue);
                     node.AddChild(childNode);
 
-                    VisitNode(childNode, eventResult, currentValue);
+                    VisitNode(childNode, currentValue);
                 } else
                 {
-                    VisitNode(node, eventResult, currentValue);
+                    VisitNode(node, currentValue);
                 }
-                // Si generic type => add child sinon ne rien faire
-                //var childNode = EventNode.Create(currentValue);
-                //node.AddChild(childNode);
-
-                //VisitChildNode(node, eventResult, value, i);
-                //// Loop again until it's not a generic type anymore ?
-                //if (genericArgs[i].IsGenericType)
-                //{
-                //    VisitChildNode(node, eventResult, value, i);
-                //}
-                //else
-                //{
-                //    VisitChildNode(node, eventResult, value, i);
-                //    //var (mappingCategory, mapper) = mapping.Search(genericArgs[i]);
-                //    //eventResult.AddDetails(mappingCategory, mapper, value.GetValueArray()[i]);
-                //    //if (value.GetValue().GetType().IsArray)
-                //    //    VisitNode(node, eventResult, (IType)value.GetValueArray()[i]);
-                //    //else
-                //    //    VisitNode(node, eventResult, (IType)value.GetValue());
-                //}
             }
         }
-
-        //private void VisitChildNode(EventNode node, EventResult eventResult, IType? value, int i)
-        //{
-        //    IType? currentValue = null;
-        //    if (value.GetValue().GetType().IsArray)
-        //        currentValue = (IType)value.GetValueArray()[i];
-        //    else
-        //        currentValue = (IType)value.GetValue();
-
-        //    // Si generic type => add child sinon ne rien faire
-        //    //var childNode = EventNode.Create(currentValue);
-        //    //node.AddChild(childNode);
-        //    VisitNode(node, eventResult, currentValue);
-        //}
+        
     }
 }

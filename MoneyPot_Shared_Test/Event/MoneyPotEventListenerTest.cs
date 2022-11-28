@@ -27,7 +27,8 @@ namespace MoneyPot_Shared_Test.Event
         [TestCase("0x00010000000900E3D6F36453EC1C1C953125ABC4A896D6F5F7F1C0EE982788530CD74F1708504800")]
         public void MoneyPot_CreatedAmount_ShouldBeParsed(string hex)
         {
-            var result = _eventListener.Read(hex);
+            var nodeResult = _eventListener.Read(hex);
+            var result = EventResult.Create(nodeResult);
             Assert.IsNotNull(result);
 
             var expectedResult = EventResult.Create("MoneyPot", "Created", new List<EventDetailsResult>()
@@ -53,7 +54,8 @@ namespace MoneyPot_Shared_Test.Event
         [TestCase("0x0001000000090093F0837CD6CC6FDCD4232AC53E1F1540060EC692B39BC3F044856803FC280E7500")]
         public void MoneyPot_CreatedSchedule_ShouldBeParsed(string hex)
         {
-            var result = _eventListener.Read(hex);
+            var nodeResult = _eventListener.Read(hex);
+            var result = EventResult.Create(nodeResult);
             Assert.IsNotNull(result);
 
             var expectedResult = EventResult.Create("MoneyPot", "Created", new List<EventDetailsResult>()
@@ -79,7 +81,8 @@ namespace MoneyPot_Shared_Test.Event
         [TestCase("0x00010000000902E3D6F36453EC1C1C953125ABC4A896D6F5F7F1C0EE982788530CD74F170850488EAF04151687736326C9FEA17E25FC5287613693C912909CB226AA4794F26A48F401000000000000000000000000000000")]
         public void MoneyPot_MoneyAdded_ShouldBeParsed(string hex)
         {
-            var result = _eventListener.Read(hex);
+            var nodeResult = _eventListener.Read(hex);
+            var result = EventResult.Create(nodeResult);
             Assert.IsNotNull(result);
 
             var expectedResult = EventResult.Create("MoneyPot", "MoneyAdded", new List<EventDetailsResult>()
@@ -119,7 +122,8 @@ namespace MoneyPot_Shared_Test.Event
         [TestCase("0x020903396CDBF0A89F28E8FF09A5D97FAE185D3FF9920D8CBCB3CEC50F256865DBE0F100")]
         public void MoneyPot_Closed_ShouldBeParsed(string hex)
         {
-            var result = _eventListener.Read(hex);
+            var nodeResult = _eventListener.Read(hex);
+            var result = EventResult.Create(nodeResult);
             Assert.IsNotNull(result);
 
             var expectedResult = EventResult.Create("MoneyPot", "Closed", new List<EventDetailsResult>()
