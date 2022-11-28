@@ -10,6 +10,40 @@ namespace MoneyPot_Shared.Event
 {
     public class EventResult
     {
+        // Build tree with selected depth
+        protected int depth = 2;
+
+        public void SetDepth(int depth)
+        {
+            this.depth = depth;
+        }
+
+        public static EventResult Create(EventNode eventNode)
+        {
+            var result = new EventResult();
+            if (eventNode.IsEmpty || eventNode.HumanData == null || eventNode.IsLeaf) return null;
+
+            string palletEventName = eventNode.HumanData.ToString();
+
+            var subEvent = eventNode.Children.First();
+            string eventName = subEvent.HumanData.ToString();
+
+            var details = new List<EventDetailsResult>();
+            if (!subEvent.IsLeaf)
+            {
+                details = subEvent.Children.Select(x =>
+                {
+                    return new EventDetailsResult()
+                    {
+                        ComponentName = x.ComponentName,
+                        Title = String.Empty,
+                        Value = x.HumanData
+                    };
+                }).ToList();
+            }
+            return Create(palletEventName, eventName, details);
+        }
+
         public static EventResult Create(string palletEventName, string eventName)
         {
             return Create(palletEventName, eventName, new List<EventDetailsResult>());

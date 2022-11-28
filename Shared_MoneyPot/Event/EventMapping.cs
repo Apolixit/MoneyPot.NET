@@ -5,6 +5,7 @@ using Ajuna.NetApi.Model.Types.Primitive;
 using MoneyPot_NetApiExt.Generated.Model.frame_support.weights;
 using MoneyPot_NetApiExt.Generated.Model.primitive_types;
 using MoneyPot_NetApiExt.Generated.Model.sp_core.crypto;
+using MoneyPot_NetApiExt.Generated.Model.sp_runtime;
 using MoneyPot_NetApiExt.Generated.Types.Base;
 using MoneyPot_Shared.Extensions;
 using MoneyPot_Shared.Helpers;
@@ -40,7 +41,7 @@ namespace MoneyPot_Shared.Event
             Elements.Add(new EventMappingElem()
             {
                 Name = "Hash",
-                Mapping = new List<IMappingElement>() { new MappingElementHash() }
+                Mapping = new List<IMappingElement>() { new MappingElementHash(), new MappingElementHashByteArray() }
             });
 
             Elements.Add(new EventMappingElem()
@@ -48,46 +49,45 @@ namespace MoneyPot_Shared.Event
                 Name = "Result",
                 Mapping = new List<IMappingElement>() { new MappingElementEnumResult() }
             });
-
-            //Elements.Add(new EventMappingElem()
-            //{
-            //    Name = "Unknown",
-            //    Mapping = new List<IMappingElement>() { new MappingElementUnknown(typeof(object)) }
-            //});
+            Elements.Add(new EventMappingElem()
+            {
+                Name = "DispatchInfo",
+                Mapping = new List<IMappingElement>() { new MappingElementDispatchInfo() }
+            });
+            Elements.Add(new EventMappingElem()
+            {
+                Name = "ModuleError",
+                Mapping = new List<IMappingElement>() { new MappingElementModuleError() }
+            });
         }
-    
-        public (EventMappingElem, IMappingElement) Search(Type searchType)
+
+        public IMappingElement Search(Type searchType)
         {
             foreach(var elem in Elements)
             {
                 var mapped = elem.Mapping.FirstOrDefault(x => x.ObjectType == searchType);
                 if(mapped != null)
                 {
-                    return (elem, mapped);
+                    return mapped;
                 }
             }
 
-            // TODO: refacto this ugly line
-            //return (Elements.Last(), Elements.Last().Mapping.Last());
-            return (
-                new EventMappingElem()
-                {
-                    Name = "Unknown",
-                },
-                new MappingElementUnknown(searchType)
-            );
+            return new MappingElementUnknown(searchType);
         }
     }
 
     public interface IMappingElement
     {
         public Type ObjectType { get; }
+        public bool IsIdentified { get; }
         public dynamic ToHuman(dynamic input);
     }
 
     public class MappingElementU128 : IMappingElement
     {
         public Type ObjectType => typeof(U128);
+
+        public bool IsIdentified => true;
 
         dynamic IMappingElement.ToHuman(dynamic input)
         {
@@ -98,6 +98,7 @@ namespace MoneyPot_Shared.Event
     public class MappingElementU64 : IMappingElement
     {
         public Type ObjectType => typeof(U64);
+        public bool IsIdentified => true;
 
         dynamic IMappingElement.ToHuman(dynamic input)
         {
@@ -108,6 +109,7 @@ namespace MoneyPot_Shared.Event
     public class MappingElementU32 : IMappingElement
     {
         public Type ObjectType => typeof(U32);
+        public bool IsIdentified => true;
 
         dynamic IMappingElement.ToHuman(dynamic input)
         {
@@ -118,6 +120,7 @@ namespace MoneyPot_Shared.Event
     public class MappingElementU16 : IMappingElement
     {
         public Type ObjectType => typeof(U16);
+        public bool IsIdentified => true;
 
         dynamic IMappingElement.ToHuman(dynamic input)
         {
@@ -128,6 +131,7 @@ namespace MoneyPot_Shared.Event
     public class MappingElementU8 : IMappingElement
     {
         public Type ObjectType => typeof(U8);
+        public bool IsIdentified => true;
 
         dynamic IMappingElement.ToHuman(dynamic input)
         {
@@ -139,13 +143,24 @@ namespace MoneyPot_Shared.Event
     {
         //[AjunaNodeType(TypeDefEnum.Array)]
         public Type ObjectType => typeof(H256);
+        public bool IsIdentified => true;
 
         dynamic IMappingElement.ToHuman(dynamic input) => Utils.Bytes2HexString(((H256)input).Value.Bytes);
+    }
+
+    public class MappingElementHashByteArray : IMappingElement
+    {
+        //[AjunaNodeType(TypeDefEnum.Array)]
+        public Type ObjectType => typeof(BaseVec<U8>);
+        public bool IsIdentified => true;
+
+        dynamic IMappingElement.ToHuman(dynamic input) => Utils.Bytes2HexString(((BaseVec<U8>)input).Bytes);
     }
 
     public class MappingElementAccount : IMappingElement
     {
         public Type ObjectType => typeof(AccountId32);
+        public bool IsIdentified => true;
 
         dynamic IMappingElement.ToHuman(dynamic input) => AccountHelper.BuildAddress((AccountId32)input);
     }
@@ -153,6 +168,8 @@ namespace MoneyPot_Shared.Event
     public class MappingElementEnumResult : IMappingElement
     {
         public Type ObjectType => typeof(EnumResult);
+
+        public bool IsIdentified => true;
 
         dynamic IMappingElement.ToHuman(dynamic input)
         {
@@ -165,19 +182,39 @@ namespace MoneyPot_Shared.Event
     public class MappingElementDispatchInfo : IMappingElement
     {
         public Type ObjectType => typeof(DispatchInfo);
+        public bool IsIdentified => true;
 
         dynamic IMappingElement.ToHuman(dynamic input)
         {
             var dispatchInfo = (DispatchInfo)input;
-            //return (dispatchInfo..Value, enumResult.Value2.ToString());
-            // TODO DispatchInfoDto
-            return input;
+
+            // Maybe better to use automapper ?
+
+            var dispatchInfoDto = new DispatchInfoDto();
+            dispatchInfoDto.PaysFee = dispatchInfo.PaysFee.Value;
+            dispatchInfoDto.Class = dispatchInfo.Class.Value;
+            dispatchInfoDto.Weight = dispatchInfo.Weight.Value;
+
+            return dispatchInfoDto;
         }
     }
-    
+
+    public class MappingElementModuleError : IMappingElement
+    {
+        public Type ObjectType => typeof(ModuleError);
+        public bool IsIdentified => true;
+
+        dynamic IMappingElement.ToHuman(dynamic input)
+        {
+            var modeError = (ModuleError)input;
+            return System.Text.Encoding.Default.GetString(modeError.Error.Bytes);
+        }
+    }
+
     public class MappingElementEnumExt : IMappingElement
     {
         public Type ObjectType => typeof(BaseEnumType);
+        public bool IsIdentified => true;
 
         dynamic IMappingElement.ToHuman(dynamic input)
         {
@@ -189,6 +226,7 @@ namespace MoneyPot_Shared.Event
     public class MappingElementUnknown : IMappingElement
     {
         private Type _objectType = typeof(object);
+        public bool IsIdentified => false;
         public MappingElementUnknown() { }
         public MappingElementUnknown(Type unknownType)
         {

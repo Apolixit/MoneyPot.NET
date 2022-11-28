@@ -28,7 +28,8 @@ namespace MoneyPot_Shared_Test.Event
         [TestCase("0x00010000000600900100000000000000")]
         public void Scheduler_ScheduleBlock_ShouldBeParsed(string hex)
         {
-            var result = _eventListener.Read(hex);
+            var nodeResult = _eventListener.Read(hex);
+            var result = EventResult.Create(nodeResult);
             Assert.IsNotNull(result);
 
             var expectedResult = EventResult.Create("Scheduler", "Scheduled", new List<EventDetailsResult>()
@@ -63,22 +64,29 @@ namespace MoneyPot_Shared_Test.Event
         [TestCase("0x020602B40000000000000001A06D6F6E6579706F74396CDBF0A89F28E8FF09A5D97FAE185D3FF9920D8CBCB3CEC50F256865DBE0F10000")]
         public void Scheduler_Dispatched_ShouldBeParsed(string hex)
         {
-            var result = _eventListener.Read(hex);
+            var nodeResult = _eventListener.Read(hex);
+            var result = EventResult.Create(nodeResult);
             Assert.IsNotNull(result);
 
             var expectedResult = EventResult.Create("Scheduler", "Dispatched", new List<EventDetailsResult>()
             {
                 new EventDetailsResult()
                 {
-                    ComponentName = "Component_U32",
+                    ComponentName = "Component_Unknown",
                     Title = "BlockNumber",
-                    Value = (uint)180
+                    Value = new List<int>() { 180, 0 }
                 },
                 new EventDetailsResult()
                 {
-                    ComponentName = "Component_U32",
-                    Title = "Index",
-                    Value = (uint)0
+                    ComponentName = "Component_Option",
+                    Title = "Hash",
+                    Value = "0xA06D6F6E6579706F74396CDBF0A89F28E8FF09A5D97FAE185D3FF9920D8CBCB3CEC50F256865DBE0F1"
+                },
+                new EventDetailsResult()
+                {
+                    ComponentName = "Component_DispatchResult",
+                    Title = "",
+                    Value = 0
                 },
             });
 
