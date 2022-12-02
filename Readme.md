@@ -8,6 +8,10 @@ Substrate metadata file.
 
 ---
 
+## Schema
+
+![image info](.\MoneyPot_BlazorFront\wwwroot\images\SubstrateMoneyPot.drawio.svg)
+
 ## Setup
 
 If you want to try it by yourself, feel free to clone the repo and use `npm update` in the MoneyPot_BlazorFront project.
