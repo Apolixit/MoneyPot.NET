@@ -10,7 +10,7 @@ Substrate metadata file.
 
 ## Schema
 
-![image info](.\MoneyPot_BlazorFront\wwwroot\images\SubstrateMoneyPot.drawio.svg)
+![image](https://github.com/Apolixit/moneypot_blazor/blob/master/MoneyPot_BlazorFront/wwwroot/images/SubstrateMoneyPot.drawio.svg)
 
 ## Setup
 
