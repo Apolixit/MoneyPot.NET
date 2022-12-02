@@ -1,4 +1,5 @@
 ﻿using Ajuna.NetApi;
+using Ajuna.NetApi.Model.Meta;
 using Ajuna.NetApi.Model.Types;
 using Ajuna.NetApi.Model.Types.Base;
 using Ajuna.NetApi.Model.Types.Primitive;
@@ -16,6 +17,15 @@ namespace MoneyPot_Shared.Event
     public class EventMapping
     {
         protected IList<EventMappingElem> Elements { get; set; }
+
+        public EventMapping(MetaData metaData) : this()
+        {
+            Elements.Add(new EventMappingElem()
+            {
+                Name = "ModuleError",
+                Mapping = new List<IMappingElement>() { new MappingElementModuleError(metaData) }
+            });
+        }
 
         public EventMapping()
         {
@@ -53,11 +63,6 @@ namespace MoneyPot_Shared.Event
             {
                 Name = "DispatchInfo",
                 Mapping = new List<IMappingElement>() { new MappingElementDispatchInfo() }
-            });
-            Elements.Add(new EventMappingElem()
-            {
-                Name = "ModuleError",
-                Mapping = new List<IMappingElement>() { new MappingElementModuleError() }
             });
         }
 
@@ -201,13 +206,33 @@ namespace MoneyPot_Shared.Event
 
     public class MappingElementModuleError : IMappingElement
     {
+        private readonly MetaData _metaData;
+
+        public MappingElementModuleError(MetaData metaData)
+        {
+            _metaData = metaData;
+        }
         public Type ObjectType => typeof(ModuleError);
         public bool IsIdentified => true;
 
         dynamic IMappingElement.ToHuman(dynamic input)
         {
-            var modeError = (ModuleError)input;
-            return System.Text.Encoding.Default.GetString(modeError.Error.Bytes);
+            var moduleError = (ModuleError)input;
+            //moduleError.Index
+            //MetaData.CreateModuleDict()
+            var palletError = _metaData.NodeMetadata.Modules[moduleError.Index.Value];
+            var fullQualifiedName = $"MoneyPot_NetApiExt.Generated.Storage.{palletError.Name}Errors, MoneyPot_NetApiExt, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+            Type palletErrorType = Type.GetType(fullQualifiedName);
+            var palletInstance = Activator.CreateInstance(palletErrorType);
+            
+            var result = new PalletErrorDto()
+            {
+                PalletName = palletError.Name,
+                EventError = (Enum)palletInstance,//MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.Error.DoesNotExists,
+                Message = String.Empty
+            };
+
+            return result;
         }
     }
 
