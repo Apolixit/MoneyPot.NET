@@ -1,4 +1,5 @@
 ﻿using Ajuna.NetApi;
+using Ajuna.NetApi.Model.Meta;
 using Ajuna.NetApi.Model.Types;
 using Ajuna.NetApi.Model.Types.Base;
 using Ajuna.NetApi.Model.Types.Primitive;
@@ -17,8 +18,17 @@ namespace MoneyPot_Shared.Event
 {
     public class EventListener : IEventListener
     {
-        protected EventMapping mapping = new EventMapping();
+        protected EventMapping mapping;
 
+        public EventListener()
+        {
+            mapping = new EventMapping();
+        }
+
+        public EventListener(MetaData metaData)
+        {
+            mapping = new EventMapping(metaData);
+        }
 
         /// <summary>
         /// Parse the hexadecimal event to a "friendly" event structure

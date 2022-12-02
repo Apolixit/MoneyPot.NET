@@ -44,6 +44,11 @@ namespace MoneyPot_Shared.Event
             return Create(palletEventName, eventName, details);
         }
 
+        private static EventDetailsResult AddDetails(LinkedList<EventNode> nodes)
+        {
+            return null;
+        }
+
         public static EventResult Create(string palletEventName, string eventName)
         {
             return Create(palletEventName, eventName, new List<EventDetailsResult>());
@@ -111,6 +116,7 @@ namespace MoneyPot_Shared.Event
         public string ComponentName { get; set; } = string.Empty;
         public string Title { get; set; } = string.Empty;
         public dynamic? Value { get; set; }
+        public List<EventDetailsResult> Details { get; set; } = new List<EventDetailsResult>();
 
         public override bool Equals(object? obj)
         {

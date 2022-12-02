@@ -78,15 +78,15 @@ namespace MoneyPot_Shared_Test.Event
                 },
                 new EventDetailsResult()
                 {
-                    ComponentName = "Component_Option",
-                    Title = "Hash",
+                    ComponentName = "",
+                    Title = "",
                     Value = "0xA06D6F6E6579706F74396CDBF0A89F28E8FF09A5D97FAE185D3FF9920D8CBCB3CEC50F256865DBE0F1"
                 },
                 new EventDetailsResult()
                 {
-                    ComponentName = "Component_DispatchResult",
+                    ComponentName = "",
                     Title = "",
-                    Value = 0
+                    Value = "Ok"
                 },
             });
 
