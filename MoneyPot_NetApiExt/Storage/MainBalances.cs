@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi;
-using Ajuna.NetApi.Model.Extrinsics;
-using Ajuna.NetApi.Model.Meta;
-using Ajuna.NetApi.Model.Types;
-using Ajuna.NetApi.Model.Types.Base;
+using Substrate.NetApi;
+using Substrate.NetApi.Model.Extrinsics;
+using Substrate.NetApi.Model.Meta;
+using Substrate.NetApi.Model.Types;
+using Substrate.NetApi.Model.Types.Base;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,14 +30,14 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public BalancesStorage(SubstrateClientExt client)
         {
             this._client = client;
-            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Balances", "TotalIssuance"), new System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(Ajuna.NetApi.Model.Types.Primitive.U128)));
-            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Balances", "Account"), new System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(new Ajuna.NetApi.Model.Meta.Storage.Hasher[] {
-                            Ajuna.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, typeof(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32), typeof(MoneyPot_NetApiExt.Generated.Model.pallet_balances.AccountData)));
-            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Balances", "Locks"), new System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(new Ajuna.NetApi.Model.Meta.Storage.Hasher[] {
-                            Ajuna.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, typeof(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32), typeof(MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.weak_bounded_vec.WeakBoundedVecT2)));
-            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Balances", "Reserves"), new System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(new Ajuna.NetApi.Model.Meta.Storage.Hasher[] {
-                            Ajuna.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, typeof(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32), typeof(MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT3)));
-            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Balances", "StorageVersion"), new System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.pallet_balances.EnumReleases)));
+            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Balances", "TotalIssuance"), new System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(Substrate.NetApi.Model.Types.Primitive.U128)));
+            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Balances", "Account"), new System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(new Substrate.NetApi.Model.Meta.Storage.Hasher[] {
+                            Substrate.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, typeof(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32), typeof(MoneyPot_NetApiExt.Generated.Model.pallet_balances.AccountData)));
+            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Balances", "Locks"), new System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(new Substrate.NetApi.Model.Meta.Storage.Hasher[] {
+                            Substrate.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, typeof(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32), typeof(MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.weak_bounded_vec.WeakBoundedVecT2)));
+            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Balances", "Reserves"), new System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(new Substrate.NetApi.Model.Meta.Storage.Hasher[] {
+                            Substrate.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, typeof(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32), typeof(MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT3)));
+            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Balances", "StorageVersion"), new System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.pallet_balances.EnumReleases)));
         }
         
         /// <summary>
@@ -46,17 +46,27 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// </summary>
         public static string TotalIssuanceParams()
         {
-            return RequestGenerator.GetStorage("Balances", "TotalIssuance", Ajuna.NetApi.Model.Meta.Storage.Type.Plain);
+            return RequestGenerator.GetStorage("Balances", "TotalIssuance", Substrate.NetApi.Model.Meta.Storage.Type.Plain);
+        }
+        
+        /// <summary>
+        /// >> TotalIssuanceDefault
+        /// Default value as hex string
+        /// </summary>
+        public static string TotalIssuanceDefault()
+        {
+            return "0x00000000000000000000000000000000";
         }
         
         /// <summary>
         /// >> TotalIssuance
         ///  The total units issued in the system.
         /// </summary>
-        public async Task<Ajuna.NetApi.Model.Types.Primitive.U128> TotalIssuance(CancellationToken token)
+        public async Task<Substrate.NetApi.Model.Types.Primitive.U128> TotalIssuance(CancellationToken token)
         {
             string parameters = BalancesStorage.TotalIssuanceParams();
-            return await _client.GetStorageAsync<Ajuna.NetApi.Model.Types.Primitive.U128>(parameters, token);
+            var result = await _client.GetStorageAsync<Substrate.NetApi.Model.Types.Primitive.U128>(parameters, token);
+            return result;
         }
         
         /// <summary>
@@ -88,9 +98,19 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// </summary>
         public static string AccountParams(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 key)
         {
-            return RequestGenerator.GetStorage("Balances", "Account", Ajuna.NetApi.Model.Meta.Storage.Type.Map, new Ajuna.NetApi.Model.Meta.Storage.Hasher[] {
-                        Ajuna.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, new Ajuna.NetApi.Model.Types.IType[] {
+            return RequestGenerator.GetStorage("Balances", "Account", Substrate.NetApi.Model.Meta.Storage.Type.Map, new Substrate.NetApi.Model.Meta.Storage.Hasher[] {
+                        Substrate.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, new Substrate.NetApi.Model.Types.IType[] {
                         key});
+        }
+        
+        /// <summary>
+        /// >> AccountDefault
+        /// Default value as hex string
+        /// </summary>
+        public static string AccountDefault()
+        {
+            return "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000" +
+                "0000000000000000000000000000000000000000000000000";
         }
         
         /// <summary>
@@ -123,7 +143,8 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public async Task<MoneyPot_NetApiExt.Generated.Model.pallet_balances.AccountData> Account(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 key, CancellationToken token)
         {
             string parameters = BalancesStorage.AccountParams(key);
-            return await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.pallet_balances.AccountData>(parameters, token);
+            var result = await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.pallet_balances.AccountData>(parameters, token);
+            return result;
         }
         
         /// <summary>
@@ -133,9 +154,18 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// </summary>
         public static string LocksParams(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 key)
         {
-            return RequestGenerator.GetStorage("Balances", "Locks", Ajuna.NetApi.Model.Meta.Storage.Type.Map, new Ajuna.NetApi.Model.Meta.Storage.Hasher[] {
-                        Ajuna.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, new Ajuna.NetApi.Model.Types.IType[] {
+            return RequestGenerator.GetStorage("Balances", "Locks", Substrate.NetApi.Model.Meta.Storage.Type.Map, new Substrate.NetApi.Model.Meta.Storage.Hasher[] {
+                        Substrate.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, new Substrate.NetApi.Model.Types.IType[] {
                         key});
+        }
+        
+        /// <summary>
+        /// >> LocksDefault
+        /// Default value as hex string
+        /// </summary>
+        public static string LocksDefault()
+        {
+            return "0x00";
         }
         
         /// <summary>
@@ -146,7 +176,8 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public async Task<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.weak_bounded_vec.WeakBoundedVecT2> Locks(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 key, CancellationToken token)
         {
             string parameters = BalancesStorage.LocksParams(key);
-            return await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.weak_bounded_vec.WeakBoundedVecT2>(parameters, token);
+            var result = await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.weak_bounded_vec.WeakBoundedVecT2>(parameters, token);
+            return result;
         }
         
         /// <summary>
@@ -155,9 +186,18 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// </summary>
         public static string ReservesParams(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 key)
         {
-            return RequestGenerator.GetStorage("Balances", "Reserves", Ajuna.NetApi.Model.Meta.Storage.Type.Map, new Ajuna.NetApi.Model.Meta.Storage.Hasher[] {
-                        Ajuna.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, new Ajuna.NetApi.Model.Types.IType[] {
+            return RequestGenerator.GetStorage("Balances", "Reserves", Substrate.NetApi.Model.Meta.Storage.Type.Map, new Substrate.NetApi.Model.Meta.Storage.Hasher[] {
+                        Substrate.NetApi.Model.Meta.Storage.Hasher.BlakeTwo128Concat}, new Substrate.NetApi.Model.Types.IType[] {
                         key});
+        }
+        
+        /// <summary>
+        /// >> ReservesDefault
+        /// Default value as hex string
+        /// </summary>
+        public static string ReservesDefault()
+        {
+            return "0x00";
         }
         
         /// <summary>
@@ -167,7 +207,8 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public async Task<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT3> Reserves(MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 key, CancellationToken token)
         {
             string parameters = BalancesStorage.ReservesParams(key);
-            return await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT3>(parameters, token);
+            var result = await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT3>(parameters, token);
+            return result;
         }
         
         /// <summary>
@@ -178,7 +219,16 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// </summary>
         public static string StorageVersionParams()
         {
-            return RequestGenerator.GetStorage("Balances", "StorageVersion", Ajuna.NetApi.Model.Meta.Storage.Type.Plain);
+            return RequestGenerator.GetStorage("Balances", "StorageVersion", Substrate.NetApi.Model.Meta.Storage.Type.Plain);
+        }
+        
+        /// <summary>
+        /// >> StorageVersionDefault
+        /// Default value as hex string
+        /// </summary>
+        public static string StorageVersionDefault()
+        {
+            return "0x00";
         }
         
         /// <summary>
@@ -190,7 +240,8 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public async Task<MoneyPot_NetApiExt.Generated.Model.pallet_balances.EnumReleases> StorageVersion(CancellationToken token)
         {
             string parameters = BalancesStorage.StorageVersionParams();
-            return await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.pallet_balances.EnumReleases>(parameters, token);
+            var result = await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.pallet_balances.EnumReleases>(parameters, token);
+            return result;
         }
     }
     
@@ -201,7 +252,7 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// >> transfer
         /// Contains one variant per dispatchable that can be called by an extrinsic.
         /// </summary>
-        public static Method Transfer(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress dest, Ajuna.NetApi.Model.Types.Base.BaseCom<Ajuna.NetApi.Model.Types.Primitive.U128> value)
+        public static Method Transfer(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress dest, Substrate.NetApi.Model.Types.Base.BaseCom<Substrate.NetApi.Model.Types.Primitive.U128> value)
         {
             System.Collections.Generic.List<byte> byteArray = new List<byte>();
             byteArray.AddRange(dest.Encode());
@@ -213,7 +264,7 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// >> set_balance
         /// Contains one variant per dispatchable that can be called by an extrinsic.
         /// </summary>
-        public static Method SetBalance(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress who, Ajuna.NetApi.Model.Types.Base.BaseCom<Ajuna.NetApi.Model.Types.Primitive.U128> new_free, Ajuna.NetApi.Model.Types.Base.BaseCom<Ajuna.NetApi.Model.Types.Primitive.U128> new_reserved)
+        public static Method SetBalance(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress who, Substrate.NetApi.Model.Types.Base.BaseCom<Substrate.NetApi.Model.Types.Primitive.U128> new_free, Substrate.NetApi.Model.Types.Base.BaseCom<Substrate.NetApi.Model.Types.Primitive.U128> new_reserved)
         {
             System.Collections.Generic.List<byte> byteArray = new List<byte>();
             byteArray.AddRange(who.Encode());
@@ -226,7 +277,7 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// >> force_transfer
         /// Contains one variant per dispatchable that can be called by an extrinsic.
         /// </summary>
-        public static Method ForceTransfer(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress source, MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress dest, Ajuna.NetApi.Model.Types.Base.BaseCom<Ajuna.NetApi.Model.Types.Primitive.U128> value)
+        public static Method ForceTransfer(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress source, MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress dest, Substrate.NetApi.Model.Types.Base.BaseCom<Substrate.NetApi.Model.Types.Primitive.U128> value)
         {
             System.Collections.Generic.List<byte> byteArray = new List<byte>();
             byteArray.AddRange(source.Encode());
@@ -239,7 +290,7 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// >> transfer_keep_alive
         /// Contains one variant per dispatchable that can be called by an extrinsic.
         /// </summary>
-        public static Method TransferKeepAlive(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress dest, Ajuna.NetApi.Model.Types.Base.BaseCom<Ajuna.NetApi.Model.Types.Primitive.U128> value)
+        public static Method TransferKeepAlive(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress dest, Substrate.NetApi.Model.Types.Base.BaseCom<Substrate.NetApi.Model.Types.Primitive.U128> value)
         {
             System.Collections.Generic.List<byte> byteArray = new List<byte>();
             byteArray.AddRange(dest.Encode());
@@ -251,7 +302,7 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// >> transfer_all
         /// Contains one variant per dispatchable that can be called by an extrinsic.
         /// </summary>
-        public static Method TransferAll(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress dest, Ajuna.NetApi.Model.Types.Primitive.Bool keep_alive)
+        public static Method TransferAll(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress dest, Substrate.NetApi.Model.Types.Primitive.Bool keep_alive)
         {
             System.Collections.Generic.List<byte> byteArray = new List<byte>();
             byteArray.AddRange(dest.Encode());
@@ -263,12 +314,50 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// >> force_unreserve
         /// Contains one variant per dispatchable that can be called by an extrinsic.
         /// </summary>
-        public static Method ForceUnreserve(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress who, Ajuna.NetApi.Model.Types.Primitive.U128 amount)
+        public static Method ForceUnreserve(MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress who, Substrate.NetApi.Model.Types.Primitive.U128 amount)
         {
             System.Collections.Generic.List<byte> byteArray = new List<byte>();
             byteArray.AddRange(who.Encode());
             byteArray.AddRange(amount.Encode());
             return new Method(5, "Balances", 5, "force_unreserve", byteArray.ToArray());
+        }
+    }
+    
+    public sealed class BalancesConstants
+    {
+        
+        /// <summary>
+        /// >> ExistentialDeposit
+        ///  The minimum amount required to keep an account open.
+        /// </summary>
+        public Substrate.NetApi.Model.Types.Primitive.U128 ExistentialDeposit()
+        {
+            var result = new Substrate.NetApi.Model.Types.Primitive.U128();
+            result.Create("0x01000000000000000000000000000000");
+            return result;
+        }
+        
+        /// <summary>
+        /// >> MaxLocks
+        ///  The maximum number of locks that should exist on an account.
+        ///  Not strictly enforced, but used for weight estimation.
+        /// </summary>
+        public Substrate.NetApi.Model.Types.Primitive.U32 MaxLocks()
+        {
+            var result = new Substrate.NetApi.Model.Types.Primitive.U32();
+            result.Create("0x32000000");
+            return result;
+        }
+        
+        /// <summary>
+        /// >> MaxReserves
+        ///  The maximum number of named reserves that can exist on an account.
+        /// </summary>
+        public Substrate.NetApi.Model.Types.Primitive.U32 MaxReserves()
+        {
+            var result = new Substrate.NetApi.Model.Types.Primitive.U32();
+            result.Create("0x00000000");
+            return result;
         }
     }
     

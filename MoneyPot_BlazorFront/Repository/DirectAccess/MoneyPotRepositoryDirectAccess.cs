@@ -1,9 +1,8 @@
-﻿using Ajuna.NetApi;
-using Ajuna.NetApi.Model.Extrinsics;
-using Ajuna.NetApi.Model.Rpc;
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.NetApi.Model.Types.Primitive;
-using Ajuna.ServiceLayer.Storage;
+﻿using Substrate.NetApi;
+using Substrate.NetApi.Model.Extrinsics;
+using Substrate.NetApi.Model.Rpc;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Primitive;
 using MoneyPot_BlazorFront.Helpers;
 using MoneyPot_BlazorFront.Service;
 using MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet;
@@ -25,12 +24,11 @@ namespace MoneyPot_BlazorFront.Repository.DirectAccess
         private readonly IBlockRepository _blockRepository;
         private readonly IList<MoneyPotDto> _moneyPots = new List<MoneyPotDto>();
 
-        public MoneyPotRepositoryDirectAccess(ISubstrateService substrateService, IAccountService accountService, IBlockRepository blockRepository) //, IStorageDataProvider storageDataProvider
+        public MoneyPotRepositoryDirectAccess(ISubstrateService substrateService, IAccountService accountService, IBlockRepository blockRepository)
         {
             _substrateService = substrateService;
             _accountService = accountService;
             _blockRepository = blockRepository;
-            //_storageDataProvider = storageDataProvider;
         }
 
         public async Task SubscribeMoneyPotsAsync(Action<MoneyPotDto> moneyPotCallback)

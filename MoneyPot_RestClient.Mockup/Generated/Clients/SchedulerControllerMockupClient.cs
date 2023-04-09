@@ -12,8 +12,8 @@ namespace MoneyPot_RestClient.Mockup.Generated.Clients
    using System;
    using System.Threading.Tasks;
    using System.Net.Http;
-   using Ajuna.NetApi.Model.Types.Base;
-   using Ajuna.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Base;
+   using Substrate.NetApi.Model.Types.Primitive;
    using MoneyPot_RestClient.Mockup.Generated.Interfaces;
    
    public sealed class SchedulerControllerMockupClient : MockupBaseClient, ISchedulerControllerMockupClient

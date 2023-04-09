@@ -13,10 +13,10 @@ namespace MoneyPot_RestClient.Generated.Clients
    using System.Threading.Tasks;
    using System.Net.Http;
    using MoneyPot_NetApiExt.Generated.Model.frame_system;
-   using Ajuna.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Primitive;
    using MoneyPot_NetApiExt.Generated.Model.frame_support.weights;
    using MoneyPot_NetApiExt.Generated.Model.primitive_types;
-   using Ajuna.NetApi.Model.Types.Base;
+   using Substrate.NetApi.Model.Types.Base;
    using MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest;
    using MoneyPot_RestClient.Generated.Interfaces;
    

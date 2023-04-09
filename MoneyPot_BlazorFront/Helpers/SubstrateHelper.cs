@@ -1,6 +1,6 @@
-﻿using Ajuna.NetApi;
-using Ajuna.NetApi.Model.Rpc;
-using Ajuna.NetApi.Model.Types;
+﻿using Substrate.NetApi;
+using Substrate.NetApi.Model.Rpc;
+using Substrate.NetApi.Model.Types;
 using MoneyPot_BlazorFront.Repository;
 using MoneyPot_NetApiExt.Generated.Model.sp_core.crypto;
 using Schnorrkel.Keys;

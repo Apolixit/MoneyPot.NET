@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Base;
 using System.Collections.Generic;
 
 
@@ -43,6 +43,8 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
         AmountToLow = 11,
         
         MoneyPotIsClose = 12,
+        
+        ScheduleError = 13,
     }
     
     /// <summary>

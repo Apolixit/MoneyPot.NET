@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi;
-using Ajuna.NetApi.Model.Extrinsics;
-using Ajuna.NetApi.Model.Meta;
-using Ajuna.NetApi.Model.Types;
-using Ajuna.NetApi.Model.Types.Base;
+using Substrate.NetApi;
+using Substrate.NetApi.Model.Extrinsics;
+using Substrate.NetApi.Model.Meta;
+using Substrate.NetApi.Model.Types;
+using Substrate.NetApi.Model.Types.Base;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,8 +30,8 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public AuraStorage(SubstrateClientExt client)
         {
             this._client = client;
-            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Aura", "Authorities"), new System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT2)));
-            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Aura", "CurrentSlot"), new System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.sp_consensus_slots.Slot)));
+            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Aura", "Authorities"), new System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT2)));
+            _client.StorageKeyDict.Add(new System.Tuple<string, string>("Aura", "CurrentSlot"), new System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.sp_consensus_slots.Slot)));
         }
         
         /// <summary>
@@ -40,7 +40,16 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// </summary>
         public static string AuthoritiesParams()
         {
-            return RequestGenerator.GetStorage("Aura", "Authorities", Ajuna.NetApi.Model.Meta.Storage.Type.Plain);
+            return RequestGenerator.GetStorage("Aura", "Authorities", Substrate.NetApi.Model.Meta.Storage.Type.Plain);
+        }
+        
+        /// <summary>
+        /// >> AuthoritiesDefault
+        /// Default value as hex string
+        /// </summary>
+        public static string AuthoritiesDefault()
+        {
+            return "0x00";
         }
         
         /// <summary>
@@ -50,7 +59,8 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public async Task<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT2> Authorities(CancellationToken token)
         {
             string parameters = AuraStorage.AuthoritiesParams();
-            return await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT2>(parameters, token);
+            var result = await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT2>(parameters, token);
+            return result;
         }
         
         /// <summary>
@@ -61,7 +71,16 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// </summary>
         public static string CurrentSlotParams()
         {
-            return RequestGenerator.GetStorage("Aura", "CurrentSlot", Ajuna.NetApi.Model.Meta.Storage.Type.Plain);
+            return RequestGenerator.GetStorage("Aura", "CurrentSlot", Substrate.NetApi.Model.Meta.Storage.Type.Plain);
+        }
+        
+        /// <summary>
+        /// >> CurrentSlotDefault
+        /// Default value as hex string
+        /// </summary>
+        public static string CurrentSlotDefault()
+        {
+            return "0x0000000000000000";
         }
         
         /// <summary>
@@ -73,11 +92,16 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public async Task<MoneyPot_NetApiExt.Generated.Model.sp_consensus_slots.Slot> CurrentSlot(CancellationToken token)
         {
             string parameters = AuraStorage.CurrentSlotParams();
-            return await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_consensus_slots.Slot>(parameters, token);
+            var result = await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_consensus_slots.Slot>(parameters, token);
+            return result;
         }
     }
     
     public sealed class AuraCalls
+    {
+    }
+    
+    public sealed class AuraConstants
     {
     }
 }

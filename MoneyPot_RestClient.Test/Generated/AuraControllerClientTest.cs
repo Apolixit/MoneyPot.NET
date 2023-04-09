@@ -30,7 +30,7 @@ namespace MoneyPot_RestClient.Test.Generated
       {
          MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT2 result;
          result = new MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT2();
-         result.Value = new Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.sp_consensus_aura.sr25519.app_sr25519.Public>();
+         result.Value = new Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.sp_consensus_aura.sr25519.app_sr25519.Public>();
          result.Value.Create(new MoneyPot_NetApiExt.Generated.Model.sp_consensus_aura.sr25519.app_sr25519.Public[] {
                   this.GetTestValue3()});
          return result;
@@ -48,7 +48,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.sp_core.sr25519.Public result;
          result = new MoneyPot_NetApiExt.Generated.Model.sp_core.sr25519.Public();
          result.Value = new MoneyPot_NetApiExt.Generated.Types.Base.Arr32U8();
-         result.Value.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Value.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),

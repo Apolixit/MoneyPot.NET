@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Attributes;
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.NetApi.Model.Types.Metadata.V14;
+using Substrate.NetApi.Attributes;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Metadata.V14;
 using System.Collections.Generic;
 
 
@@ -20,7 +20,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.frame_system.extensions.check_tx_ve
     /// <summary>
     /// >> 142 - Composite[frame_system.extensions.check_tx_version.CheckTxVersion]
     /// </summary>
-    [AjunaNodeType(TypeDefEnum.Composite)]
+    [SubstrateNodeType(TypeDefEnum.Composite)]
     public sealed class CheckTxVersion : BaseType
     {
         
@@ -38,7 +38,10 @@ namespace MoneyPot_NetApiExt.Generated.Model.frame_system.extensions.check_tx_ve
         public override void Decode(byte[] byteArray, ref int p)
         {
             var start = p;
-            TypeSize = p - start;
+            var bytesLength = p - start;
+            TypeSize = bytesLength;
+            Bytes = new byte[bytesLength];
+            System.Array.Copy(byteArray, start, Bytes, 0, bytesLength);
         }
     }
 }

@@ -16,10 +16,10 @@ namespace MoneyPot_RestClient.Test.Generated
    using MoneyPot_RestClient.Mockup.Generated.Clients;
    using MoneyPot_RestClient.Generated.Clients;
    using MoneyPot_NetApiExt.Generated.Model.frame_system;
-   using Ajuna.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Primitive;
    using MoneyPot_NetApiExt.Generated.Model.frame_support.weights;
    using MoneyPot_NetApiExt.Generated.Model.primitive_types;
-   using Ajuna.NetApi.Model.Types.Base;
+   using Substrate.NetApi.Model.Types.Base;
    using MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest;
    
    public class SystemControllerClientTest : ClientTestBase
@@ -57,7 +57,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 result;
          result = new MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32();
          result.Value = new MoneyPot_NetApiExt.Generated.Types.Base.Arr32U8();
-         result.Value.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Value.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
@@ -132,7 +132,7 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          SystemControllerClient rpcClient = new SystemControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Primitive.U32 mockupValue = this.GetTestValueU32();
+         Substrate.NetApi.Model.Types.Primitive.U32 mockupValue = this.GetTestValueU32();
 
 
          Assert.IsTrue(await rpcClient.SubscribeExtrinsicCount());
@@ -145,7 +145,7 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Primitive.U32 rpcResult = await rpcClient.GetExtrinsicCount();
+         Substrate.NetApi.Model.Types.Primitive.U32 rpcResult = await rpcClient.GetExtrinsicCount();
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
@@ -199,7 +199,7 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          SystemControllerClient rpcClient = new SystemControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Primitive.U32 mockupValue = this.GetTestValueU32();
+         Substrate.NetApi.Model.Types.Primitive.U32 mockupValue = this.GetTestValueU32();
 
 
          Assert.IsTrue(await rpcClient.SubscribeAllExtrinsicsLen());
@@ -212,7 +212,7 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Primitive.U32 rpcResult = await rpcClient.GetAllExtrinsicsLen();
+         Substrate.NetApi.Model.Types.Primitive.U32 rpcResult = await rpcClient.GetAllExtrinsicsLen();
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
@@ -222,7 +222,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.primitive_types.H256 result;
          result = new MoneyPot_NetApiExt.Generated.Model.primitive_types.H256();
          result.Value = new MoneyPot_NetApiExt.Generated.Types.Base.Arr32U8();
-         result.Value.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Value.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
@@ -269,7 +269,7 @@ namespace MoneyPot_RestClient.Test.Generated
          // Construct new RPC client to test with.
          SystemControllerClient rpcClient = new SystemControllerClient(_httpClient, subscriptionClient);
          MoneyPot_NetApiExt.Generated.Model.primitive_types.H256 mockupValue = this.GetTestValue10();
-         Ajuna.NetApi.Model.Types.Primitive.U32 mockupKey = this.GetTestValueU32();
+         Substrate.NetApi.Model.Types.Primitive.U32 mockupKey = this.GetTestValueU32();
 
          Assert.IsTrue(await rpcClient.SubscribeBlockHash(mockupKey));
 
@@ -286,11 +286,11 @@ namespace MoneyPot_RestClient.Test.Generated
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
       }
-      public Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8> GetTestValue12()
+      public Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8> GetTestValue12()
       {
-         Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8> result;
-         result = new Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8>();
-         result.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8> result;
+         result = new Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8>();
+         result.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8()});
          return result;
       }
@@ -305,8 +305,8 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          SystemControllerClient rpcClient = new SystemControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8> mockupValue = this.GetTestValue12();
-         Ajuna.NetApi.Model.Types.Primitive.U32 mockupKey = this.GetTestValueU32();
+         Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8> mockupValue = this.GetTestValue12();
+         Substrate.NetApi.Model.Types.Primitive.U32 mockupKey = this.GetTestValueU32();
 
          Assert.IsTrue(await rpcClient.SubscribeExtrinsicData(mockupKey));
 
@@ -318,7 +318,7 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8> rpcResult = await rpcClient.GetExtrinsicData(mockupKey);
+         Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8> rpcResult = await rpcClient.GetExtrinsicData(mockupKey);
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
@@ -334,7 +334,7 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          SystemControllerClient rpcClient = new SystemControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Primitive.U32 mockupValue = this.GetTestValueU32();
+         Substrate.NetApi.Model.Types.Primitive.U32 mockupValue = this.GetTestValueU32();
 
 
          Assert.IsTrue(await rpcClient.SubscribeNumber());
@@ -347,7 +347,7 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Primitive.U32 rpcResult = await rpcClient.GetNumber();
+         Substrate.NetApi.Model.Types.Primitive.U32 rpcResult = await rpcClient.GetNumber();
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
@@ -357,7 +357,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.primitive_types.H256 result;
          result = new MoneyPot_NetApiExt.Generated.Model.primitive_types.H256();
          result.Value = new MoneyPot_NetApiExt.Generated.Types.Base.Arr32U8();
-         result.Value.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Value.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
@@ -425,7 +425,7 @@ namespace MoneyPot_RestClient.Test.Generated
       {
          MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.Digest result;
          result = new MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.Digest();
-         result.Logs = new Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.EnumDigestItem>();
+         result.Logs = new Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.EnumDigestItem>();
          result.Logs.Create(new MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.EnumDigestItem[] {
                   this.GetTestValue18()});
          return result;
@@ -437,11 +437,11 @@ namespace MoneyPot_RestClient.Test.Generated
          result.Create(this.GetTestValueEnum<MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.DigestItem>(), this.GetTestValue19());
          return result;
       }
-      public Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8> GetTestValue19()
+      public Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8> GetTestValue19()
       {
-         Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8> result;
-         result = new Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8>();
-         result.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8> result;
+         result = new Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8>();
+         result.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8()});
          return result;
       }
@@ -474,10 +474,10 @@ namespace MoneyPot_RestClient.Test.Generated
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
       }
-      public Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> GetTestValue21()
+      public Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> GetTestValue21()
       {
-         Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> result;
-         result = new Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord>();
+         Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> result;
+         result = new Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord>();
          result.Create(new MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord[] {
                   this.GetTestValue22()});
          return result;
@@ -490,7 +490,7 @@ namespace MoneyPot_RestClient.Test.Generated
          result.Phase.Create(this.GetTestValueEnum<MoneyPot_NetApiExt.Generated.Model.frame_system.Phase>(), this.GetTestValueU32());
          result.Event = new MoneyPot_NetApiExt.Generated.Model.node_template_runtime.EnumEvent();
          result.Event.Create(this.GetTestValueEnum<MoneyPot_NetApiExt.Generated.Model.node_template_runtime.Event>(), this.GetTestValue23());
-         result.Topics = new Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.primitive_types.H256>();
+         result.Topics = new Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.primitive_types.H256>();
          result.Topics.Create(new MoneyPot_NetApiExt.Generated.Model.primitive_types.H256[] {
                   this.GetTestValue25()});
          return result;
@@ -518,7 +518,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.primitive_types.H256 result;
          result = new MoneyPot_NetApiExt.Generated.Model.primitive_types.H256();
          result.Value = new MoneyPot_NetApiExt.Generated.Types.Base.Arr32U8();
-         result.Value.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Value.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
@@ -564,7 +564,7 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          SystemControllerClient rpcClient = new SystemControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> mockupValue = this.GetTestValue21();
+         Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> mockupValue = this.GetTestValue21();
 
 
          Assert.IsTrue(await rpcClient.SubscribeEvents());
@@ -577,7 +577,7 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> rpcResult = await rpcClient.GetEvents();
+         Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> rpcResult = await rpcClient.GetEvents();
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
@@ -593,7 +593,7 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          SystemControllerClient rpcClient = new SystemControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Primitive.U32 mockupValue = this.GetTestValueU32();
+         Substrate.NetApi.Model.Types.Primitive.U32 mockupValue = this.GetTestValueU32();
 
 
          Assert.IsTrue(await rpcClient.SubscribeEventCount());
@@ -606,23 +606,23 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Primitive.U32 rpcResult = await rpcClient.GetEventCount();
+         Substrate.NetApi.Model.Types.Primitive.U32 rpcResult = await rpcClient.GetEventCount();
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
       }
-      public Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>> GetTestValue28()
+      public Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>> GetTestValue28()
       {
-         Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>> result;
-         result = new Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>>();
-         result.Create(new Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>[] {
+         Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>> result;
+         result = new Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>>();
+         result.Create(new Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>[] {
                   this.GetTestValue29()});
          return result;
       }
-      public Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32> GetTestValue29()
+      public Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32> GetTestValue29()
       {
-         Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32> result;
-         result = new Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>();
+         Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32> result;
+         result = new Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>();
          result.Create(this.GetTestValueU32(), this.GetTestValueU32());
          return result;
       }
@@ -631,7 +631,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.primitive_types.H256 result;
          result = new MoneyPot_NetApiExt.Generated.Model.primitive_types.H256();
          result.Value = new MoneyPot_NetApiExt.Generated.Types.Base.Arr32U8();
-         result.Value.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Value.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
@@ -677,7 +677,7 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          SystemControllerClient rpcClient = new SystemControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>> mockupValue = this.GetTestValue28();
+         Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>> mockupValue = this.GetTestValue28();
          MoneyPot_NetApiExt.Generated.Model.primitive_types.H256 mockupKey = this.GetTestValue30();
 
          Assert.IsTrue(await rpcClient.SubscribeEventTopics(mockupKey));
@@ -690,7 +690,7 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>> rpcResult = await rpcClient.GetEventTopics(mockupKey);
+         Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>> rpcResult = await rpcClient.GetEventTopics(mockupKey);
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
@@ -699,8 +699,8 @@ namespace MoneyPot_RestClient.Test.Generated
       {
          MoneyPot_NetApiExt.Generated.Model.frame_system.LastRuntimeUpgradeInfo result;
          result = new MoneyPot_NetApiExt.Generated.Model.frame_system.LastRuntimeUpgradeInfo();
-         result.SpecVersion = new Ajuna.NetApi.Model.Types.Base.BaseCom<Ajuna.NetApi.Model.Types.Primitive.U32>();
-         result.SpecVersion.Create(new Ajuna.NetApi.CompactInteger(this.GetTestValueU32().Value));
+         result.SpecVersion = new Substrate.NetApi.Model.Types.Base.BaseCom<Substrate.NetApi.Model.Types.Primitive.U32>();
+         result.SpecVersion.Create(new Substrate.NetApi.CompactInteger(this.GetTestValueU32().Value));
          result.SpecName = this.GetTestValueStr();
          return result;
       }
@@ -744,7 +744,7 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          SystemControllerClient rpcClient = new SystemControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Primitive.Bool mockupValue = this.GetTestValueBool();
+         Substrate.NetApi.Model.Types.Primitive.Bool mockupValue = this.GetTestValueBool();
 
 
          Assert.IsTrue(await rpcClient.SubscribeUpgradedToU32RefCount());
@@ -757,7 +757,7 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Primitive.Bool rpcResult = await rpcClient.GetUpgradedToU32RefCount();
+         Substrate.NetApi.Model.Types.Primitive.Bool rpcResult = await rpcClient.GetUpgradedToU32RefCount();
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
@@ -773,7 +773,7 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          SystemControllerClient rpcClient = new SystemControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Primitive.Bool mockupValue = this.GetTestValueBool();
+         Substrate.NetApi.Model.Types.Primitive.Bool mockupValue = this.GetTestValueBool();
 
 
          Assert.IsTrue(await rpcClient.SubscribeUpgradedToTripleRefCount());
@@ -786,7 +786,7 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Primitive.Bool rpcResult = await rpcClient.GetUpgradedToTripleRefCount();
+         Substrate.NetApi.Model.Types.Primitive.Bool rpcResult = await rpcClient.GetUpgradedToTripleRefCount();
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());

@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.ServiceLayer.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using MoneyPot_RestService.Generated.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.ServiceLayer.Attributes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -42,7 +42,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  The total units issued in the system.
         /// </summary>
         [HttpGet("TotalIssuance")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.U128), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.U128), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.BalancesStorage), "TotalIssuanceParams")]
         public IActionResult GetTotalIssuance()
         {

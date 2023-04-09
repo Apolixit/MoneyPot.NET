@@ -1,5 +1,5 @@
-﻿using Ajuna.NetApi.Model.Rpc;
-using Ajuna.NetApi.Model.Types.Base;
+﻿using Substrate.NetApi.Model.Rpc;
+using Substrate.NetApi.Model.Types.Base;
 using MoneyPot_BlazorFront.Helpers;
 using MoneyPot_BlazorFront.Service;
 using MoneyPot_NetApiExt.Generated.Model.frame_system;

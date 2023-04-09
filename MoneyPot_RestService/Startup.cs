@@ -1,9 +1,9 @@
-using Ajuna.AspNetCore;
-using Ajuna.AspNetCore.Persistence;
-using Ajuna.AspNetCore.Extensions;
+using Substrate.AspNetCore;
+using Substrate.AspNetCore.Persistence;
+using Substrate.AspNetCore.Extensions;
 using MoneyPot_RestService.Formatters;
-using Ajuna.ServiceLayer;
-using Ajuna.ServiceLayer.Storage;
+using Substrate.ServiceLayer;
+using Substrate.ServiceLayer.Storage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,19 +22,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MoneyPot_RestService
 {
-   class AjunaOutputFormatterSetup : IConfigureOptions<MvcOptions>
+   class SubstrateOutputFormatterSetup : IConfigureOptions<MvcOptions>
    {
       void IConfigureOptions<MvcOptions>.Configure(MvcOptions options)
       {
-         options.OutputFormatters.Insert(0, new AjunaOutputFormatter());
+         options.OutputFormatters.Insert(0, new SubstrateOutputFormatter());
       }
    }
 
    public static class MvcBuilderExtensions
    {
-      public static IMvcBuilder AddAjunaOutputFormatter(this IMvcBuilder builder)
+      public static IMvcBuilder AddSubstrateOutputFormatter(this IMvcBuilder builder)
       {
-         builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, AjunaOutputFormatterSetup>());
+         builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, SubstrateOutputFormatterSetup>());
          return builder;
       }
    }
@@ -80,34 +80,35 @@ namespace MoneyPot_RestService
       /// <param name="services">Service collection to configure.</param>
       public void ConfigureServices(IServiceCollection services)
       {
-         string useMockupProvider = Environment.GetEnvironmentVariable("AJUNA_USE_MOCKUP_PROVIDER") ?? "false";
+         string useMockupProvider = Environment.GetEnvironmentVariable("SUBSTRATE_USE_MOCKUP_PROVIDER") ?? "false";
          if (!string.IsNullOrEmpty(useMockupProvider) && useMockupProvider.Equals("true", StringComparison.InvariantCultureIgnoreCase))
          {
             // Configure mockup data provider
-            _storageDataProvider = new AjunaMockupDataProvider(File.ReadAllText(Path.Combine("..",".ajuna","metadata.txt")));
+            _storageDataProvider = new SubstrateMockupDataProvider(File.ReadAllText(Path.Combine("..",".substrate","metadata.txt")));
          }
          else
          {
             // Configure regular data provider
-            _storageDataProvider = new AjunaSubstrateDataProvider(Environment.GetEnvironmentVariable("AJUNA_WEBSOCKET_ENDPOINT") ?? "ws://127.0.0.1:9944");
+            _storageDataProvider = new SubstrateDataProvider(Environment.GetEnvironmentVariable("SUBSTRATE_WEBSOCKET_ENDPOINT") ?? "ws://127.0.0.1:9944");
          }
 
          // Configure web sockets to allow clients to subscribe to storage changes.
-         services.AddAjunaSubscriptionHandler();
+         services.AddSubstrateSubscriptionHandler();
 
          // Configure storage services
-         services.AddAjunaStorageService(new AjunaStorageServiceConfiguration()
+         services.AddSubstrateStorageService(new SubstrateStorageServiceConfiguration()
          {
             CancellationToken = CTS.Token,
             DataProvider = _storageDataProvider,
-            Storages = GetRuntimeStorages()
+            Storages = GetRuntimeStorages(),
+            IsLazyLoadingEnabled = false // Set to true if you prefer to avoid loading all initial Storage values at the service startup
          });
 
          // Register data provider as singleton.
          services.AddSingleton(_storageDataProvider);
          services.AddRouting(options => { options.LowercaseQueryStrings = true; options.LowercaseUrls = true; });
          services.AddControllers(options => { })
-            .AddAjunaOutputFormatter();
+            .AddSubstrateOutputFormatter();
 
          services.AddSwaggerGen(c =>
          {

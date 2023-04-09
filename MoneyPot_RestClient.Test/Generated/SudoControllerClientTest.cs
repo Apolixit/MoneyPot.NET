@@ -30,7 +30,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 result;
          result = new MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32();
          result.Value = new MoneyPot_NetApiExt.Generated.Types.Base.Arr32U8();
-         result.Value.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Value.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),

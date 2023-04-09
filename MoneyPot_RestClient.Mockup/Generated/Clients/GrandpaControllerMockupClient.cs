@@ -13,8 +13,8 @@ namespace MoneyPot_RestClient.Mockup.Generated.Clients
    using System.Threading.Tasks;
    using System.Net.Http;
    using MoneyPot_NetApiExt.Generated.Model.pallet_grandpa;
-   using Ajuna.NetApi.Model.Types.Primitive;
-   using Ajuna.NetApi.Model.Types.Base;
+   using Substrate.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Base;
    using MoneyPot_RestClient.Mockup.Generated.Interfaces;
    
    public sealed class GrandpaControllerMockupClient : MockupBaseClient, IGrandpaControllerMockupClient

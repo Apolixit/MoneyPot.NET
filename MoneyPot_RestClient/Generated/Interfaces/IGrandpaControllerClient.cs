@@ -12,8 +12,8 @@ namespace MoneyPot_RestClient.Generated.Interfaces
    using System;
    using System.Threading.Tasks;
    using MoneyPot_NetApiExt.Generated.Model.pallet_grandpa;
-   using Ajuna.NetApi.Model.Types.Primitive;
-   using Ajuna.NetApi.Model.Types.Base;
+   using Substrate.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Base;
    
    public interface IGrandpaControllerClient
    {

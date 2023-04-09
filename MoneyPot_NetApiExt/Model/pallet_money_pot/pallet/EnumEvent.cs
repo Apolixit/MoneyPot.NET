@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Base;
 using System.Collections.Generic;
 
 
@@ -34,7 +34,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
     ///			by this pallet.
     ///			
     /// </summary>
-    public sealed class EnumEvent : BaseEnumExt<Event, MoneyPot_NetApiExt.Generated.Model.primitive_types.H256, MoneyPot_NetApiExt.Generated.Model.primitive_types.H256, BaseTuple<MoneyPot_NetApiExt.Generated.Model.primitive_types.H256, MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32, Ajuna.NetApi.Model.Types.Primitive.U128>, MoneyPot_NetApiExt.Generated.Model.primitive_types.H256>
+    public sealed class EnumEvent : BaseEnumExt<Event, MoneyPot_NetApiExt.Generated.Model.primitive_types.H256, MoneyPot_NetApiExt.Generated.Model.primitive_types.H256, BaseTuple<MoneyPot_NetApiExt.Generated.Model.primitive_types.H256, MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32, Substrate.NetApi.Model.Types.Primitive.U128>, MoneyPot_NetApiExt.Generated.Model.primitive_types.H256>
     {
     }
 }

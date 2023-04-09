@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.ServiceLayer.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using MoneyPot_RestService.Generated.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.ServiceLayer.Attributes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -42,7 +42,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  Current time for the current block.
         /// </summary>
         [HttpGet("Now")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.U64), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.U64), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.TimestampStorage), "NowParams")]
         public IActionResult GetNow()
         {
@@ -54,7 +54,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  Did the timestamp get updated in this block?
         /// </summary>
         [HttpGet("DidUpdate")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.Bool), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.Bool), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.TimestampStorage), "DidUpdateParams")]
         public IActionResult GetDidUpdate()
         {

@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Attributes;
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.NetApi.Model.Types.Metadata.V14;
+using Substrate.NetApi.Attributes;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Metadata.V14;
 using System.Collections.Generic;
 
 
@@ -20,16 +20,16 @@ namespace MoneyPot_NetApiExt.Generated.Model.sp_consensus_slots
     /// <summary>
     /// >> 77 - Composite[sp_consensus_slots.Slot]
     /// </summary>
-    [AjunaNodeType(TypeDefEnum.Composite)]
+    [SubstrateNodeType(TypeDefEnum.Composite)]
     public sealed class Slot : BaseType
     {
         
         /// <summary>
         /// >> value
         /// </summary>
-        private Ajuna.NetApi.Model.Types.Primitive.U64 _value;
+        private Substrate.NetApi.Model.Types.Primitive.U64 _value;
         
-        public Ajuna.NetApi.Model.Types.Primitive.U64 Value
+        public Substrate.NetApi.Model.Types.Primitive.U64 Value
         {
             get
             {
@@ -56,9 +56,12 @@ namespace MoneyPot_NetApiExt.Generated.Model.sp_consensus_slots
         public override void Decode(byte[] byteArray, ref int p)
         {
             var start = p;
-            Value = new Ajuna.NetApi.Model.Types.Primitive.U64();
+            Value = new Substrate.NetApi.Model.Types.Primitive.U64();
             Value.Decode(byteArray, ref p);
-            TypeSize = p - start;
+            var bytesLength = p - start;
+            TypeSize = bytesLength;
+            Bytes = new byte[bytesLength];
+            System.Array.Copy(byteArray, start, Bytes, 0, bytesLength);
         }
     }
 }

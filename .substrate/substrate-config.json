@@ -1,0 +1,13 @@
+{
+  "projects": {
+    "net_api": "MoneyPot_NetApiExt",
+    "rest_service": "MoneyPot_RestService",
+    "rest_client": "MoneyPot_RestClient"
+  },
+   "metadata": {
+      "websocket": "ws://127.0.0.1:9944"
+   },
+  "rest_client_settings": {
+    "service_assembly": "MoneyPot_RestService.dll"
+  }
+}

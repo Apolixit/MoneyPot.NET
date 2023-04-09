@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.ServiceLayer.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using MoneyPot_RestService.Generated.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.ServiceLayer.Attributes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -41,7 +41,7 @@ namespace MoneyPot_RestService.Generated.Controller
         /// >> MoneyPotsCount
         /// </summary>
         [HttpGet("MoneyPotsCount")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.U32), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.U32), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.MoneyPotStorage), "MoneyPotsCountParams")]
         public IActionResult GetMoneyPotsCount()
         {
@@ -53,7 +53,7 @@ namespace MoneyPot_RestService.Generated.Controller
         /// </summary>
         [HttpGet("MoneyPotsHash")]
         [ProducesResponseType(typeof(MoneyPot_NetApiExt.Generated.Model.primitive_types.H256), 200)]
-        [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.MoneyPotStorage), "MoneyPotsHashParams", typeof(Ajuna.NetApi.Model.Types.Primitive.U32))]
+        [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.MoneyPotStorage), "MoneyPotsHashParams", typeof(Substrate.NetApi.Model.Types.Primitive.U32))]
         public IActionResult GetMoneyPotsHash(string key)
         {
             return this.Ok(_moneyPotStorage.GetMoneyPotsHash(key));

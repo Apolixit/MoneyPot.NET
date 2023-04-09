@@ -12,8 +12,8 @@ namespace MoneyPot_RestClient.Generated.Clients
    using System;
    using System.Threading.Tasks;
    using System.Net.Http;
-   using Ajuna.NetApi.Model.Types.Base;
-   using Ajuna.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Base;
+   using Substrate.NetApi.Model.Types.Primitive;
    using MoneyPot_RestClient.Generated.Interfaces;
    
    public sealed class SchedulerControllerClient : BaseClient, ISchedulerControllerClient

@@ -11,8 +11,8 @@ namespace MoneyPot_RestClient.Mockup.Generated.Interfaces
 {
    using System;
    using System.Threading.Tasks;
-   using Ajuna.NetApi.Model.Types.Base;
-   using Ajuna.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Base;
+   using Substrate.NetApi.Model.Types.Primitive;
    
    public interface ISchedulerControllerMockupClient
    {

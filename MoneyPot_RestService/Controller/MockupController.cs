@@ -1,8 +1,8 @@
-﻿using Ajuna.NetApi;
-using Ajuna.NetApi.Model.Rpc;
-using Ajuna.ServiceLayer.Model;
-using Ajuna.ServiceLayer.Storage;
-using Ajuna.ServiceLayer.Attributes;
+﻿using Substrate.NetApi;
+using Substrate.NetApi.Model.Rpc;
+using Substrate.ServiceLayer.Model;
+using Substrate.ServiceLayer.Storage;
+using Substrate.ServiceLayer.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +12,7 @@ namespace MoneyPot_RestService.Controller
 {
    [Controller]
    [Route("[controller]")]
-   [AjunaControllerIgnore]
+   [SubstrateControllerIgnore]
    public class MockupController : ControllerBase
    {
       private readonly IStorageDataProvider _storageDataProvider;
@@ -54,7 +54,7 @@ namespace MoneyPot_RestService.Controller
 
             var changeSet = new StorageChangeSet()
             {
-               Block = new Ajuna.NetApi.Model.Types.Base.Hash() { },
+               Block = new Substrate.NetApi.Model.Types.Base.Hash() { },
                Changes = new string[1][]
             };
 

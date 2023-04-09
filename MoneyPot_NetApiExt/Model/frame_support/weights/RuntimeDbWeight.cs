@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Attributes;
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.NetApi.Model.Types.Metadata.V14;
+using Substrate.NetApi.Attributes;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Metadata.V14;
 using System.Collections.Generic;
 
 
@@ -20,21 +20,21 @@ namespace MoneyPot_NetApiExt.Generated.Model.frame_support.weights
     /// <summary>
     /// >> 62 - Composite[frame_support.weights.RuntimeDbWeight]
     /// </summary>
-    [AjunaNodeType(TypeDefEnum.Composite)]
+    [SubstrateNodeType(TypeDefEnum.Composite)]
     public sealed class RuntimeDbWeight : BaseType
     {
         
         /// <summary>
         /// >> read
         /// </summary>
-        private Ajuna.NetApi.Model.Types.Primitive.U64 _read;
+        private Substrate.NetApi.Model.Types.Primitive.U64 _read;
         
         /// <summary>
         /// >> write
         /// </summary>
-        private Ajuna.NetApi.Model.Types.Primitive.U64 _write;
+        private Substrate.NetApi.Model.Types.Primitive.U64 _write;
         
-        public Ajuna.NetApi.Model.Types.Primitive.U64 Read
+        public Substrate.NetApi.Model.Types.Primitive.U64 Read
         {
             get
             {
@@ -46,7 +46,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.frame_support.weights
             }
         }
         
-        public Ajuna.NetApi.Model.Types.Primitive.U64 Write
+        public Substrate.NetApi.Model.Types.Primitive.U64 Write
         {
             get
             {
@@ -74,11 +74,14 @@ namespace MoneyPot_NetApiExt.Generated.Model.frame_support.weights
         public override void Decode(byte[] byteArray, ref int p)
         {
             var start = p;
-            Read = new Ajuna.NetApi.Model.Types.Primitive.U64();
+            Read = new Substrate.NetApi.Model.Types.Primitive.U64();
             Read.Decode(byteArray, ref p);
-            Write = new Ajuna.NetApi.Model.Types.Primitive.U64();
+            Write = new Substrate.NetApi.Model.Types.Primitive.U64();
             Write.Decode(byteArray, ref p);
-            TypeSize = p - start;
+            var bytesLength = p - start;
+            TypeSize = bytesLength;
+            Bytes = new byte[bytesLength];
+            System.Array.Copy(byteArray, start, Bytes, 0, bytesLength);
         }
     }
 }

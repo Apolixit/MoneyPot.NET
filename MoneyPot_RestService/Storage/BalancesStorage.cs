@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.ServiceLayer.Attributes;
-using Ajuna.ServiceLayer.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.ServiceLayer.Attributes;
+using Substrate.ServiceLayer.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,7 +28,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> TotalIssuance
         ///  The total units issued in the system.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.U128 GetTotalIssuance();
+        Substrate.NetApi.Model.Types.Primitive.U128 GetTotalIssuance();
         
         /// <summary>
         /// >> Account
@@ -90,7 +90,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _totalIssuanceTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U128> _totalIssuanceTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.U128> _totalIssuanceTypedStorage;
         
         /// <summary>
         /// _accountTypedStorage typed storage field
@@ -117,7 +117,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// </summary>
         public BalancesStorage(IStorageDataProvider storageDataProvider, List<IStorageChangeDelegate> storageChangeDelegates)
         {
-            this.TotalIssuanceTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U128>("Balances.TotalIssuance", storageDataProvider, storageChangeDelegates);
+            this.TotalIssuanceTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.U128>("Balances.TotalIssuance", storageDataProvider, storageChangeDelegates);
             this.AccountTypedStorage = new TypedMapStorage<MoneyPot_NetApiExt.Generated.Model.pallet_balances.AccountData>("Balances.Account", storageDataProvider, storageChangeDelegates);
             this.LocksTypedStorage = new TypedMapStorage<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.weak_bounded_vec.WeakBoundedVecT2>("Balances.Locks", storageDataProvider, storageChangeDelegates);
             this.ReservesTypedStorage = new TypedMapStorage<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT3>("Balances.Reserves", storageDataProvider, storageChangeDelegates);
@@ -127,7 +127,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _totalIssuanceTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U128> TotalIssuanceTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.U128> TotalIssuanceTypedStorage
         {
             get
             {
@@ -202,7 +202,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// Connects to all storages and initializes the change subscription handling.
         /// </summary>
-        public async Task InitializeAsync(Ajuna.ServiceLayer.Storage.IStorageDataProvider dataProvider)
+        public async Task InitializeAsync(Substrate.ServiceLayer.Storage.IStorageDataProvider dataProvider)
         {
             await TotalIssuanceTypedStorage.InitializeAsync("Balances", "TotalIssuance");
             await AccountTypedStorage.InitializeAsync("Balances", "Account");
@@ -224,7 +224,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> TotalIssuance
         ///  The total units issued in the system.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.U128 GetTotalIssuance()
+        public Substrate.NetApi.Model.Types.Primitive.U128 GetTotalIssuance()
         {
             return TotalIssuanceTypedStorage.Get();
         }

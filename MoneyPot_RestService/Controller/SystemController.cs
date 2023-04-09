@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.ServiceLayer.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using MoneyPot_RestService.Generated.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.ServiceLayer.Attributes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -54,7 +54,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  Total extrinsics count for the current block.
         /// </summary>
         [HttpGet("ExtrinsicCount")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.U32), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.U32), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "ExtrinsicCountParams")]
         public IActionResult GetExtrinsicCount()
         {
@@ -78,7 +78,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  Total length (in bytes) for all extrinsics put together, for the current block.
         /// </summary>
         [HttpGet("AllExtrinsicsLen")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.U32), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.U32), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "AllExtrinsicsLenParams")]
         public IActionResult GetAllExtrinsicsLen()
         {
@@ -91,7 +91,7 @@ namespace MoneyPot_RestService.Generated.Controller
         /// </summary>
         [HttpGet("BlockHash")]
         [ProducesResponseType(typeof(MoneyPot_NetApiExt.Generated.Model.primitive_types.H256), 200)]
-        [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "BlockHashParams", typeof(Ajuna.NetApi.Model.Types.Primitive.U32))]
+        [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "BlockHashParams", typeof(Substrate.NetApi.Model.Types.Primitive.U32))]
         public IActionResult GetBlockHash(string key)
         {
             return this.Ok(_systemStorage.GetBlockHash(key));
@@ -102,8 +102,8 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  Extrinsics data for the current block (maps an extrinsic's index to its data).
         /// </summary>
         [HttpGet("ExtrinsicData")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8>), 200)]
-        [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "ExtrinsicDataParams", typeof(Ajuna.NetApi.Model.Types.Primitive.U32))]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8>), 200)]
+        [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "ExtrinsicDataParams", typeof(Substrate.NetApi.Model.Types.Primitive.U32))]
         public IActionResult GetExtrinsicData(string key)
         {
             return this.Ok(_systemStorage.GetExtrinsicData(key));
@@ -114,7 +114,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  The current block number being processed. Set by `execute_block`.
         /// </summary>
         [HttpGet("Number")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.U32), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.U32), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "NumberParams")]
         public IActionResult GetNumber()
         {
@@ -156,7 +156,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  just in case someone still reads them from within the runtime.
         /// </summary>
         [HttpGet("Events")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord>), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord>), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "EventsParams")]
         public IActionResult GetEvents()
         {
@@ -168,7 +168,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  The number of events in the `Events<T>` list.
         /// </summary>
         [HttpGet("EventCount")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.U32), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.U32), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "EventCountParams")]
         public IActionResult GetEventCount()
         {
@@ -189,7 +189,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  no notification will be triggered thus the event might be lost.
         /// </summary>
         [HttpGet("EventTopics")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>>), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>>), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "EventTopicsParams", typeof(MoneyPot_NetApiExt.Generated.Model.primitive_types.H256))]
         public IActionResult GetEventTopics(string key)
         {
@@ -213,7 +213,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  True if we have upgraded so that `type RefCount` is `u32`. False (default) if not.
         /// </summary>
         [HttpGet("UpgradedToU32RefCount")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.Bool), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.Bool), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "UpgradedToU32RefCountParams")]
         public IActionResult GetUpgradedToU32RefCount()
         {
@@ -226,7 +226,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  (default) if not.
         /// </summary>
         [HttpGet("UpgradedToTripleRefCount")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.Bool), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.Bool), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.SystemStorage), "UpgradedToTripleRefCountParams")]
         public IActionResult GetUpgradedToTripleRefCount()
         {

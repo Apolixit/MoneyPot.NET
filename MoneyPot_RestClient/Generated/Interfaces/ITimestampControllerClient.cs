@@ -11,7 +11,7 @@ namespace MoneyPot_RestClient.Generated.Interfaces
 {
    using System;
    using System.Threading.Tasks;
-   using Ajuna.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Primitive;
    
    public interface ITimestampControllerClient
    {

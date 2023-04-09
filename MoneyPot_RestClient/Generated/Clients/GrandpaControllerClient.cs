@@ -13,8 +13,8 @@ namespace MoneyPot_RestClient.Generated.Clients
    using System.Threading.Tasks;
    using System.Net.Http;
    using MoneyPot_NetApiExt.Generated.Model.pallet_grandpa;
-   using Ajuna.NetApi.Model.Types.Primitive;
-   using Ajuna.NetApi.Model.Types.Base;
+   using Substrate.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Base;
    using MoneyPot_RestClient.Generated.Interfaces;
    
    public sealed class GrandpaControllerClient : BaseClient, IGrandpaControllerClient

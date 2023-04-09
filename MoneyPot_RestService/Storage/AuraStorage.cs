@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.ServiceLayer.Attributes;
-using Ajuna.ServiceLayer.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.ServiceLayer.Attributes;
+using Substrate.ServiceLayer.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -97,7 +97,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// Connects to all storages and initializes the change subscription handling.
         /// </summary>
-        public async Task InitializeAsync(Ajuna.ServiceLayer.Storage.IStorageDataProvider dataProvider)
+        public async Task InitializeAsync(Substrate.ServiceLayer.Storage.IStorageDataProvider dataProvider)
         {
             await AuthoritiesTypedStorage.InitializeAsync("Aura", "Authorities");
             await CurrentSlotTypedStorage.InitializeAsync("Aura", "CurrentSlot");

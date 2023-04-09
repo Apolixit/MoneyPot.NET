@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Base;
 using System.Collections.Generic;
 
 
@@ -26,7 +26,7 @@ namespace MoneyPot_NetApiExt.Generated.Types.Base
     /// <summary>
     /// >> 37 - Variant[Result]
     /// </summary>
-    public sealed class EnumResult : BaseEnumExt<Result, Ajuna.NetApi.Model.Types.Base.BaseTuple, MoneyPot_NetApiExt.Generated.Model.sp_runtime.EnumDispatchError>
+    public sealed class EnumResult : BaseEnumExt<Result, Substrate.NetApi.Model.Types.Base.BaseTuple, MoneyPot_NetApiExt.Generated.Model.sp_runtime.EnumDispatchError>
     {
     }
 }

@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.ServiceLayer.Attributes;
-using Ajuna.ServiceLayer.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.ServiceLayer.Attributes;
+using Substrate.ServiceLayer.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -27,7 +27,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// >> MoneyPotsCount
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.U32 GetMoneyPotsCount();
+        Substrate.NetApi.Model.Types.Primitive.U32 GetMoneyPotsCount();
         
         /// <summary>
         /// >> MoneyPotsHash
@@ -59,7 +59,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _moneyPotsCountTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> _moneyPotsCountTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> _moneyPotsCountTypedStorage;
         
         /// <summary>
         /// _moneyPotsHashTypedStorage typed storage field
@@ -86,7 +86,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// </summary>
         public MoneyPotStorage(IStorageDataProvider storageDataProvider, List<IStorageChangeDelegate> storageChangeDelegates)
         {
-            this.MoneyPotsCountTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32>("MoneyPot.MoneyPotsCount", storageDataProvider, storageChangeDelegates);
+            this.MoneyPotsCountTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32>("MoneyPot.MoneyPotsCount", storageDataProvider, storageChangeDelegates);
             this.MoneyPotsHashTypedStorage = new TypedMapStorage<MoneyPot_NetApiExt.Generated.Model.primitive_types.H256>("MoneyPot.MoneyPotsHash", storageDataProvider, storageChangeDelegates);
             this.MoneyPotsTypedStorage = new TypedMapStorage<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.MoneyPot>("MoneyPot.MoneyPots", storageDataProvider, storageChangeDelegates);
             this.MoneyPotOwnedTypedStorage = new TypedMapStorage<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT4>("MoneyPot.MoneyPotOwned", storageDataProvider, storageChangeDelegates);
@@ -96,7 +96,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _moneyPotsCountTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> MoneyPotsCountTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> MoneyPotsCountTypedStorage
         {
             get
             {
@@ -171,7 +171,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// Connects to all storages and initializes the change subscription handling.
         /// </summary>
-        public async Task InitializeAsync(Ajuna.ServiceLayer.Storage.IStorageDataProvider dataProvider)
+        public async Task InitializeAsync(Substrate.ServiceLayer.Storage.IStorageDataProvider dataProvider)
         {
             await MoneyPotsCountTypedStorage.InitializeAsync("MoneyPot", "MoneyPotsCount");
             await MoneyPotsHashTypedStorage.InitializeAsync("MoneyPot", "MoneyPotsHash");
@@ -192,7 +192,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// >> MoneyPotsCount
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.U32 GetMoneyPotsCount()
+        public Substrate.NetApi.Model.Types.Primitive.U32 GetMoneyPotsCount()
         {
             return MoneyPotsCountTypedStorage.Get();
         }

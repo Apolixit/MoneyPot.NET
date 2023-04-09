@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi;
-using Ajuna.NetApi.Model.Extrinsics;
-using Ajuna.NetApi.Model.Meta;
-using Ajuna.NetApi.Model.Types;
-using Ajuna.NetApi.Model.Types.Base;
+using Substrate.NetApi;
+using Substrate.NetApi.Model.Extrinsics;
+using Substrate.NetApi.Model.Meta;
+using Substrate.NetApi.Model.Types;
+using Substrate.NetApi.Model.Types.Base;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,7 +30,7 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public RandomnessCollectiveFlipStorage(SubstrateClientExt client)
         {
             this._client = client;
-            _client.StorageKeyDict.Add(new System.Tuple<string, string>("RandomnessCollectiveFlip", "RandomMaterial"), new System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT1)));
+            _client.StorageKeyDict.Add(new System.Tuple<string, string>("RandomnessCollectiveFlip", "RandomMaterial"), new System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT1)));
         }
         
         /// <summary>
@@ -41,7 +41,16 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// </summary>
         public static string RandomMaterialParams()
         {
-            return RequestGenerator.GetStorage("RandomnessCollectiveFlip", "RandomMaterial", Ajuna.NetApi.Model.Meta.Storage.Type.Plain);
+            return RequestGenerator.GetStorage("RandomnessCollectiveFlip", "RandomMaterial", Substrate.NetApi.Model.Meta.Storage.Type.Plain);
+        }
+        
+        /// <summary>
+        /// >> RandomMaterialDefault
+        /// Default value as hex string
+        /// </summary>
+        public static string RandomMaterialDefault()
+        {
+            return "0x00";
         }
         
         /// <summary>
@@ -53,11 +62,16 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public async Task<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT1> RandomMaterial(CancellationToken token)
         {
             string parameters = RandomnessCollectiveFlipStorage.RandomMaterialParams();
-            return await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT1>(parameters, token);
+            var result = await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT1>(parameters, token);
+            return result;
         }
     }
     
     public sealed class RandomnessCollectiveFlipCalls
+    {
+    }
+    
+    public sealed class RandomnessCollectiveFlipConstants
     {
     }
 }

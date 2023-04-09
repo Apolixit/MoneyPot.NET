@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Extrinsics;
-using Ajuna.NetApi.Model.Meta;
-using Ajuna.NetApi.Model.Types.Base;
 using MoneyPot_NetApiExt.Generated.Storage;
+using Substrate.NetApi.Model.Extrinsics;
+using Substrate.NetApi.Model.Meta;
+using Substrate.NetApi.Model.Types.Base;
 using System.Collections.Generic;
 
 
@@ -18,13 +18,13 @@ namespace MoneyPot_NetApiExt.Generated
 {
     
     
-    public sealed class SubstrateClientExt : Ajuna.NetApi.SubstrateClient
+    public sealed class SubstrateClientExt : Substrate.NetApi.SubstrateClient
     {
         
         /// <summary>
         /// StorageKeyDict for key definition informations.
         /// </summary>
-        public System.Collections.Generic.Dictionary<System.Tuple<string, string>, System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>> StorageKeyDict;
+        public System.Collections.Generic.Dictionary<System.Tuple<string, string>, System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>> StorageKeyDict;
         
         /// <summary>
         /// SystemStorage storage calls.
@@ -76,10 +76,10 @@ namespace MoneyPot_NetApiExt.Generated
         /// </summary>
         public MoneyPotStorage MoneyPotStorage;
         
-        public SubstrateClientExt(System.Uri uri, ChargeType chargeType) : 
+        public SubstrateClientExt(System.Uri uri, Substrate.NetApi.Model.Extrinsics.ChargeType chargeType) : 
                 base(uri, chargeType)
         {
-            StorageKeyDict = new System.Collections.Generic.Dictionary<System.Tuple<string, string>, System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>>();
+            StorageKeyDict = new System.Collections.Generic.Dictionary<System.Tuple<string, string>, System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>>();
             this.SystemStorage = new SystemStorage(this);
             this.RandomnessCollectiveFlipStorage = new RandomnessCollectiveFlipStorage(this);
             this.TimestampStorage = new TimestampStorage(this);

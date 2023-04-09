@@ -1,5 +1,5 @@
-﻿using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.NetApi.Model.Types.Primitive;
+﻿using Substrate.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Primitive;
 using System;
 using System.Net.Http;
 using System.Net.WebSockets;
@@ -11,7 +11,7 @@ namespace MoneyPot_RestClient.Test
    {
       protected string GetBaseAddress()
       {
-         return Environment.GetEnvironmentVariable("AJUNA_SERVICE_ENDPOINT") ?? "http://localhost:61752";
+         return Environment.GetEnvironmentVariable("SUBSTRATE_SERVICE_ENDPOINT") ?? "http://localhost:61752";
       }
 
       protected HttpClient CreateHttpClient()
@@ -21,7 +21,7 @@ namespace MoneyPot_RestClient.Test
             BaseAddress = new Uri(GetBaseAddress())
          };
 
-         httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/ajuna");
+         httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/substrate");
          return httpClient;
       }
 
@@ -161,7 +161,7 @@ namespace MoneyPot_RestClient.Test
       protected Str GetTestValueStr()
       {
          var result = new Str();
-         result.Create("ajuna");
+         result.Create("substrate");
          return result;
       }
 

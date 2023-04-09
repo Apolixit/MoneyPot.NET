@@ -11,7 +11,7 @@ namespace MoneyPot_RestClient.Mockup.Generated.Interfaces
 {
    using System;
    using System.Threading.Tasks;
-   using Ajuna.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Primitive;
    using MoneyPot_NetApiExt.Generated.Model.primitive_types;
    using MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet;
    using MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec;

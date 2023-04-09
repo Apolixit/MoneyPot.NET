@@ -15,7 +15,7 @@ namespace MoneyPot_RestClient.Test.Generated
    using System.Net.Http;
    using MoneyPot_RestClient.Mockup.Generated.Clients;
    using MoneyPot_RestClient.Generated.Clients;
-   using Ajuna.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Primitive;
    
    public class TimestampControllerClientTest : ClientTestBase
    {
@@ -36,7 +36,7 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          TimestampControllerClient rpcClient = new TimestampControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Primitive.U64 mockupValue = this.GetTestValueU64();
+         Substrate.NetApi.Model.Types.Primitive.U64 mockupValue = this.GetTestValueU64();
 
 
          Assert.IsTrue(await rpcClient.SubscribeNow());
@@ -49,7 +49,7 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Primitive.U64 rpcResult = await rpcClient.GetNow();
+         Substrate.NetApi.Model.Types.Primitive.U64 rpcResult = await rpcClient.GetNow();
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
@@ -65,7 +65,7 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          TimestampControllerClient rpcClient = new TimestampControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Primitive.Bool mockupValue = this.GetTestValueBool();
+         Substrate.NetApi.Model.Types.Primitive.Bool mockupValue = this.GetTestValueBool();
 
 
          Assert.IsTrue(await rpcClient.SubscribeDidUpdate());
@@ -78,7 +78,7 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Primitive.Bool rpcResult = await rpcClient.GetDidUpdate();
+         Substrate.NetApi.Model.Types.Primitive.Bool rpcResult = await rpcClient.GetDidUpdate();
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());

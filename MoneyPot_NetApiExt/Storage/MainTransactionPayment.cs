@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi;
-using Ajuna.NetApi.Model.Extrinsics;
-using Ajuna.NetApi.Model.Meta;
-using Ajuna.NetApi.Model.Types;
-using Ajuna.NetApi.Model.Types.Base;
+using Substrate.NetApi;
+using Substrate.NetApi.Model.Extrinsics;
+using Substrate.NetApi.Model.Meta;
+using Substrate.NetApi.Model.Types;
+using Substrate.NetApi.Model.Types.Base;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,8 +30,8 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public TransactionPaymentStorage(SubstrateClientExt client)
         {
             this._client = client;
-            _client.StorageKeyDict.Add(new System.Tuple<string, string>("TransactionPayment", "NextFeeMultiplier"), new System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.sp_arithmetic.fixed_point.FixedU128)));
-            _client.StorageKeyDict.Add(new System.Tuple<string, string>("TransactionPayment", "StorageVersion"), new System.Tuple<Ajuna.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.pallet_transaction_payment.EnumReleases)));
+            _client.StorageKeyDict.Add(new System.Tuple<string, string>("TransactionPayment", "NextFeeMultiplier"), new System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.sp_arithmetic.fixed_point.FixedU128)));
+            _client.StorageKeyDict.Add(new System.Tuple<string, string>("TransactionPayment", "StorageVersion"), new System.Tuple<Substrate.NetApi.Model.Meta.Storage.Hasher[], System.Type, System.Type>(null, null, typeof(MoneyPot_NetApiExt.Generated.Model.pallet_transaction_payment.EnumReleases)));
         }
         
         /// <summary>
@@ -39,7 +39,16 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// </summary>
         public static string NextFeeMultiplierParams()
         {
-            return RequestGenerator.GetStorage("TransactionPayment", "NextFeeMultiplier", Ajuna.NetApi.Model.Meta.Storage.Type.Plain);
+            return RequestGenerator.GetStorage("TransactionPayment", "NextFeeMultiplier", Substrate.NetApi.Model.Meta.Storage.Type.Plain);
+        }
+        
+        /// <summary>
+        /// >> NextFeeMultiplierDefault
+        /// Default value as hex string
+        /// </summary>
+        public static string NextFeeMultiplierDefault()
+        {
+            return "0x000064A7B3B6E00D0000000000000000";
         }
         
         /// <summary>
@@ -48,7 +57,8 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public async Task<MoneyPot_NetApiExt.Generated.Model.sp_arithmetic.fixed_point.FixedU128> NextFeeMultiplier(CancellationToken token)
         {
             string parameters = TransactionPaymentStorage.NextFeeMultiplierParams();
-            return await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_arithmetic.fixed_point.FixedU128>(parameters, token);
+            var result = await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.sp_arithmetic.fixed_point.FixedU128>(parameters, token);
+            return result;
         }
         
         /// <summary>
@@ -56,7 +66,16 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         /// </summary>
         public static string StorageVersionParams()
         {
-            return RequestGenerator.GetStorage("TransactionPayment", "StorageVersion", Ajuna.NetApi.Model.Meta.Storage.Type.Plain);
+            return RequestGenerator.GetStorage("TransactionPayment", "StorageVersion", Substrate.NetApi.Model.Meta.Storage.Type.Plain);
+        }
+        
+        /// <summary>
+        /// >> StorageVersionDefault
+        /// Default value as hex string
+        /// </summary>
+        public static string StorageVersionDefault()
+        {
+            return "0x00";
         }
         
         /// <summary>
@@ -65,11 +84,47 @@ namespace MoneyPot_NetApiExt.Generated.Storage
         public async Task<MoneyPot_NetApiExt.Generated.Model.pallet_transaction_payment.EnumReleases> StorageVersion(CancellationToken token)
         {
             string parameters = TransactionPaymentStorage.StorageVersionParams();
-            return await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.pallet_transaction_payment.EnumReleases>(parameters, token);
+            var result = await _client.GetStorageAsync<MoneyPot_NetApiExt.Generated.Model.pallet_transaction_payment.EnumReleases>(parameters, token);
+            return result;
         }
     }
     
     public sealed class TransactionPaymentCalls
     {
+    }
+    
+    public sealed class TransactionPaymentConstants
+    {
+        
+        /// <summary>
+        /// >> OperationalFeeMultiplier
+        ///  A fee mulitplier for `Operational` extrinsics to compute "virtual tip" to boost their
+        ///  `priority`
+        /// 
+        ///  This value is multipled by the `final_fee` to obtain a "virtual tip" that is later
+        ///  added to a tip component in regular `priority` calculations.
+        ///  It means that a `Normal` transaction can front-run a similarly-sized `Operational`
+        ///  extrinsic (with no tip), by including a tip value greater than the virtual tip.
+        /// 
+        ///  ```rust,ignore
+        ///  // For `Normal`
+        ///  let priority = priority_calc(tip);
+        /// 
+        ///  // For `Operational`
+        ///  let virtual_tip = (inclusion_fee + tip) * OperationalFeeMultiplier;
+        ///  let priority = priority_calc(tip + virtual_tip);
+        ///  ```
+        /// 
+        ///  Note that since we use `final_fee` the multiplier applies also to the regular `tip`
+        ///  sent with the transaction. So, not only does the transaction get a priority bump based
+        ///  on the `inclusion_fee`, but we also amplify the impact of tips applied to `Operational`
+        ///  transactions.
+        /// </summary>
+        public Substrate.NetApi.Model.Types.Primitive.U8 OperationalFeeMultiplier()
+        {
+            var result = new Substrate.NetApi.Model.Types.Primitive.U8();
+            result.Create("0x05");
+            return result;
+        }
     }
 }

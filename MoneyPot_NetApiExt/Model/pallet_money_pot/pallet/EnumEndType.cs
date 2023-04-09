@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Base;
 using System.Collections.Generic;
 
 
@@ -26,7 +26,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
     /// <summary>
     /// >> 127 - Variant[pallet_money_pot.pallet.EndType]
     /// </summary>
-    public sealed class EnumEndType : BaseEnumExt<EndType, Ajuna.NetApi.Model.Types.Primitive.U32, BaseTuple<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumAmountType, Ajuna.NetApi.Model.Types.Primitive.U128>>
+    public sealed class EnumEndType : BaseEnumExt<EndType, Substrate.NetApi.Model.Types.Primitive.U32, BaseTuple<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumAmountType, Substrate.NetApi.Model.Types.Primitive.U128>>
     {
     }
 }

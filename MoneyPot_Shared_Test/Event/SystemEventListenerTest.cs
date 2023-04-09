@@ -1,4 +1,4 @@
-﻿using Ajuna.NetApi.Model.Extrinsics;
+﻿using Substrate.NetApi.Model.Extrinsics;
 using MoneyPot_NetApiExt.Generated;
 using MoneyPot_NetApiExt.Generated.Model.frame_support.weights;
 using MoneyPot_Shared;

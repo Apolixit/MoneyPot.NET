@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Base;
 using System.Collections.Generic;
 
 
@@ -26,7 +26,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.node_template_runtime
     /// <summary>
     /// >> 119 - Variant[node_template_runtime.OriginCaller]
     /// </summary>
-    public sealed class EnumOriginCaller : BaseEnumExt<OriginCaller, MoneyPot_NetApiExt.Generated.Model.frame_support.dispatch.EnumRawOrigin, Ajuna.NetApi.Model.Types.Base.BaseVoid>
+    public sealed class EnumOriginCaller : BaseEnumExt<OriginCaller, MoneyPot_NetApiExt.Generated.Model.frame_support.dispatch.EnumRawOrigin, Substrate.NetApi.Model.Types.Base.BaseVoid>
     {
     }
 }

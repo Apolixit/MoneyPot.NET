@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Attributes;
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.NetApi.Model.Types.Metadata.V14;
+using Substrate.NetApi.Attributes;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Metadata.V14;
 using System.Collections.Generic;
 
 
@@ -20,16 +20,16 @@ namespace MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest
     /// <summary>
     /// >> 11 - Composite[sp_runtime.generic.digest.Digest]
     /// </summary>
-    [AjunaNodeType(TypeDefEnum.Composite)]
+    [SubstrateNodeType(TypeDefEnum.Composite)]
     public sealed class Digest : BaseType
     {
         
         /// <summary>
         /// >> logs
         /// </summary>
-        private Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.EnumDigestItem> _logs;
+        private Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.EnumDigestItem> _logs;
         
-        public Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.EnumDigestItem> Logs
+        public Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.EnumDigestItem> Logs
         {
             get
             {
@@ -56,9 +56,12 @@ namespace MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest
         public override void Decode(byte[] byteArray, ref int p)
         {
             var start = p;
-            Logs = new Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.EnumDigestItem>();
+            Logs = new Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.EnumDigestItem>();
             Logs.Decode(byteArray, ref p);
-            TypeSize = p - start;
+            var bytesLength = p - start;
+            TypeSize = bytesLength;
+            Bytes = new byte[bytesLength];
+            System.Array.Copy(byteArray, start, Bytes, 0, bytesLength);
         }
     }
 }

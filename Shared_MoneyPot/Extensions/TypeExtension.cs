@@ -1,5 +1,5 @@
-﻿using Ajuna.NetApi.Model.Types;
-using Ajuna.NetApi.Model.Types.Base;
+﻿using Substrate.NetApi.Model.Types;
+using Substrate.NetApi.Model.Types.Base;
 using MoneyPot_NetApiExt.Generated.Model.primitive_types;
 using System.Diagnostics;
 

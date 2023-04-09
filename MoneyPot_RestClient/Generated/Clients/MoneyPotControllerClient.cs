@@ -12,7 +12,7 @@ namespace MoneyPot_RestClient.Generated.Clients
    using System;
    using System.Threading.Tasks;
    using System.Net.Http;
-   using Ajuna.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Primitive;
    using MoneyPot_NetApiExt.Generated.Model.primitive_types;
    using MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet;
    using MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec;

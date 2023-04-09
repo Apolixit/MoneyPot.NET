@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.ServiceLayer.Attributes;
-using Ajuna.ServiceLayer.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.ServiceLayer.Attributes;
+using Substrate.ServiceLayer.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -34,7 +34,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> ExtrinsicCount
         ///  Total extrinsics count for the current block.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.U32 GetExtrinsicCount();
+        Substrate.NetApi.Model.Types.Primitive.U32 GetExtrinsicCount();
         
         /// <summary>
         /// >> BlockWeight
@@ -46,7 +46,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> AllExtrinsicsLen
         ///  Total length (in bytes) for all extrinsics put together, for the current block.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.U32 GetAllExtrinsicsLen();
+        Substrate.NetApi.Model.Types.Primitive.U32 GetAllExtrinsicsLen();
         
         /// <summary>
         /// >> BlockHash
@@ -58,13 +58,13 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> ExtrinsicData
         ///  Extrinsics data for the current block (maps an extrinsic's index to its data).
         /// </summary>
-        Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8> GetExtrinsicData(string key);
+        Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8> GetExtrinsicData(string key);
         
         /// <summary>
         /// >> Number
         ///  The current block number being processed. Set by `execute_block`.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.U32 GetNumber();
+        Substrate.NetApi.Model.Types.Primitive.U32 GetNumber();
         
         /// <summary>
         /// >> ParentHash
@@ -88,13 +88,13 @@ namespace MoneyPot_RestService.Generated.Storage
         ///  Events have a large in-memory size. Box the events to not go out-of-memory
         ///  just in case someone still reads them from within the runtime.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> GetEvents();
+        Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> GetEvents();
         
         /// <summary>
         /// >> EventCount
         ///  The number of events in the `Events<T>` list.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.U32 GetEventCount();
+        Substrate.NetApi.Model.Types.Primitive.U32 GetEventCount();
         
         /// <summary>
         /// >> EventTopics
@@ -109,7 +109,7 @@ namespace MoneyPot_RestService.Generated.Storage
         ///  the `EventIndex` then in case if the topic has the same contents on the next block
         ///  no notification will be triggered thus the event might be lost.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>> GetEventTopics(string key);
+        Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>> GetEventTopics(string key);
         
         /// <summary>
         /// >> LastRuntimeUpgrade
@@ -121,14 +121,14 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> UpgradedToU32RefCount
         ///  True if we have upgraded so that `type RefCount` is `u32`. False (default) if not.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.Bool GetUpgradedToU32RefCount();
+        Substrate.NetApi.Model.Types.Primitive.Bool GetUpgradedToU32RefCount();
         
         /// <summary>
         /// >> UpgradedToTripleRefCount
         ///  True if we have upgraded so that AccountInfo contains three types of `RefCount`. False
         ///  (default) if not.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.Bool GetUpgradedToTripleRefCount();
+        Substrate.NetApi.Model.Types.Primitive.Bool GetUpgradedToTripleRefCount();
         
         /// <summary>
         /// >> ExecutionPhase
@@ -151,7 +151,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _extrinsicCountTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> _extrinsicCountTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> _extrinsicCountTypedStorage;
         
         /// <summary>
         /// _blockWeightTypedStorage typed storage field
@@ -161,7 +161,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _allExtrinsicsLenTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> _allExtrinsicsLenTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> _allExtrinsicsLenTypedStorage;
         
         /// <summary>
         /// _blockHashTypedStorage typed storage field
@@ -171,12 +171,12 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _extrinsicDataTypedStorage typed storage field
         /// </summary>
-        private TypedMapStorage<Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8>> _extrinsicDataTypedStorage;
+        private TypedMapStorage<Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8>> _extrinsicDataTypedStorage;
         
         /// <summary>
         /// _numberTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> _numberTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> _numberTypedStorage;
         
         /// <summary>
         /// _parentHashTypedStorage typed storage field
@@ -191,17 +191,17 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _eventsTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord>> _eventsTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord>> _eventsTypedStorage;
         
         /// <summary>
         /// _eventCountTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> _eventCountTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> _eventCountTypedStorage;
         
         /// <summary>
         /// _eventTopicsTypedStorage typed storage field
         /// </summary>
-        private TypedMapStorage<Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>>> _eventTopicsTypedStorage;
+        private TypedMapStorage<Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>>> _eventTopicsTypedStorage;
         
         /// <summary>
         /// _lastRuntimeUpgradeTypedStorage typed storage field
@@ -211,12 +211,12 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _upgradedToU32RefCountTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.Bool> _upgradedToU32RefCountTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.Bool> _upgradedToU32RefCountTypedStorage;
         
         /// <summary>
         /// _upgradedToTripleRefCountTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.Bool> _upgradedToTripleRefCountTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.Bool> _upgradedToTripleRefCountTypedStorage;
         
         /// <summary>
         /// _executionPhaseTypedStorage typed storage field
@@ -229,20 +229,20 @@ namespace MoneyPot_RestService.Generated.Storage
         public SystemStorage(IStorageDataProvider storageDataProvider, List<IStorageChangeDelegate> storageChangeDelegates)
         {
             this.AccountTypedStorage = new TypedMapStorage<MoneyPot_NetApiExt.Generated.Model.frame_system.AccountInfo>("System.Account", storageDataProvider, storageChangeDelegates);
-            this.ExtrinsicCountTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32>("System.ExtrinsicCount", storageDataProvider, storageChangeDelegates);
+            this.ExtrinsicCountTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32>("System.ExtrinsicCount", storageDataProvider, storageChangeDelegates);
             this.BlockWeightTypedStorage = new TypedStorage<MoneyPot_NetApiExt.Generated.Model.frame_support.weights.PerDispatchClassT1>("System.BlockWeight", storageDataProvider, storageChangeDelegates);
-            this.AllExtrinsicsLenTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32>("System.AllExtrinsicsLen", storageDataProvider, storageChangeDelegates);
+            this.AllExtrinsicsLenTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32>("System.AllExtrinsicsLen", storageDataProvider, storageChangeDelegates);
             this.BlockHashTypedStorage = new TypedMapStorage<MoneyPot_NetApiExt.Generated.Model.primitive_types.H256>("System.BlockHash", storageDataProvider, storageChangeDelegates);
-            this.ExtrinsicDataTypedStorage = new TypedMapStorage<Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8>>("System.ExtrinsicData", storageDataProvider, storageChangeDelegates);
-            this.NumberTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32>("System.Number", storageDataProvider, storageChangeDelegates);
+            this.ExtrinsicDataTypedStorage = new TypedMapStorage<Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8>>("System.ExtrinsicData", storageDataProvider, storageChangeDelegates);
+            this.NumberTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32>("System.Number", storageDataProvider, storageChangeDelegates);
             this.ParentHashTypedStorage = new TypedStorage<MoneyPot_NetApiExt.Generated.Model.primitive_types.H256>("System.ParentHash", storageDataProvider, storageChangeDelegates);
             this.DigestTypedStorage = new TypedStorage<MoneyPot_NetApiExt.Generated.Model.sp_runtime.generic.digest.Digest>("System.Digest", storageDataProvider, storageChangeDelegates);
-            this.EventsTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord>>("System.Events", storageDataProvider, storageChangeDelegates);
-            this.EventCountTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32>("System.EventCount", storageDataProvider, storageChangeDelegates);
-            this.EventTopicsTypedStorage = new TypedMapStorage<Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>>>("System.EventTopics", storageDataProvider, storageChangeDelegates);
+            this.EventsTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord>>("System.Events", storageDataProvider, storageChangeDelegates);
+            this.EventCountTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32>("System.EventCount", storageDataProvider, storageChangeDelegates);
+            this.EventTopicsTypedStorage = new TypedMapStorage<Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>>>("System.EventTopics", storageDataProvider, storageChangeDelegates);
             this.LastRuntimeUpgradeTypedStorage = new TypedStorage<MoneyPot_NetApiExt.Generated.Model.frame_system.LastRuntimeUpgradeInfo>("System.LastRuntimeUpgrade", storageDataProvider, storageChangeDelegates);
-            this.UpgradedToU32RefCountTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.Bool>("System.UpgradedToU32RefCount", storageDataProvider, storageChangeDelegates);
-            this.UpgradedToTripleRefCountTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.Bool>("System.UpgradedToTripleRefCount", storageDataProvider, storageChangeDelegates);
+            this.UpgradedToU32RefCountTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.Bool>("System.UpgradedToU32RefCount", storageDataProvider, storageChangeDelegates);
+            this.UpgradedToTripleRefCountTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.Bool>("System.UpgradedToTripleRefCount", storageDataProvider, storageChangeDelegates);
             this.ExecutionPhaseTypedStorage = new TypedStorage<MoneyPot_NetApiExt.Generated.Model.frame_system.EnumPhase>("System.ExecutionPhase", storageDataProvider, storageChangeDelegates);
         }
         
@@ -264,7 +264,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _extrinsicCountTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> ExtrinsicCountTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> ExtrinsicCountTypedStorage
         {
             get
             {
@@ -294,7 +294,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _allExtrinsicsLenTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> AllExtrinsicsLenTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> AllExtrinsicsLenTypedStorage
         {
             get
             {
@@ -324,7 +324,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _extrinsicDataTypedStorage property
         /// </summary>
-        public TypedMapStorage<Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8>> ExtrinsicDataTypedStorage
+        public TypedMapStorage<Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8>> ExtrinsicDataTypedStorage
         {
             get
             {
@@ -339,7 +339,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _numberTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> NumberTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> NumberTypedStorage
         {
             get
             {
@@ -384,7 +384,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _eventsTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord>> EventsTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord>> EventsTypedStorage
         {
             get
             {
@@ -399,7 +399,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _eventCountTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> EventCountTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> EventCountTypedStorage
         {
             get
             {
@@ -414,7 +414,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _eventTopicsTypedStorage property
         /// </summary>
-        public TypedMapStorage<Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>>> EventTopicsTypedStorage
+        public TypedMapStorage<Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>>> EventTopicsTypedStorage
         {
             get
             {
@@ -444,7 +444,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _upgradedToU32RefCountTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.Bool> UpgradedToU32RefCountTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.Bool> UpgradedToU32RefCountTypedStorage
         {
             get
             {
@@ -459,7 +459,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _upgradedToTripleRefCountTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.Bool> UpgradedToTripleRefCountTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.Bool> UpgradedToTripleRefCountTypedStorage
         {
             get
             {
@@ -489,7 +489,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// Connects to all storages and initializes the change subscription handling.
         /// </summary>
-        public async Task InitializeAsync(Ajuna.ServiceLayer.Storage.IStorageDataProvider dataProvider)
+        public async Task InitializeAsync(Substrate.ServiceLayer.Storage.IStorageDataProvider dataProvider)
         {
             await AccountTypedStorage.InitializeAsync("System", "Account");
             await ExtrinsicCountTypedStorage.InitializeAsync("System", "ExtrinsicCount");
@@ -551,7 +551,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> ExtrinsicCount
         ///  Total extrinsics count for the current block.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.U32 GetExtrinsicCount()
+        public Substrate.NetApi.Model.Types.Primitive.U32 GetExtrinsicCount()
         {
             return ExtrinsicCountTypedStorage.Get();
         }
@@ -587,7 +587,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> AllExtrinsicsLen
         ///  Total length (in bytes) for all extrinsics put together, for the current block.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.U32 GetAllExtrinsicsLen()
+        public Substrate.NetApi.Model.Types.Primitive.U32 GetAllExtrinsicsLen()
         {
             return AllExtrinsicsLenTypedStorage.Get();
         }
@@ -634,13 +634,13 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> ExtrinsicData
         ///  Extrinsics data for the current block (maps an extrinsic's index to its data).
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8> GetExtrinsicData(string key)
+        public Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8> GetExtrinsicData(string key)
         {
             if ((key == null))
             {
                 return null;
             }
-            if (ExtrinsicDataTypedStorage.Dictionary.TryGetValue(key, out Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Primitive.U8> result))
+            if (ExtrinsicDataTypedStorage.Dictionary.TryGetValue(key, out Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Primitive.U8> result))
             {
                 return result;
             }
@@ -663,7 +663,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> Number
         ///  The current block number being processed. Set by `execute_block`.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.U32 GetNumber()
+        public Substrate.NetApi.Model.Types.Primitive.U32 GetNumber()
         {
             return NumberTypedStorage.Get();
         }
@@ -723,7 +723,7 @@ namespace MoneyPot_RestService.Generated.Storage
         ///  Events have a large in-memory size. Box the events to not go out-of-memory
         ///  just in case someone still reads them from within the runtime.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> GetEvents()
+        public Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.frame_system.EventRecord> GetEvents()
         {
             return EventsTypedStorage.Get();
         }
@@ -741,7 +741,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> EventCount
         ///  The number of events in the `Events<T>` list.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.U32 GetEventCount()
+        public Substrate.NetApi.Model.Types.Primitive.U32 GetEventCount()
         {
             return EventCountTypedStorage.Get();
         }
@@ -768,13 +768,13 @@ namespace MoneyPot_RestService.Generated.Storage
         ///  the `EventIndex` then in case if the topic has the same contents on the next block
         ///  no notification will be triggered thus the event might be lost.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>> GetEventTopics(string key)
+        public Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>> GetEventTopics(string key)
         {
             if ((key == null))
             {
                 return null;
             }
-            if (EventTopicsTypedStorage.Dictionary.TryGetValue(key, out Ajuna.NetApi.Model.Types.Base.BaseVec<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>> result))
+            if (EventTopicsTypedStorage.Dictionary.TryGetValue(key, out Substrate.NetApi.Model.Types.Base.BaseVec<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>> result))
             {
                 return result;
             }
@@ -815,7 +815,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> UpgradedToU32RefCount
         ///  True if we have upgraded so that `type RefCount` is `u32`. False (default) if not.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.Bool GetUpgradedToU32RefCount()
+        public Substrate.NetApi.Model.Types.Primitive.Bool GetUpgradedToU32RefCount()
         {
             return UpgradedToU32RefCountTypedStorage.Get();
         }
@@ -834,7 +834,7 @@ namespace MoneyPot_RestService.Generated.Storage
         ///  True if we have upgraded so that AccountInfo contains three types of `RefCount`. False
         ///  (default) if not.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.Bool GetUpgradedToTripleRefCount()
+        public Substrate.NetApi.Model.Types.Primitive.Bool GetUpgradedToTripleRefCount()
         {
             return UpgradedToTripleRefCountTypedStorage.Get();
         }

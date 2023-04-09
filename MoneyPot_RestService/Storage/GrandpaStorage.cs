@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.ServiceLayer.Attributes;
-using Ajuna.ServiceLayer.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.ServiceLayer.Attributes;
+using Substrate.ServiceLayer.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -40,20 +40,20 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> NextForced
         ///  next block number where we can force a change.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.U32 GetNextForced();
+        Substrate.NetApi.Model.Types.Primitive.U32 GetNextForced();
         
         /// <summary>
         /// >> Stalled
         ///  `true` if we are currently stalled.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32> GetStalled();
+        Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32> GetStalled();
         
         /// <summary>
         /// >> CurrentSetId
         ///  The number of changes (both in terms of keys and underlying economic responsibilities)
         ///  in the "set" of Grandpa validators from genesis.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.U64 GetCurrentSetId();
+        Substrate.NetApi.Model.Types.Primitive.U64 GetCurrentSetId();
         
         /// <summary>
         /// >> SetIdSession
@@ -62,7 +62,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// 
         ///  TWOX-NOTE: `SetId` is not under user control.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.U32 GetSetIdSession(string key);
+        Substrate.NetApi.Model.Types.Primitive.U32 GetSetIdSession(string key);
     }
     
     /// <summary>
@@ -84,22 +84,22 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _nextForcedTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> _nextForcedTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> _nextForcedTypedStorage;
         
         /// <summary>
         /// _stalledTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>> _stalledTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>> _stalledTypedStorage;
         
         /// <summary>
         /// _currentSetIdTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U64> _currentSetIdTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.U64> _currentSetIdTypedStorage;
         
         /// <summary>
         /// _setIdSessionTypedStorage typed storage field
         /// </summary>
-        private TypedMapStorage<Ajuna.NetApi.Model.Types.Primitive.U32> _setIdSessionTypedStorage;
+        private TypedMapStorage<Substrate.NetApi.Model.Types.Primitive.U32> _setIdSessionTypedStorage;
         
         /// <summary>
         /// GrandpaStorage constructor.
@@ -108,10 +108,10 @@ namespace MoneyPot_RestService.Generated.Storage
         {
             this.StateTypedStorage = new TypedStorage<MoneyPot_NetApiExt.Generated.Model.pallet_grandpa.EnumStoredState>("Grandpa.State", storageDataProvider, storageChangeDelegates);
             this.PendingChangeTypedStorage = new TypedStorage<MoneyPot_NetApiExt.Generated.Model.pallet_grandpa.StoredPendingChange>("Grandpa.PendingChange", storageDataProvider, storageChangeDelegates);
-            this.NextForcedTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32>("Grandpa.NextForced", storageDataProvider, storageChangeDelegates);
-            this.StalledTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>>("Grandpa.Stalled", storageDataProvider, storageChangeDelegates);
-            this.CurrentSetIdTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U64>("Grandpa.CurrentSetId", storageDataProvider, storageChangeDelegates);
-            this.SetIdSessionTypedStorage = new TypedMapStorage<Ajuna.NetApi.Model.Types.Primitive.U32>("Grandpa.SetIdSession", storageDataProvider, storageChangeDelegates);
+            this.NextForcedTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32>("Grandpa.NextForced", storageDataProvider, storageChangeDelegates);
+            this.StalledTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>>("Grandpa.Stalled", storageDataProvider, storageChangeDelegates);
+            this.CurrentSetIdTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.U64>("Grandpa.CurrentSetId", storageDataProvider, storageChangeDelegates);
+            this.SetIdSessionTypedStorage = new TypedMapStorage<Substrate.NetApi.Model.Types.Primitive.U32>("Grandpa.SetIdSession", storageDataProvider, storageChangeDelegates);
         }
         
         /// <summary>
@@ -147,7 +147,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _nextForcedTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U32> NextForcedTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.U32> NextForcedTypedStorage
         {
             get
             {
@@ -162,7 +162,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _stalledTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>> StalledTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>> StalledTypedStorage
         {
             get
             {
@@ -177,7 +177,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _currentSetIdTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U64> CurrentSetIdTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.U64> CurrentSetIdTypedStorage
         {
             get
             {
@@ -192,7 +192,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _setIdSessionTypedStorage property
         /// </summary>
-        public TypedMapStorage<Ajuna.NetApi.Model.Types.Primitive.U32> SetIdSessionTypedStorage
+        public TypedMapStorage<Substrate.NetApi.Model.Types.Primitive.U32> SetIdSessionTypedStorage
         {
             get
             {
@@ -207,7 +207,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// Connects to all storages and initializes the change subscription handling.
         /// </summary>
-        public async Task InitializeAsync(Ajuna.ServiceLayer.Storage.IStorageDataProvider dataProvider)
+        public async Task InitializeAsync(Substrate.ServiceLayer.Storage.IStorageDataProvider dataProvider)
         {
             await StateTypedStorage.InitializeAsync("Grandpa", "State");
             await PendingChangeTypedStorage.InitializeAsync("Grandpa", "PendingChange");
@@ -266,7 +266,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> NextForced
         ///  next block number where we can force a change.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.U32 GetNextForced()
+        public Substrate.NetApi.Model.Types.Primitive.U32 GetNextForced()
         {
             return NextForcedTypedStorage.Get();
         }
@@ -284,7 +284,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> Stalled
         ///  `true` if we are currently stalled.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32> GetStalled()
+        public Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32> GetStalled()
         {
             return StalledTypedStorage.Get();
         }
@@ -303,7 +303,7 @@ namespace MoneyPot_RestService.Generated.Storage
         ///  The number of changes (both in terms of keys and underlying economic responsibilities)
         ///  in the "set" of Grandpa validators from genesis.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.U64 GetCurrentSetId()
+        public Substrate.NetApi.Model.Types.Primitive.U64 GetCurrentSetId()
         {
             return CurrentSetIdTypedStorage.Get();
         }
@@ -324,13 +324,13 @@ namespace MoneyPot_RestService.Generated.Storage
         /// 
         ///  TWOX-NOTE: `SetId` is not under user control.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.U32 GetSetIdSession(string key)
+        public Substrate.NetApi.Model.Types.Primitive.U32 GetSetIdSession(string key)
         {
             if ((key == null))
             {
                 return null;
             }
-            if (SetIdSessionTypedStorage.Dictionary.TryGetValue(key, out Ajuna.NetApi.Model.Types.Primitive.U32 result))
+            if (SetIdSessionTypedStorage.Dictionary.TryGetValue(key, out Substrate.NetApi.Model.Types.Primitive.U32 result))
             {
                 return result;
             }

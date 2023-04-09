@@ -1,12 +1,5 @@
-﻿using Ajuna.NetApi.Model.Extrinsics;
-using Ajuna.ServiceLayer;
-using Ajuna.ServiceLayer.Storage;
-using MoneyPot_BlazorFront.Repository;
-using MoneyPot_BlazorFront.Repository.DirectAccess;
-using MoneyPot_BlazorFront.Repository.Mock;
+﻿using Substrate.NetApi.Model.Extrinsics;
 using MoneyPot_NetApiExt.Generated;
-using MoneyPot_RestClient;
-using Shared_MoneyPot;
 
 namespace MoneyPot_BlazorFront.Service
 {

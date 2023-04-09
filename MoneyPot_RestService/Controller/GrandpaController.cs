@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.ServiceLayer.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using MoneyPot_RestService.Generated.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.ServiceLayer.Attributes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -66,7 +66,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  next block number where we can force a change.
         /// </summary>
         [HttpGet("NextForced")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.U32), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.U32), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.GrandpaStorage), "NextForcedParams")]
         public IActionResult GetNextForced()
         {
@@ -78,7 +78,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  `true` if we are currently stalled.
         /// </summary>
         [HttpGet("Stalled")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Base.BaseTuple<Ajuna.NetApi.Model.Types.Primitive.U32, Ajuna.NetApi.Model.Types.Primitive.U32>), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Base.BaseTuple<Substrate.NetApi.Model.Types.Primitive.U32, Substrate.NetApi.Model.Types.Primitive.U32>), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.GrandpaStorage), "StalledParams")]
         public IActionResult GetStalled()
         {
@@ -91,7 +91,7 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  in the "set" of Grandpa validators from genesis.
         /// </summary>
         [HttpGet("CurrentSetId")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.U64), 200)]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.U64), 200)]
         [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.GrandpaStorage), "CurrentSetIdParams")]
         public IActionResult GetCurrentSetId()
         {
@@ -106,8 +106,8 @@ namespace MoneyPot_RestService.Generated.Controller
         ///  TWOX-NOTE: `SetId` is not under user control.
         /// </summary>
         [HttpGet("SetIdSession")]
-        [ProducesResponseType(typeof(Ajuna.NetApi.Model.Types.Primitive.U32), 200)]
-        [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.GrandpaStorage), "SetIdSessionParams", typeof(Ajuna.NetApi.Model.Types.Primitive.U64))]
+        [ProducesResponseType(typeof(Substrate.NetApi.Model.Types.Primitive.U32), 200)]
+        [StorageKeyBuilder(typeof(MoneyPot_NetApiExt.Generated.Storage.GrandpaStorage), "SetIdSessionParams", typeof(Substrate.NetApi.Model.Types.Primitive.U64))]
         public IActionResult GetSetIdSession(string key)
         {
             return this.Ok(_grandpaStorage.GetSetIdSession(key));

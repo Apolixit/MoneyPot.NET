@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Base;
 using System.Collections.Generic;
 
 
@@ -31,7 +31,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_sudo.pallet
     /// >> 117 - Variant[pallet_sudo.pallet.Call]
     /// Contains one variant per dispatchable that can be called by an extrinsic.
     /// </summary>
-    public sealed class EnumCall : BaseEnumExt<Call, MoneyPot_NetApiExt.Generated.Model.node_template_runtime.EnumCall, BaseTuple<MoneyPot_NetApiExt.Generated.Model.node_template_runtime.EnumCall, Ajuna.NetApi.Model.Types.Primitive.U64>, MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress, BaseTuple<MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress, MoneyPot_NetApiExt.Generated.Model.node_template_runtime.EnumCall>>
+    public sealed class EnumCall : BaseEnumExt<Call, MoneyPot_NetApiExt.Generated.Model.node_template_runtime.EnumCall, BaseTuple<MoneyPot_NetApiExt.Generated.Model.node_template_runtime.EnumCall, Substrate.NetApi.Model.Types.Primitive.U64>, MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress, BaseTuple<MoneyPot_NetApiExt.Generated.Model.sp_runtime.multiaddress.EnumMultiAddress, MoneyPot_NetApiExt.Generated.Model.node_template_runtime.EnumCall>>
     {
     }
 }

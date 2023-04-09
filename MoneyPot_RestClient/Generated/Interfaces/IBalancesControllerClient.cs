@@ -11,7 +11,7 @@ namespace MoneyPot_RestClient.Generated.Interfaces
 {
    using System;
    using System.Threading.Tasks;
-   using Ajuna.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Primitive;
    using MoneyPot_NetApiExt.Generated.Model.pallet_balances;
    using MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.weak_bounded_vec;
    using MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec;

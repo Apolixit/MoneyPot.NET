@@ -1,5 +1,3 @@
-using Ajuna.ServiceLayer;
-using Ajuna.ServiceLayer.Storage;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

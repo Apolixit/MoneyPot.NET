@@ -4,7 +4,8 @@
     @Label
     </label>
     <InputText 
-        id="@Id" 
+        id="@Id"
+        placeholder="@Placeholder"
         class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
             focus:ring-slate-200
             focus:border-slate-400 block w-full p-2.5"
@@ -15,4 +16,5 @@
     [CascadingParameter] protected MainLayout.GlobalInformation global { get; set; }
     [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString();
     [Parameter] public string Label { get; set; } = string.Empty;
+    [Parameter] public string Placeholder { get; set; } = string.Empty;
 }

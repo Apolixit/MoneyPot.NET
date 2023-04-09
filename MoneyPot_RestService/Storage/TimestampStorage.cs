@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.ServiceLayer.Attributes;
-using Ajuna.ServiceLayer.Storage;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.ServiceLayer.Attributes;
+using Substrate.ServiceLayer.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,13 +28,13 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> Now
         ///  Current time for the current block.
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.U64 GetNow();
+        Substrate.NetApi.Model.Types.Primitive.U64 GetNow();
         
         /// <summary>
         /// >> DidUpdate
         ///  Did the timestamp get updated in this block?
         /// </summary>
-        Ajuna.NetApi.Model.Types.Primitive.Bool GetDidUpdate();
+        Substrate.NetApi.Model.Types.Primitive.Bool GetDidUpdate();
     }
     
     /// <summary>
@@ -46,26 +46,26 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _nowTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U64> _nowTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.U64> _nowTypedStorage;
         
         /// <summary>
         /// _didUpdateTypedStorage typed storage field
         /// </summary>
-        private TypedStorage<Ajuna.NetApi.Model.Types.Primitive.Bool> _didUpdateTypedStorage;
+        private TypedStorage<Substrate.NetApi.Model.Types.Primitive.Bool> _didUpdateTypedStorage;
         
         /// <summary>
         /// TimestampStorage constructor.
         /// </summary>
         public TimestampStorage(IStorageDataProvider storageDataProvider, List<IStorageChangeDelegate> storageChangeDelegates)
         {
-            this.NowTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U64>("Timestamp.Now", storageDataProvider, storageChangeDelegates);
-            this.DidUpdateTypedStorage = new TypedStorage<Ajuna.NetApi.Model.Types.Primitive.Bool>("Timestamp.DidUpdate", storageDataProvider, storageChangeDelegates);
+            this.NowTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.U64>("Timestamp.Now", storageDataProvider, storageChangeDelegates);
+            this.DidUpdateTypedStorage = new TypedStorage<Substrate.NetApi.Model.Types.Primitive.Bool>("Timestamp.DidUpdate", storageDataProvider, storageChangeDelegates);
         }
         
         /// <summary>
         /// _nowTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.U64> NowTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.U64> NowTypedStorage
         {
             get
             {
@@ -80,7 +80,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// _didUpdateTypedStorage property
         /// </summary>
-        public TypedStorage<Ajuna.NetApi.Model.Types.Primitive.Bool> DidUpdateTypedStorage
+        public TypedStorage<Substrate.NetApi.Model.Types.Primitive.Bool> DidUpdateTypedStorage
         {
             get
             {
@@ -95,7 +95,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// <summary>
         /// Connects to all storages and initializes the change subscription handling.
         /// </summary>
-        public async Task InitializeAsync(Ajuna.ServiceLayer.Storage.IStorageDataProvider dataProvider)
+        public async Task InitializeAsync(Substrate.ServiceLayer.Storage.IStorageDataProvider dataProvider)
         {
             await NowTypedStorage.InitializeAsync("Timestamp", "Now");
             await DidUpdateTypedStorage.InitializeAsync("Timestamp", "DidUpdate");
@@ -114,7 +114,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> Now
         ///  Current time for the current block.
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.U64 GetNow()
+        public Substrate.NetApi.Model.Types.Primitive.U64 GetNow()
         {
             return NowTypedStorage.Get();
         }
@@ -132,7 +132,7 @@ namespace MoneyPot_RestService.Generated.Storage
         /// >> DidUpdate
         ///  Did the timestamp get updated in this block?
         /// </summary>
-        public Ajuna.NetApi.Model.Types.Primitive.Bool GetDidUpdate()
+        public Substrate.NetApi.Model.Types.Primitive.Bool GetDidUpdate()
         {
             return DidUpdateTypedStorage.Get();
         }

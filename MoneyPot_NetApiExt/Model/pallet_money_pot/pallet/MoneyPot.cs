@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Attributes;
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.NetApi.Model.Types.Metadata.V14;
+using Substrate.NetApi.Attributes;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Metadata.V14;
 using System.Collections.Generic;
 
 
@@ -20,7 +20,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
     /// <summary>
     /// >> 125 - Composite[pallet_money_pot.pallet.MoneyPot]
     /// </summary>
-    [AjunaNodeType(TypeDefEnum.Composite)]
+    [SubstrateNodeType(TypeDefEnum.Composite)]
     public sealed class MoneyPot : BaseType
     {
         
@@ -37,17 +37,17 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
         /// <summary>
         /// >> start_time
         /// </summary>
-        private Ajuna.NetApi.Model.Types.Primitive.U32 _startTime;
+        private Substrate.NetApi.Model.Types.Primitive.U32 _startTime;
         
         /// <summary>
         /// >> end_time
         /// </summary>
-        private Ajuna.NetApi.Model.Types.Base.BaseOpt<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumEndType> _endTime;
+        private Substrate.NetApi.Model.Types.Base.BaseOpt<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumEndType> _endTime;
         
         /// <summary>
         /// >> is_active
         /// </summary>
-        private Ajuna.NetApi.Model.Types.Primitive.Bool _isActive;
+        private Substrate.NetApi.Model.Types.Primitive.Bool _isActive;
         
         public MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 Owner
         {
@@ -73,7 +73,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
             }
         }
         
-        public Ajuna.NetApi.Model.Types.Primitive.U32 StartTime
+        public Substrate.NetApi.Model.Types.Primitive.U32 StartTime
         {
             get
             {
@@ -85,7 +85,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
             }
         }
         
-        public Ajuna.NetApi.Model.Types.Base.BaseOpt<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumEndType> EndTime
+        public Substrate.NetApi.Model.Types.Base.BaseOpt<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumEndType> EndTime
         {
             get
             {
@@ -97,7 +97,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
             }
         }
         
-        public Ajuna.NetApi.Model.Types.Primitive.Bool IsActive
+        public Substrate.NetApi.Model.Types.Primitive.Bool IsActive
         {
             get
             {
@@ -132,13 +132,16 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet
             Owner.Decode(byteArray, ref p);
             Receiver = new MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32();
             Receiver.Decode(byteArray, ref p);
-            StartTime = new Ajuna.NetApi.Model.Types.Primitive.U32();
+            StartTime = new Substrate.NetApi.Model.Types.Primitive.U32();
             StartTime.Decode(byteArray, ref p);
-            EndTime = new Ajuna.NetApi.Model.Types.Base.BaseOpt<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumEndType>();
+            EndTime = new Substrate.NetApi.Model.Types.Base.BaseOpt<MoneyPot_NetApiExt.Generated.Model.pallet_money_pot.pallet.EnumEndType>();
             EndTime.Decode(byteArray, ref p);
-            IsActive = new Ajuna.NetApi.Model.Types.Primitive.Bool();
+            IsActive = new Substrate.NetApi.Model.Types.Primitive.Bool();
             IsActive.Decode(byteArray, ref p);
-            TypeSize = p - start;
+            var bytesLength = p - start;
+            TypeSize = bytesLength;
+            Bytes = new byte[bytesLength];
+            System.Array.Copy(byteArray, start, Bytes, 0, bytesLength);
         }
     }
 }

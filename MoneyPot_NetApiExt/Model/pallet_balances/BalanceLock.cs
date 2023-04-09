@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Ajuna.NetApi.Attributes;
-using Ajuna.NetApi.Model.Types.Base;
-using Ajuna.NetApi.Model.Types.Metadata.V14;
+using Substrate.NetApi.Attributes;
+using Substrate.NetApi.Model.Types.Base;
+using Substrate.NetApi.Model.Types.Metadata.V14;
 using System.Collections.Generic;
 
 
@@ -20,7 +20,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_balances
     /// <summary>
     /// >> 97 - Composite[pallet_balances.BalanceLock]
     /// </summary>
-    [AjunaNodeType(TypeDefEnum.Composite)]
+    [SubstrateNodeType(TypeDefEnum.Composite)]
     public sealed class BalanceLock : BaseType
     {
         
@@ -32,7 +32,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_balances
         /// <summary>
         /// >> amount
         /// </summary>
-        private Ajuna.NetApi.Model.Types.Primitive.U128 _amount;
+        private Substrate.NetApi.Model.Types.Primitive.U128 _amount;
         
         /// <summary>
         /// >> reasons
@@ -51,7 +51,7 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_balances
             }
         }
         
-        public Ajuna.NetApi.Model.Types.Primitive.U128 Amount
+        public Substrate.NetApi.Model.Types.Primitive.U128 Amount
         {
             get
             {
@@ -94,11 +94,14 @@ namespace MoneyPot_NetApiExt.Generated.Model.pallet_balances
             var start = p;
             Id = new MoneyPot_NetApiExt.Generated.Types.Base.Arr8U8();
             Id.Decode(byteArray, ref p);
-            Amount = new Ajuna.NetApi.Model.Types.Primitive.U128();
+            Amount = new Substrate.NetApi.Model.Types.Primitive.U128();
             Amount.Decode(byteArray, ref p);
             Reasons = new MoneyPot_NetApiExt.Generated.Model.pallet_balances.EnumReasons();
             Reasons.Decode(byteArray, ref p);
-            TypeSize = p - start;
+            var bytesLength = p - start;
+            TypeSize = bytesLength;
+            Bytes = new byte[bytesLength];
+            System.Array.Copy(byteArray, start, Bytes, 0, bytesLength);
         }
     }
 }

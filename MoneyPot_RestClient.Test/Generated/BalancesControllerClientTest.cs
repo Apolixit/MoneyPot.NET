@@ -15,7 +15,7 @@ namespace MoneyPot_RestClient.Test.Generated
    using System.Net.Http;
    using MoneyPot_RestClient.Mockup.Generated.Clients;
    using MoneyPot_RestClient.Generated.Clients;
-   using Ajuna.NetApi.Model.Types.Primitive;
+   using Substrate.NetApi.Model.Types.Primitive;
    using MoneyPot_NetApiExt.Generated.Model.pallet_balances;
    using MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.weak_bounded_vec;
    using MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec;
@@ -39,7 +39,7 @@ namespace MoneyPot_RestClient.Test.Generated
 
          // Construct new RPC client to test with.
          BalancesControllerClient rpcClient = new BalancesControllerClient(_httpClient, subscriptionClient);
-         Ajuna.NetApi.Model.Types.Primitive.U128 mockupValue = this.GetTestValueU128();
+         Substrate.NetApi.Model.Types.Primitive.U128 mockupValue = this.GetTestValueU128();
 
 
          Assert.IsTrue(await rpcClient.SubscribeTotalIssuance());
@@ -52,7 +52,7 @@ namespace MoneyPot_RestClient.Test.Generated
          var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(1));
          Assert.IsTrue(await subscriptionClient.ReceiveNextAsync(cts.Token));
 
-         Ajuna.NetApi.Model.Types.Primitive.U128 rpcResult = await rpcClient.GetTotalIssuance();
+         Substrate.NetApi.Model.Types.Primitive.U128 rpcResult = await rpcClient.GetTotalIssuance();
 
          // Test that the expected mockup value matches the actual result from RPC service.
          Assert.AreEqual(mockupValue.Encode(), rpcResult.Encode());
@@ -72,7 +72,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 result;
          result = new MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32();
          result.Value = new MoneyPot_NetApiExt.Generated.Types.Base.Arr32U8();
-         result.Value.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Value.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
@@ -140,7 +140,7 @@ namespace MoneyPot_RestClient.Test.Generated
       {
          MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.weak_bounded_vec.WeakBoundedVecT2 result;
          result = new MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.weak_bounded_vec.WeakBoundedVecT2();
-         result.Value = new Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.pallet_balances.BalanceLock>();
+         result.Value = new Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.pallet_balances.BalanceLock>();
          result.Value.Create(new MoneyPot_NetApiExt.Generated.Model.pallet_balances.BalanceLock[] {
                   this.GetTestValue7()});
          return result;
@@ -150,7 +150,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.pallet_balances.BalanceLock result;
          result = new MoneyPot_NetApiExt.Generated.Model.pallet_balances.BalanceLock();
          result.Id = new MoneyPot_NetApiExt.Generated.Types.Base.Arr8U8();
-         result.Id.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Id.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
@@ -169,7 +169,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 result;
          result = new MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32();
          result.Value = new MoneyPot_NetApiExt.Generated.Types.Base.Arr32U8();
-         result.Value.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Value.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
@@ -237,7 +237,7 @@ namespace MoneyPot_RestClient.Test.Generated
       {
          MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT3 result;
          result = new MoneyPot_NetApiExt.Generated.Model.sp_runtime.bounded.bounded_vec.BoundedVecT3();
-         result.Value = new Ajuna.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.pallet_balances.ReserveData>();
+         result.Value = new Substrate.NetApi.Model.Types.Base.BaseVec<MoneyPot_NetApiExt.Generated.Model.pallet_balances.ReserveData>();
          result.Value.Create(new MoneyPot_NetApiExt.Generated.Model.pallet_balances.ReserveData[] {
                   this.GetTestValue11()});
          return result;
@@ -247,7 +247,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.pallet_balances.ReserveData result;
          result = new MoneyPot_NetApiExt.Generated.Model.pallet_balances.ReserveData();
          result.Id = new MoneyPot_NetApiExt.Generated.Types.Base.Arr8U8();
-         result.Id.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Id.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
@@ -264,7 +264,7 @@ namespace MoneyPot_RestClient.Test.Generated
          MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32 result;
          result = new MoneyPot_NetApiExt.Generated.Model.sp_core.crypto.AccountId32();
          result.Value = new MoneyPot_NetApiExt.Generated.Types.Base.Arr32U8();
-         result.Value.Create(new Ajuna.NetApi.Model.Types.Primitive.U8[] {
+         result.Value.Create(new Substrate.NetApi.Model.Types.Primitive.U8[] {
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
                   this.GetTestValueU8(),
