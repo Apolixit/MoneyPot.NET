@@ -3,14 +3,14 @@
 This repo is the [money pot pallet front end](https://github.com/Apolixit/pallet_money_pot) developped with [ASP.NET Core Blazor](https://learn.microsoft.com/fr-fr/aspnet/core/blazor/)
 
 It's a proof of concept to developp a blockchain front end application without Javascript.
-I use [Ajuna.SDK](https://github.com/ajuna-network/Ajuna.SDK) which create automatically all the C# and substrate connexion layer based of the current
+I use [Substrate.NET.Toolchain](https://github.com/SubstrateGaming/Substrate.NET.Toolchain) which create automatically all the C# and substrate connexion layer based of the current
 Substrate metadata file.
 
 ---
 
 ## Schema
 
-![image](https://github.com/Apolixit/moneypot_blazor/blob/master/MoneyPot_BlazorFront/wwwroot/images/SubstrateMoneyPot.drawio.svg)
+![image](https://github.com/Apolixit/MoneyPot.NET/blob/master/MoneyPot_BlazorFront/wwwroot/images/SubstrateMoneyPot.drawio.svg)
 
 ## Setup
 
@@ -24,7 +24,7 @@ Otherwise if you want to connect it to the Money pot pallet, please use the foll
 services.AddMoneyPotServices(MoneyPotServiceExtension.ServiceMode.SubstrateNode, endpoint);
 ```
 
-## [Screenshot are available here](https://github.com/Apolixit/moneypot_blazor/Screenshot)
+## [Screenshot are available here](https://github.com/Apolixit/MoneyPot.NET/tree/master/Screenshot)
 
 
 ---

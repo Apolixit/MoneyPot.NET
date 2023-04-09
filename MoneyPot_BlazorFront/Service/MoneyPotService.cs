@@ -24,9 +24,6 @@ namespace MoneyPot_BlazorFront.Service
                     services.AddScoped<IAccountRepository, AccountRepositoryDirectAccess>();
                     services.AddScoped<IEventsRepository, EventsRepositoryDirectAccess>();
                     services.AddSingleton<ISubstrateService, SubstrateServiceDirectAccess>();
-
-                    //IStorageDataProvider _storageDataProvider = new AjunaSubstrateDataProvider(endpoint);
-                    //services.AddSingleton(_storageDataProvider);
                     break;
             }
 
