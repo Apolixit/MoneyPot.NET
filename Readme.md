@@ -1,5 +1,7 @@
 # Money pot Blazor Front End
 
+<img src="https://github.com/Apolixit/MoneyPot.NET/blob/master/MoneyPot_BlazorFront/wwwroot/images/money_pot_logo_no_background.png"  width="200" height="279">
+
 This repo is the [money pot pallet front end](https://github.com/Apolixit/pallet_money_pot) developped with [ASP.NET Core Blazor](https://learn.microsoft.com/fr-fr/aspnet/core/blazor/)
 
 It's a proof of concept to developp a blockchain front end application without Javascript.
