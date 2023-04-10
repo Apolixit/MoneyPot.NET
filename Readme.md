@@ -4,9 +4,10 @@
 
 This repo is the [money pot pallet front end](https://github.com/Apolixit/pallet_money_pot) developped with [ASP.NET Core Blazor](https://learn.microsoft.com/fr-fr/aspnet/core/blazor/)
 
-It's a proof of concept to developp a blockchain front end application without Javascript.
-I use [Substrate.NET.Toolchain](https://github.com/SubstrateGaming/Substrate.NET.Toolchain) which create automatically all the C# and substrate connexion layer based of the current
-Substrate metadata file.
+It is a Blazor .Net web application that serves as a proof of concept for building a Substrate blockchain front end.
+This project demonstrates how a blockchain front-end can be developed without using Javascript. 
+
+I use [Substrate.NET.Toolchain](https://github.com/SubstrateGaming/Substrate.NET.Toolchain) to automatically generate the C# and substrate connection layers based on the current Substrate metadata file.
 
 ---
 

@@ -9,7 +9,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>3eaae0c8-9695-48e2-9f68-32c4d611a6f3</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\Readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Blazored.Toast" Version="3.2.2" />
